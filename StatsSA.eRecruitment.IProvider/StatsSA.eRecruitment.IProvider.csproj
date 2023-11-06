@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{1AE9BC8E-14D2-432E-9B6D-7AD232F726B7}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>StatsSA.eRecruitment.IProvider</RootNamespace>
+    <AssemblyName>StatsSA.eRecruitment.IProvider</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AnswersSpecificQuestions\IAnswersSpecificQuestionsProvider.cs" />
+    <Compile Include="AnswersGenericQuestions\IAnswersGenericQuestionsProvider.cs" />
+    <Compile Include="AnswerThreshold\IAnswersThresholdProvider.cs" />
+    <Compile Include="ApplicantAttachments\IApplicantAttachmentProvider.cs" />
+    <Compile Include="ApplicantContactDetails\IApplicantContactDetailsProvider.cs" />
+    <Compile Include="ApplicantDeclaration\IApplicantDeclarationProvider.cs" />
+    <Compile Include="ApplicantExperience\IApplicantExperienceProvider.cs" />
+    <Compile Include="ApplicantLangProficiency\IApplicantLangProviciencyProvider.cs" />
+    <Compile Include="ApplicantProfile\IApplicantProfileProvider.cs" />
+    <Compile Include="ApplicantProhibition\IApplicantProhibitionProvider.cs" />
+    <Compile Include="ApplicantQualifications\IApplicantQualificationsProvider.cs" />
+    <Compile Include="ApplicantReferences\IApplicantReferenceProvider.cs" />
+    <Compile Include="ApplicationStatus\IApplicationStatusProvider.cs" />
+    <Compile Include="Applications\IApplicationProvider.cs" />
+    <Compile Include="Auth\IAuthProvider.cs" />
+    <Compile Include="ClientRoles\IClientRoleProvider.cs" />
+    <Compile Include="Clients\IClientProvider.cs" />
+    <Compile Include="ContactMethods\IContactMethodProvider.cs" />
+    <Compile Include="DocumentTypes\IDocumentTypeProvider.cs" />
+    <Compile Include="HiringManagersVacancy\IHiringManagersVacancyAccessProvider.cs" />
+    <Compile Include="RequestAllApplications\IRequestAllApplicationsProvider.cs" />
+    <Compile Include="SpecificQuestions\ISpecificQuestionsProvider.cs" />
+    <Compile Include="GenericQuestions\IGenericQuestionProvider.cs" />
+    <Compile Include="Programmes\IProgrammeProvider.cs" />
+    <Compile Include="Institutions\IInstitutionProvider.cs" />
+    <Compile Include="Genders\IGenderProvider.cs" />
+    <Compile Include="HRRoles\IHRRoleProvider.cs" />
+    <Compile Include="HRUserRoles\IHRUserRoleProvider.cs" />
+    <Compile Include="HRUsers\IHRUserProvider.cs" />
+    <Compile Include="LanguageProficiencies\ILanguageProficiencyProvider.cs" />
+    <Compile Include="Languages\ILanguageProvider.cs" />
+    <Compile Include="ManagePassword\IManagePasswordProvider.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QualificationTypes\IQualificationTypeProvider.cs" />
+    <Compile Include="Races\IRaceProvider.cs" />
+    <Compile Include="Roles\IRoleProvider.cs" />
+    <Compile Include="Salaries\ISalariesProvider.cs" />
+    <Compile Include="UserClients\IUserClientProvider.cs" />
+    <Compile Include="Users\IUserProvider.cs" />
+    <Compile Include="Vacancies\IVacancyProvider.cs" />
+    <Compile Include="VacancyStatus\IVacancyProvider.cs" />
+    <Compile Include="VerApplicantAttachments\IVerApplicantAttachmentProvider.cs" />
+    <Compile Include="VerApplicantContactDetails\IVerApplicantContactDetailsProvider.cs" />
+    <Compile Include="VerApplicantDeclarations\IVerApplicantDeclarationProvider.cs" />
+    <Compile Include="VerApplicantExperiences\IVerApplicantExperienceProvider.cs" />
+    <Compile Include="VerApplicantLangProficiencies\IVerApplicantLangProviciencyProvider.cs" />
+    <Compile Include="VerApplicantProfile\IVerApplicantProfileProvider.cs" />
+    <Compile Include="VerApplicantPubServProhibitions\IVerApplicantProhibitionProvider.cs" />
+    <Compile Include="VerApplicantQualifications\IVerApplicantQualificationsProvider.cs" />
+    <Compile Include="VerApplicantReferences\IVerApplicantReferenceProvider.cs" />
+    <Compile Include="EmailVerification\IVerifyEmailProvider.cs" />
+    <Compile Include="ViewApplicantQuestionAnswers\IViewApplicantQuestionAnswersProvider.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\StatsSA.eRecruitment.Entities\StatsSA.eRecruitment.Entities.csproj">
+      <Project>{54D2AACC-4A85-4646-B905-548FABD2A6B5}</Project>
+      <Name>StatsSA.eRecruitment.Entities</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

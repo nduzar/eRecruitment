@@ -1,0 +1,278 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{54D2AACC-4A85-4646-B905-548FABD2A6B5}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>StatsSA.eRecruitment.Entities</RootNamespace>
+    <AssemblyName>StatsSA.eRecruitment.Entities</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AnswersGenericQuestion.cs">
+      <DependentUpon>eRecruitmentModel23.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AnswersSpecificQuestion.cs">
+      <DependentUpon>eRecruitmentModel23.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AnswersThreshold.cs">
+      <DependentUpon>eRecruitmentModel23.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ApplicantAttachment.cs">
+      <DependentUpon>eRecruitmentModel23.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ApplicantContactDetail.cs">
+      <DependentUpon>eRecruitmentModel23.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ApplicantDeclaration.cs">
+      <DependentUpon>eRecruitmentModel23.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ApplicantExperience.cs">
+      <DependentUpon>eRecruitmentModel23.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ApplicantLangProficiency.cs">
+      <DependentUpon>eRecruitmentModel23.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ApplicantProfile.cs">
+      <DependentUpon>eRecruitmentModel23.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ApplicantPubServProhibition.cs">
+      <DependentUpon>eRecruitmentModel23.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ApplicantQualification.cs">
+      <DependentUpon>eRecruitmentModel23.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ApplicantReference.cs">
+      <DependentUpon>eRecruitmentModel23.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Application.cs">
+      <DependentUpon>eRecruitmentModel23.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ApplicationRequirement.cs">
+      <DependentUpon>eRecruitmentModel23.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ApplicationStatus.cs">
+      <DependentUpon>eRecruitmentModel23.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Attachment.cs">
+      <DependentUpon>eRecruitmentModel23.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Client.cs">
+      <DependentUpon>eRecruitmentModel23.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ClientRole.cs">
+      <DependentUpon>eRecruitmentModel23.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ContactMethod.cs">
+      <DependentUpon>eRecruitmentModel23.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DocumentType.cs">
+      <DependentUpon>eRecruitmentModel23.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Enums\HRUserRoles.cs" />
+    <Compile Include="Enums\ApplicationStatuses.cs" />
+    <Compile Include="Enums\ApplicationTypes.cs" />
+    <Compile Include="Enums\VacancyStatuses.cs" />
+    <Compile Include="eRecruitmentModel23.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>eRecruitmentModel23.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Gender.cs">
+      <DependentUpon>eRecruitmentModel23.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GenericQuestion.cs">
+      <DependentUpon>eRecruitmentModel23.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Helper.cs" />
+    <Compile Include="HiringManagersVacancyAccess.cs">
+      <DependentUpon>eRecruitmentModel23.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HRRole.cs">
+      <DependentUpon>eRecruitmentModel23.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HRUser.cs">
+      <DependentUpon>eRecruitmentModel23.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HRUserRole.cs">
+      <DependentUpon>eRecruitmentModel23.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Institution.cs">
+      <DependentUpon>eRecruitmentModel23.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Language.cs">
+      <DependentUpon>eRecruitmentModel23.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LanguageProficiency.cs">
+      <DependentUpon>eRecruitmentModel23.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ListOfApplication.cs">
+      <DependentUpon>eRecruitmentModel23.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ListOfApplicationsNew.cs">
+      <DependentUpon>eRecruitmentModel23.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NewApplicationRequirement.cs">
+      <DependentUpon>eRecruitmentModel23.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PasswordRequestStatus.cs">
+      <DependentUpon>eRecruitmentModel23.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PasswordResetRequest.cs">
+      <DependentUpon>eRecruitmentModel23.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Programme.cs">
+      <DependentUpon>eRecruitmentModel23.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QualificationType.cs">
+      <DependentUpon>eRecruitmentModel23.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Race.cs">
+      <DependentUpon>eRecruitmentModel23.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RefreshToken.cs">
+      <DependentUpon>eRecruitmentModel23.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RequestAllApplication.cs">
+      <DependentUpon>eRecruitmentModel23.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Requirement.cs">
+      <DependentUpon>eRecruitmentModel23.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Role.cs">
+      <DependentUpon>eRecruitmentModel23.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Salary.cs">
+      <DependentUpon>eRecruitmentModel23.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SpecificQuestion.cs">
+      <DependentUpon>eRecruitmentModel23.tt</DependentUpon>
+    </Compile>
+    <Compile Include="User.cs">
+      <DependentUpon>eRecruitmentModel23.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserClient.cs">
+      <DependentUpon>eRecruitmentModel23.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserClientRole.cs">
+      <DependentUpon>eRecruitmentModel23.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Vacancy.cs">
+      <DependentUpon>eRecruitmentModel23.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VacancyStatus.cs">
+      <DependentUpon>eRecruitmentModel23.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VerApplicantAttachment.cs">
+      <DependentUpon>eRecruitmentModel23.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VerApplicantContactDetail.cs">
+      <DependentUpon>eRecruitmentModel23.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VerApplicantDeclaration.cs">
+      <DependentUpon>eRecruitmentModel23.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VerApplicantExperience.cs">
+      <DependentUpon>eRecruitmentModel23.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VerApplicantLangProficiency.cs">
+      <DependentUpon>eRecruitmentModel23.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VerApplicantProfile.cs">
+      <DependentUpon>eRecruitmentModel23.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VerApplicantPubServProhibition.cs">
+      <DependentUpon>eRecruitmentModel23.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VerApplicantQualification.cs">
+      <DependentUpon>eRecruitmentModel23.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VerApplicantReference.cs">
+      <DependentUpon>eRecruitmentModel23.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VerAttachment.cs">
+      <DependentUpon>eRecruitmentModel23.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VerifyEmail.cs">
+      <DependentUpon>eRecruitmentModel23.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VerifyEmailRequestStatu.cs">
+      <DependentUpon>eRecruitmentModel23.tt</DependentUpon>
+    </Compile>
+    <Compile Include="viewApplicantQuestionAnswer.cs">
+      <DependentUpon>eRecruitmentModel23.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewApplication.cs">
+      <DependentUpon>eRecruitmentModel23.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="eRecruitmentModel23.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>eRecruitmentModel23.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

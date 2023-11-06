@@ -1,0 +1,192 @@
+﻿/*navbar-default*/
+
+.navbar-default {
+    /*background-color: #0056a7;
+    background-color: #ffffff;*/
+    background-color: #d1d3d4;
+    /*background-color: #939598;
+    background-color: #231f20;*/
+    border-color: #E7E7E7;
+}
+/* title */
+.navbar-default .navbar-brand {
+    /*color: #777; - 47%*/ 
+    color: #74797b;
+}
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus {
+    /*color: #5E5E5E; - 37%*/
+    color: #5c5f61;
+}
+/* link */
+.navbar-default .navbar-nav > li > a {
+    color: #777;
+    /*color: #74797b;*/
+}
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+    /*color: #333; - 20%*/
+    color: #ffffff;
+    background-color: #74797b;
+}
+.navbar-default .navbar-nav > .active > a, 
+.navbar-default .navbar-nav > .active > a:hover, 
+.navbar-default .navbar-nav > .active > a:focus {
+    /*color: #555; - 33%*/
+    /*background-color: #E7E7E7; - 91%*/
+    color: #525557;
+    background-color: #74797b;
+}
+.navbar-default .navbar-nav > .open > a, 
+.navbar-default .navbar-nav > .open > a:hover, 
+.navbar-default .navbar-nav > .open > a:focus {
+    /*color: #555 - 33%;
+    background-color: #D5D5D5; - 84%*/
+
+    color: #525557;
+    background-color: #d5d7d7;
+}
+/* caret */
+.navbar-default .navbar-nav > .dropdown > a .caret {
+    /*border-top-color: #777;
+    border-bottom-color: #777;*/
+
+    border-top-color: #74797b;
+    border-bottom-color: #74797b;
+}
+.navbar-default .navbar-nav > .dropdown > a:hover .caret,
+.navbar-default .navbar-nav > .dropdown > a:focus .caret {
+    /*border-top-color: #333;
+    border-bottom-color: #333;*/
+
+    border-top-color: #313435;
+    border-bottom-color: #313435;
+}
+.navbar-default .navbar-nav > .open > a .caret, 
+.navbar-default .navbar-nav > .open > a:hover .caret, 
+.navbar-default .navbar-nav > .open > a:focus .caret {
+    /*border-top-color: #555;
+    border-bottom-color: #555;*/
+
+    border-top-color: #525557;
+    border-bottom-color: #525557;
+}
+/* mobile version */
+.navbar-default .navbar-toggle {
+    /*border-color: #DDD; - 87*/
+    border-color: #dddedf;
+}
+.navbar-default .navbar-toggle:hover,
+.navbar-default .navbar-toggle:focus {
+    /*background-color: #DDD;*/
+    background-color: #dddedf;
+}
+.navbar-default .navbar-toggle .icon-bar {
+    /*background-color: #CCC; - 80%*/
+    background-color: #cacdce;
+    
+}
+@media (max-width: 767px) {
+    .navbar-default .navbar-nav .open .dropdown-menu > li > a {
+        /*color: #777;*/
+        color: #74797b;
+    }
+    .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
+    .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
+        /*color: #333;*/
+        /*color: #313435;*/
+        color: #ffffff;
+    }
+}
+
+
+
+.alert-info {
+    /*background-color: #5bc0de;
+    border-color: #3db5d8;*/
+    background-color: #8c1603;
+    border-color: #8c1603;
+    color: #ffffff;
+}
+
+.form-control:focus {
+    
+    border-color: #8c1603;
+    
+}
+
+.panel-primary > .panel-heading {
+    /*background-color: #008cba;  005cb8*/
+    /*border-color: #0079a1;*/
+    color: #ffffff;
+    background-color: #8c1603;
+    border-color: #8c1603;
+}
+
+.btn-link {
+    color: #005cb8;
+    font-weight: normal;
+    border-radius: 0;
+}
+
+.panel-primary {
+  border-color: #005cb8;
+}
+
+
+.panel-primary > .panel-heading + .panel-collapse > .panel-body {
+  border-top-color: #005cb8;
+}
+.panel-primary > .panel-heading .badge {
+  color: #005cb8;
+  background-color: #fff;
+}
+.panel-primary > .panel-footer + .panel-collapse > .panel-body {
+  border-bottom-color: #005cb8;
+}
+
+
+/*.panel-primary {
+    border-color: #005cb8;
+}*/
+
+
+blockquote {
+    display: block;
+    background: #fff;
+    padding: 15px 20px 15px 10px;
+    margin: 0 0 20px;
+    position: relative;
+    /*Font*/
+    font-family: Georgia, serif;
+    font-size: 16px;
+    line-height: 1.2;
+    color: #666;
+    text-align: justify;
+    /*Borders - (Optional)*/
+    border-left: 8px solid #8c1603;
+    border-right: 2px solid #8c1603;
+    /*Box Shadow - (Optional)*/
+    -moz-box-shadow: 2px 2px 15px #ccc;
+    /*-webkit-box-shadow: 2px 2px 15px #ccc;
+  box-shadow: 2px 2px 15px #ccc;*/
+    -webkit-box-shadow: 1px 1px 1px #ccc;
+    box-shadow: 1px 1px 1px #ccc;
+}
+
+blockquote::after{
+  /*Reset to make sure*/
+  content: "";
+}
+
+.panel-primary {
+    border-color: #8c1603 !important;
+}
+
+.alert-info {
+    background-color: #8c1603 !important;
+}
+
+blockquote em{
+  font-style: italic;
+}

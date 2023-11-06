@@ -1,0 +1,130 @@
+
+
+    <div class="container" style="padding-left:10%; padding-right:10%; margin-top:2%" ng-init="vm.initialisePage()">
+         <div ng-show="!(vm.sentEmailClicked)" class="well card">
+                        <fieldset>
+                            <legend>List of Applications</legend>
+
+                            <div ng-show="vm.applications.length == 0" class="row">
+                                <div class="alert alert-dismissible alert-info">
+                                    <strong>No Applications!</strong> There are no applications.
+                                </div>
+                            </div>
+                            <div ng-hide="vm.applications.length == 0" class="row">
+                                <span>Number of Application:  </span> <span>{{vm.noOfApplications}}</span>
+                                <br />
+                                <br />
+                                <div class="col-lg-12">
+                                    <div class="row">
+                                        <div class="input-group input-group-sm">
+                                            <input type="text" class="form-control input-group-sm" ng-model="vm.searchString" placeholder="Search" />
+                                            <span class="input-group-btn input-group-sm">
+                                                <button class="btn btn-default btn-xs" title="Search" ng-click="vm.setFilter()"><i class="glyphicon glyphicon-search"></i></button>
+                                                <button class="btn btn-default btn-xs" title="Reset search" ng-click="vm.clearFilter()"><i class="glyphicon glyphicon-refresh"></i></button>
+
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <table class="table table-striped table-hover table-condensed">
+                                            <tr>
+                                                <th ng-click="vm.setSorting('app.firstNames')">Name</th>
+                                                <th ng-click="vm.setSorting('app.surname')">Surname</th>
+                                                <th ng-click="vm.setSorting('app.applicationStatusDesc')">Application Status</th>
+                                                <!--<th ng-click="vm.setSorting('app.experience')">Experience</th>
+                                    <th ng-click="vm.setSorting('app.managementExperience')">Management Experience</th>
+                                    <!-- <th ng-click="vm.setSorting('hasAttachments')">Has Attachments</th>-->
+                                                <!--<th ng-click="vm.setSorting('score')">Score</th>-->
+                                                <!--<th ng-click="vm.setSorting('app.highestQualification')">Highest Qualification</th>
+                                    <th ng-click="vm.setSorting('app.hasKnowledge')">Has Knowledge</th>-->
+                                                <th>View</th>
+                                            </tr>
+
+                                            <!-- Enable this once the is connectivity -->
+                                            <!-- <tr ng-repeat="app in vm.allApplications">-->
+                                            <tr ng-repeat="app in vm.applications">
+                                                <td>{{app.firstNames}}</td>
+                                                <td>{{app.surname}}</td>
+                                                <td>
+                                                    <span>{{app.applicationStatusDesc}}</span>
+                                                </td>
+                                                <td>
+                                                    <button ng-click="vm.viewApplication(app)" class="btn btn-default btn-xs"><i class="glyphicon glyphicon-chevron-right"></i></button>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        <!--<ul ng-if="vm.pager.pages.length" class="pagination">
+                                <li ng-class="{disabled:vm.pager.currentPage === 1}">
+                                    <a ng-click="vm.setPager(1)">First</a>
+                                </li>
+                                <li ng-class="{disabled:vm.pager.currentPage === 1}">
+                                    <a ng-click="vm.setPager(vm.pager.currentPage - 1)">Previous</a>
+                                </li>
+                                <li ng-repeat="page in vm.pager.pages" ng-class="{active:vm.pager.currentPage === page}">
+                                    <a ng-click="vm.setPager(page)">{{page}}</a>
+                                </li>
+                                <li ng-class="{disabled:vm.pager.currentPage === vm.pager.totalPages}">
+                                    <a ng-click="vm.setPager(vm.pager.currentPage + 1)">Next</a>
+                                </li>
+                                <li ng-class="{disabled:vm.pager.currentPage === vm.pager.totalPages}">
+                                    <a ng-click="vm.setPager(vm.pager.totalPages)">Last</a>
+                                </li>
+                            </ul>-->
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <button class="btn btn-default btn-xs" ng-click="vm.backToPosts()"><i class="glyphicon glyphicon-chevron-left"></i> Vacancies</button>
+                                <button class="btn btn-default btn-xs" ng-click="vm.toggleScreen()"><i class="glyphicon glyphicon-chevron-right"></i> Sent Approved applications to Hiring Line Manager</button>
+
+                            </div>
+
+                        </fieldset>
+                    </div>
+         <div ng-show="(vm.sentEmailClicked)" class="well card">
+             <fieldset>
+                 <legend><span>Sent email to hiring managers:</span></legend>
+                 <div class="row">
+                     <div class="form-group">
+                         <label class="control-label" for="users">Select User</label>
+                         <select name="salaryLevel"
+                                 class="form-control input-sm" required
+                                 ng-model="vm.selectedUser"
+                                 ng-options="user as user.fullName for user in vm.allUsers track by user.hrUserId"></select>
+                         <br />                         
+                         <button ng-click="vm.addUser()" class="btn btn-default btn-xs pull-right">Add the Selected User</button>
+                     </div>
+                 </div>
+
+             </fieldset>
+
+             <div class="row">
+                 <div id="selectedUsers" ng-repeat="selectedUser in vm.userList">
+                     <div class="form-group">
+                         <label for="answer" class="control-label">Hiring Manager {{ $index+1 }}</label>
+                         <div class="input-group">
+                             <input type="text" ng-disabled="true" class="form-control input-sm" name="" ng-model="selectedUser.fullName" />
+                             <span class="input-group-btn" ng-click="vm.remove(selectedUser, vm.userList)">
+                                 <button class="btn btn-danger btn-sm"
+                                         type="button"
+                                         title="Remove this answer">
+                                     X
+                                 </button>
+                             </span>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+             <br/>
+             <div class="row">
+                 <button ng-click="vm.backToList()" class="btn btn-default btn-xs">Back</button>
+                 <button ng-show="vm.editMode" ng-click="vm.sentEmail()" class="btn btn-default btn-xs pull-right">Sent to Selected Users</button>
+             </div>
+
+
+
+
+         </div>
+    </div>

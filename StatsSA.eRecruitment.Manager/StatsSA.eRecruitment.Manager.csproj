@@ -1,0 +1,181 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D989E3BC-3CA7-400C-BB25-7B6AC905C244}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>StatsSA.eRecruitment.Manager</RootNamespace>
+    <AssemblyName>StatsSA.eRecruitment.Manager</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="StatsSA.SystemArchitecture.Resolver">
+      <HintPath>..\packages\StatsSA.SystemArchitecture.Resolver\StatsSA.SystemArchitecture.Resolver.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AnswersSpecificQuestions\AnswersSpecificQuestionsManager.cs" />
+    <Compile Include="AnswersGenericQuestions\AnswersGenericQuestionsManager.cs" />
+    <Compile Include="AnswerThreshold\AnswersThresholdManager.cs" />
+    <Compile Include="ApplicantAttachments\ApplicantAttachmentsManager.cs" />
+    <Compile Include="ApplicantContactDetails\ApplicantContactDetailsManager.cs" />
+    <Compile Include="ApplicantDeclaration\ApplicantDeclarationManager.cs" />
+    <Compile Include="ApplicantExperience\ApplicantExperienceManager.cs" />
+    <Compile Include="ApplicantLangProficiency\ApplicantLangProficiencyManager.cs" />
+    <Compile Include="ApplicantProhibition\ApplicantProhibitionManager.cs" />
+    <Compile Include="ApplicantQualifications\ApplicantQualificationManager.cs" />
+    <Compile Include="ApplicantReferences\ApplicantReferencesManager.cs" />
+    <Compile Include="ApplicationRequirement\ApplicationRequirementManager.cs" />
+    <Compile Include="ApplicationStatus\ApplicationStatusManager.cs" />
+    <Compile Include="Applications\ApplicationManager.cs" />
+    <Compile Include="Auth\AuthManager.cs" />
+    <Compile Include="ClientRoles\ClientRoleManager.cs" />
+    <Compile Include="Clients\ClientManager.cs" />
+    <Compile Include="ContactMethods\ContactMethodManager.cs" />
+    <Compile Include="DIResolver\DependencyResolver.cs" />
+    <Compile Include="DocumentTypes\DocumentTypeManager.cs" />
+    <Compile Include="eRecruitmentModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>eRecruitmentModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="eRecruitmentModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>eRecruitmentModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="GenericQuestions\GenericQuestionsManager.cs" />
+    <Compile Include="HiringManagersVacancy\HiringManagersVacancyAccessManager.cs" />
+    <Compile Include="Programmes\ProgrammeManager.cs" />
+    <Compile Include="Institutions\InstitutionsManager.cs" />
+    <Compile Include="Genders\GenderManager.cs" />
+    <Compile Include="GenericRepository\GenericRepository.cs" />
+    <Compile Include="HRRoles\HRRoleManager.cs" />
+    <Compile Include="HRUserRoles\HRUserRoleManager.cs" />
+    <Compile Include="HRUsers\HRUserManager.cs" />
+    <Compile Include="LanguageProficiencies\LanguageProficiencyManager.cs" />
+    <Compile Include="Languages\LanuageManager.cs" />
+    <Compile Include="ManagePassword\ManagePasswordManager.cs" />
+    <Compile Include="ApplicantProfile\ApplicantProfileManager.cs" />
+    <Compile Include="PasswordResetRequests\PasswordResetRequestManager.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QualificationTypes\QualificationTypeManager.cs" />
+    <Compile Include="Races\RaceManager.cs" />
+    <Compile Include="RequestAllApplications\RequestAllApplicationsManager.cs" />
+    <Compile Include="Roles\RoleManager.cs" />
+    <Compile Include="Salaries\SalariesManager.cs" />
+    <Compile Include="SpecificQuestions\SpecificQuestionsManager.cs" />
+    <Compile Include="UnitOfWork\UnitOfWork.cs" />
+    <Compile Include="UserClients\UserClientManager.cs" />
+    <Compile Include="Users\UserManager.cs" />
+    <Compile Include="Vacancies\VacancyManager.cs" />
+    <Compile Include="VacancyStatus\VacancyStatusManager.cs" />
+    <Compile Include="VerApplicantAttachments\VerApplicantAttachmentsManager.cs" />
+    <Compile Include="VerApplicantContactDetails\VerApplicantContactDetailsManager.cs" />
+    <Compile Include="VerApplicantDeclarations\VerApplicantDeclarationManager.cs" />
+    <Compile Include="VerApplicantExperiences\VerApplicantExperienceManager.cs" />
+    <Compile Include="VerApplicantLangProficiencies\VerApplicantLangProficiencyManager.cs" />
+    <Compile Include="VerApplicantProfile\VerApplicantProfileManager.cs" />
+    <Compile Include="VerApplicantPubServProhibitions\VerApplicantProhibitionManager.cs" />
+    <Compile Include="VerApplicantQualifications\VerApplicantQualificationManager.cs" />
+    <Compile Include="VerApplicantReferences\VerApplicantReferencesManager.cs" />
+    <Compile Include="EmailVerification\VerifyEmailManager.cs" />
+    <Compile Include="ViewApplicantQuestionAnswers\ViewApplicantQuestionAnswersManager.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\StatsSA.eRecruitment.Entities\StatsSA.eRecruitment.Entities.csproj">
+      <Project>{54d2aacc-4a85-4646-b905-548fabd2a6b5}</Project>
+      <Name>StatsSA.eRecruitment.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StatsSA.eRecruitment.IManager\StatsSA.eRecruitment.IManager.csproj">
+      <Project>{b869ae84-126f-4413-882b-ebb3e94dc444}</Project>
+      <Name>StatsSA.eRecruitment.IManager</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config">
+      <SubType>Designer</SubType>
+    </None>
+    <EntityDeploy Include="eRecruitmentModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>eRecruitmentModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="eRecruitmentModel.edmx.diagram">
+      <DependentUpon>eRecruitmentModel.edmx</DependentUpon>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="eRecruitmentModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>eRecruitmentModel.edmx</DependentUpon>
+      <LastGenOutput>eRecruitmentModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="SQL\CreateDatabase.sql" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>start xcopy /y "$(ProjectDir)$(OutDir)*.dll" "$(SolutionDir)StatsSA.eRecruitment.WebApi\bin\"
+start xcopy /y "$(ProjectDir)$(OutDir)*.dll" "$(SolutionDir)StatsSA.eRecruitment.InternalWeb\bin\"</PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

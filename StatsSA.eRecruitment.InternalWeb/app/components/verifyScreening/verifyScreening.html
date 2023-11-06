@@ -1,0 +1,331 @@
+<style type="text/css">
+    .input-xs {
+        height: 25px;
+        padding: 2px 5px;
+        font-size: 12px;
+        line-height: 1.8; /* If Placeholder of the input is moved up, rem/modify this. */
+        border-radius: 2px;
+    }
+
+    .questions {
+        font-size: 14px;
+    }
+</style>
+<div class="container" style="padding-left:10%; padding-right:10%; margin-top:2%" ng-init="vm.initialisePage()">
+    <div class="well card">
+        <fieldset>
+            <legend>Personal information<span data-ng-bind="vm.vacancy.jobTitle"></span></legend>
+            <div ng-show="false" class="row">
+                <div class="alert alert-dismissible alert-info">
+                    <strong>No Profile!</strong> Something happend, we could not retrieve a profile.
+                </div>
+            </div>
+            <div ng-hide="false" class="row">
+                <div class="col-lg-12">
+                    <table class="table">
+                        <tr>
+                            <th>First names: </th>
+                            <td>{{vm.applicant.profile.firstNames}}</td>
+                            <th>Surname: </th>
+                            <td>{{vm.applicant.profile.surname}}</td>
+                        </tr>
+                        <tr>
+                            <th>Date of birth: </th>
+                            <td>{{vm.applicant.profile.dateOfBirth | date : 'yyyy/MM/dd'}}</td>
+                            <th>ID Number/Passport number: </th>
+                            <td>{{vm.applicant.profile.identityNumber}}</td>
+                        </tr>
+                        <tr>
+                            <th>Race: </th>
+                            <td>{{vm.applicant.profile.race.raceDesc}}</td>
+                            <th>Gender: </th>
+                            <td>{{vm.applicant.profile.gender.genderDesc}}</td>
+                        </tr>
+                        <tr>
+                            <th>Disabled: </th>
+                            <td>{{vm.applicant.profile.disability && 'Yes' || 'No'}} </td>
+                            <th ng-show="vm.applicant.profile.disability">Disability: </th>
+                            <td ng-show="vm.applicant.profile.disability">{{vm.applicant.profile.disabilityDesc}}</td>
+                        </tr>
+                        <tr>
+                            <th>SA citizen: </th>
+                            <td>{{vm.applicant.profile.citizen && 'Yes' || 'No'}}</td>
+                            <th>Nationality: </th>
+                            <td>{{vm.applicant.profile.nationality}}</td>
+                        </tr>
+                        <tr>
+                            <th>Work permit: </th>
+                            <td>{{vm.applicant.profile.workPermit && 'Yes' || 'No'}}</td>
+                            <td> </td>
+                            <td> </td>
+                        </tr>
+                        <tr>
+                            <th>Previously dismised: </th>
+                            <td>{{vm.applicant.profile.previousDismissal && 'Yes' || 'No'}}</td>
+                            <th>Criminal offence: </th>
+                            <td>{{vm.applicant.profile.criminalOffence && 'Yes' || 'No'}}</td>
+                        </tr>
+                        <tr>
+                            <th colspan="2">Occupation required registration date: </th>
+                            <td colspan="2">{{vm.applicant.profile.occupationRegistrationDate | date : 'yyyy-mm-dd'}}</td>
+                        </tr>
+                        <tr>
+                            <th colspan="2">Have you been convicted or found guilty of a criminal offence (including an admission of guilt)?</th>
+                            <tr>
+                                <td colspan="2">{{vm.applicant.profile.criminalOffence && 'Yes' || 'No'}}</td>
+                            <th ng-show="vm.applicant.profile.criminalOffence">Details: </th>
+                            <td ng-show="vm.applicant.profile.criminalOffence">{{vm.applicant.profile.criminalOffenceDesc}}</td>
+                        </tr>
+
+                        <tr>
+                            <th colspan="2">Do you have any pending criminal case against you? </th>
+                            <td colspan="2">{{vm.applicant.profile.pendingCriminalCase && 'Yes' || 'No'}}</td>
+                            <th ng-show="vm.applicant.profile.pendingCriminalCase">Details: </th>
+                            <td ng-show="vm.applicant.profile.pendingCriminalCase">{{vm.applicant.profile.pendingCriminalCaseDesc}}</td>
+                        </tr>
+                        <tr>
+                            <th colspan="2">Have you ever been dismissed for misconduct from the Public Service?</th>
+                            <td colspan="2">{{vm.applicant.profile.publicServiceDismiss && 'Yes' || 'No'}}</td>
+                            <th ng-show="vm.applicant.profile.publicServiceDismiss">Details: </th>
+                            <td ng-show="vm.applicant.profile.publicServiceDismiss">{{vm.applicant.profile.previousDismissedReason}}</td>
+                        </tr>
+                        <tr>
+                            <th colspan="2">Do you have any pending disciplinary case against you?</th>
+                            <td colspan="2">{{vm.applicant.profile.pendingDisciplinary && 'Yes' || 'No'}}</td>
+                            <th ng-show="vm.applicant.profile.pendingDisciplinary">Details: </th>
+                            <td ng-show="vm.applicant.profile.pendingDisciplinary">{{vm.applicant.profile.pendingDisciplinaryDesc}}</td>
+                        </tr>
+                        <tr>
+                            <th colspan="2">Have you resigned from a recent job pending any disciplinary proceeding against you?</th>
+                            <td colspan="2">{{vm.applicant.profile.resignedPendingDisciplinary && 'Yes' || 'No'}}</td>
+                            <th ng-show="vm.applicant.profile.resignedPendingDisciplinary">Details: </th>
+                            <td ng-show="vm.applicant.profile.resignedPendingDisciplinary">{{vm.applicant.profile.resignedPendingDisciplinaryDesc}}</td>
+                        </tr>
+                        <tr>
+                            <th colspan="2">Have you been discharged or retired from the Public Service on grounds of Ill-health or on condition that your cannot be re-employed?</th>
+                            <td colspan="2">{{vm.applicant.profile.dischargedOrRetired && 'Yes' || 'No'}}</td>
+                        </tr>
+                        <tr>
+                            <th colspan="2">Are you conducting business with the State or are you a Director of a Public or Private company conducting business with the State? </th>
+                            <td colspan="2">{{vm.applicant.profile.businessWithState && 'Yes' || 'No'}}</td>
+                            <th ng-show="vm.applicant.profile.businessWithState">Details: </th>
+                            <td ng-show="vm.applicant.profile.businessWithState">{{vm.applicant.profile.businessWithStateDesc}}</td>
+                        </tr>
+                        <tr>
+                            <th colspan="2">In the event that you are employed in the Public Service, will you immediately relinquish such business interests?</th>
+                            <td colspan="2">{{vm.applicant.profile.relinquishBusinessInterest && 'Yes' || 'No'}}</td>
+                        </tr>
+                        <tr>
+                            <th colspan="2">Please specify the total number of years of experience you have</th>
+                            <td colspan="2">Private:{{vm.applicant.profile.numberOfExperiencePrivate}}  Public: {{vm.applicant.profile.numberOfExperiencePublic}}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>Contact Information</legend>
+            <div ng-hide="false" class="row">
+                <div class="col-lg-12">
+                    <table class="table">
+                        <tr>
+                            <th>Language: </th>
+                            <td>{{vm.applicant.profile.verApplicantContactDetails[0].language.languageDesc}}</td>
+                            <th>Alternative contact number: </th>
+                            <td>{{vm.applicant.profile.verApplicantContactDetails[0].cellNumber}}</td>
+                        </tr>
+                        <tr>
+                            <th>Communication method: </th>
+                            <td>{{vm.applicant.profile.verApplicantContactDetails[0].contactMethod.contactMethodDesc}}</td>
+                            <th>Communication method details: </th>
+                            <td>{{vm.applicant.profile.verApplicantContactDetails[0].contactMethogDetails}}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>Language Proficiency</legend>
+            <div ng-hide="false" class="row">
+                <div class="col-lg-12">
+                    <table class="table table-striped">
+                        <tr>
+                            <th>Language</th>
+                            <th>Read</th>
+                            <th>Speak</th>
+                            <th>Write</th>
+                        </tr>
+                        <tr ng-repeat="proficiency in vm.applicant.profile.verApplicantLangProficiencies">
+                            <td>{{proficiency.language.languageDesc}}</td>
+                            <td>{{proficiency.languageProficiency.languageProficiencyDesc}}</td>
+                            <td>{{proficiency.languageProficiency1.languageProficiencyDesc}}</td>
+                            <td>{{proficiency.languageProficiency2.languageProficiencyDesc}}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>Qualifications</legend>
+            <div ng-hide="false" class="row">
+                <div class="col-lg-12">
+                    <table class="table table-striped">
+                        <tr>
+                            <th>Institution</th>
+                            <th>Qualification type</th>
+                            <th>Quaification name</th>
+                            <th>Year Obtained</th>
+                            <th>Is current study</th>
+                        </tr>
+                        <tr ng-repeat="qualification in vm.applicant.profile.verApplicantQualifications">
+                            <td ng-if="qualification.institutionId != '28'">{{qualification.institution.institutionName }}</td>
+                            <td ng-if="qualification.institutionId == '28'">{{qualification.otherInstitution }}</td>
+                            <td>{{qualification.qualificationType.qualificationTypeDesc}}</td>
+                            <td>{{qualification.nameOfQualification}}</td>
+                            <td>{{qualification.yearObtained}}</td>
+                            <td>{{qualification.currentStudies && 'Yes' || 'No'}}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>Experience & Prohibition</legend>
+            <div ng-hide="false" class="row">
+                <div class="col-lg-12">
+                    <table class="table table-striped">
+                        <tr>
+                            <th>Employer</th>
+                            <th>Position</th>
+                            <th>From</th>
+                            <th>Until</th>
+                            <th>Reason for leaving</th>
+                        </tr>
+                        <tr ng-repeat="experience in vm.applicant.profile.verApplicantExperiences">
+                            <td>{{experience.employer}}</td>
+                            <td>{{experience.postHeld}}</td>
+                            <td>{{experience.dateFrom | date : 'yyyy/MM/dd'}}</td>
+                            <td>{{experience.dateTo | date : 'yyyy/MM/dd'}}</td>
+                            <td>{{experience.reasonForLeaving}}</td>
+                        </tr>
+                    </table>
+                    <table class="table">
+                        <tr>
+                            <th>Previously dismissed from the public service for a reason that will prohibit re-appointment?</th>
+                            <td style="min-width:200px;">{{vm.applicant.profile.verApplicantPubServProhibition.publicServiceProhibition && 'Yes' || 'No'}}</td>
+                        </tr>
+                        <tr><th>Department name</th><td>{{vm.applicant.profile.verApplicantPubServProhibition.departmentName}}</td></tr>
+                    </table>
+                </div>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>References</legend>
+            <div ng-hide="false" class="row">
+                <div class="col-lg-12">
+                    <table class="table table-striped">
+                        <tr>
+                            <th>Name</th>
+                            <th>Relationship</th>
+                            <th>Contact number</th>
+                        </tr>
+                        <tr ng-repeat="reference in vm.applicant.profile.verApplicantReferences">
+                            <td>{{reference.referenceName}}</td>
+                            <td>{{reference.referenceRelationship}}</td>
+                            <td>{{reference.referenceContactNumber}}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>Attachments</legend>
+            <div ng-hide="false" class="row">
+                <div class="col-lg-12">
+                    <table class="table table-striped">
+                        <tr>
+                            <th>Document type</th>
+                            <th>Filename</th>
+                            <th>Uploaded on</th>
+                            <th>View</th>
+                        </tr>
+                        <tr ng-repeat="attachment in vm.applicant.profile.verAttachments">
+                            <td>{{attachment.documentType.documentTypeDesc}}</td>
+                            <td>{{attachment.originalFileName}}</td>
+                            <td>{{attachment.maintDate | date : 'yyyy/MM/dd'}}</td>
+                            <td><button class="btn btn-default btn-xs" ng-click="vm.viewAttachment(attachment)"><i class="fa fa-file" ng-class="{'fa fa-file-pdf-o' : attachment.documentFormat == 'application/pdf', 'fa fa-file-image-o' : attachment.documentFormat == 'image/jpeg' ||  attachment.documentFormat == 'image/png', 'fa fa-file-word-o' : attachment.documentFormat == 'application/msword' ||  attachment.documentFormat == 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'}"></i></button></td>
+                        </tr>
+                    </table>
+                    <table class="table">
+                        <tr>
+                            <th>Previously dismissed from the public service for a reason that will prohibit re-appointment?</th>
+                            <td style="min-width:200px;">{{vm.applicant.profile.verApplicantPubServProhibition.publicServiceProhibition && 'Yes' || 'No'}}</td>
+                        </tr>
+                        <tr><th>Department name</th><td>{{vm.applicant.profile.verApplicantPubServProhibition.departmentName}}</td></tr>
+                    </table>
+                </div>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>Declaration</legend>
+            <table class="table">
+                <tr>
+                    <th>Declaration accepted</th>
+                    <td style="min-width:200px;">{{vm.applicant.profile.verApplicantDeclaration.acceptedDeclaration && 'Yes' || 'No'}}</td>
+                </tr>
+                <tr><th>Accepted date</th><td>{{vm.applicant.profile.verApplicantDeclaration.acceptedDeclarationOn | date : 'yyyy/MM/dd' }}</td></tr>
+            </table>
+        </fieldset>
+
+        <!--Careers-->
+        <fieldset>
+            <legend>Answers</legend>
+            <div class="col-lg-1"></div>
+            <div class="col-lg-10">
+
+                <div ng-repeat="questionAnswers in vm.allApplicationQuestionAnswers">
+                    <div class="row">
+                        <div class="col-md-8 questions">{{questionAnswers.question}} : </div>
+                        <div class="col-md-4">
+                            <div class="input-group">
+                                {{questionAnswers.answer}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-8 questions"></div>
+                        <div class="col-md-4">
+                            <div class="input-group">
+                                {{questionAnswers.otherAnswerDescription}}
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                </div>
+            </div>
+            <div class="col-lg-1"></div>
+        </fieldset>
+    </div>
+    <div class="row">
+        <button class="btn btn-default btn-xs" ng-click="vm.backToApplicants()"><i class="glyphicon glyphicon-chevron-left"></i> Applicants</button>
+        <!--<button ng-click="vm.inProcess(vm.applicant)" class="btn btn-default btn-xs pull-right"><i class="glyphicon glyphicon-check"></i> InProcess</button>&nbsp;-->
+        <button ng-click="vm.unSuccessful(vm.applicant)" class="btn btn-default btn-xs pull-right"><i class="glyphicon glyphicon-check"></i>UnSuccessful</button>&nbsp;
+        <button ng-click="vm.shortlistApplication(vm.applicant)" class="btn btn-default btn-xs pull-right"><i class="glyphicon glyphicon-check"></i>HR Shortlist</button>&nbsp;
+        <button ng-click="vm.hrRejected(vm.applicant)" class="btn btn-default btn-xs pull-right"><i class="glyphicon glyphicon-check"></i>HR Reject</button>&nbsp;
+        <button ng-click="vm.successful(vm.applicant)" class="btn btn-default btn-xs pull-right"><i class="glyphicon glyphicon-check"></i> Successful</button>&nbsp;
+        <button ng-click="vm.interview(vm.applicant)" class="btn btn-default btn-xs pull-right"><i class="glyphicon glyphicon-check"></i> Schedule Interview</button>&nbsp;
+
+        <!-- <button ng-click="vm.verifyApplication(vm.applicant)" class="btn btn-default btn-xs pull-right"><i class="glyphicon glyphicon-check"></i> Meeting Minimum Requirements</button>&nbsp;-->
+        <!--  <button ng-click="vm.rejectAtVerification(vm.applicant)" class="btn btn-default btn-xs pull-right"><i class="glyphicon glyphicon-remove"></i> Not Meeting Minimum Requirements</button>-->
+    </div>
+    <div class="row">
+        <div class="col-lg-1">&nbsp;</div>
+        <div ng-hide="!vm.ShowError" class="alert alert-danger alert-dismissable col-lg-10">
+            <strong>Whoops {{vm.ErrorMessage}}</strong>
+        </div>
+        <div ng-hide="!vm.ShowSuccess" class="alert alert-success alert-dismissable col-lg-10">
+            <strong>Congratulations {{vm.SuccessMessage}}</strong>
+        </div>
+        <div class="col-lg-1">&nbsp;</div>
+    </div>
+</div>

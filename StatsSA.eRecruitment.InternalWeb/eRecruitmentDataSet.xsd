@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="eRecruitmentDataSet" targetNamespace="http://tempuri.org/eRecruitmentDataSet.xsd" xmlns:mstns="http://tempuri.org/eRecruitmentDataSet.xsd" xmlns="http://tempuri.org/eRecruitmentDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Web.config" AppSettingsPropertyName="eRecruitmentConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="eRecruitmentConnectionString (Web.config)" ParameterPrefix="@" PropertyReference="AppConfig.System.Configuration.ConfigurationManager.0.ConnectionStrings.eRecruitmentConnectionString.ConnectionString" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="VacanciesTableAdapter" GeneratorDataComponentClassName="VacanciesTableAdapter" Name="Vacancies" UserDataComponentName="VacanciesTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="eRecruitmentConnectionString (Web.config)" DbObjectName="eRecruitment.dbo.Vacancies" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT JobTitle, OfficeName, DivisionName, NumberOfPosts, Prerequisites, SalaryLevel, SalaryNotch, RemunerationDescription, OpeningDate, ClosingDate, ReferenceNumber, IsPermanent FROM dbo.Vacancies</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="JobTitle" DataSetColumn="JobTitle" />
+              <Mapping SourceColumn="OfficeName" DataSetColumn="OfficeName" />
+              <Mapping SourceColumn="DivisionName" DataSetColumn="DivisionName" />
+              <Mapping SourceColumn="NumberOfPosts" DataSetColumn="NumberOfPosts" />
+              <Mapping SourceColumn="Prerequisites" DataSetColumn="Prerequisites" />
+              <Mapping SourceColumn="SalaryLevel" DataSetColumn="SalaryLevel" />
+              <Mapping SourceColumn="SalaryNotch" DataSetColumn="SalaryNotch" />
+              <Mapping SourceColumn="RemunerationDescription" DataSetColumn="RemunerationDescription" />
+              <Mapping SourceColumn="OpeningDate" DataSetColumn="OpeningDate" />
+              <Mapping SourceColumn="ClosingDate" DataSetColumn="ClosingDate" />
+              <Mapping SourceColumn="ReferenceNumber" DataSetColumn="ReferenceNumber" />
+              <Mapping SourceColumn="IsPermanent" DataSetColumn="IsPermanent" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="eRecruitmentDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="eRecruitmentDataSet" msprop:Generator_UserDSName="eRecruitmentDataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Vacancies" msprop:Generator_TableClassName="VacanciesDataTable" msprop:Generator_TableVarName="tableVacancies" msprop:Generator_TablePropName="Vacancies" msprop:Generator_RowDeletingName="VacanciesRowDeleting" msprop:Generator_RowChangingName="VacanciesRowChanging" msprop:Generator_RowEvHandlerName="VacanciesRowChangeEventHandler" msprop:Generator_RowDeletedName="VacanciesRowDeleted" msprop:Generator_UserTableName="Vacancies" msprop:Generator_RowChangedName="VacanciesRowChanged" msprop:Generator_RowEvArgName="VacanciesRowChangeEvent" msprop:Generator_RowClassName="VacanciesRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="JobTitle" msprop:Generator_ColumnVarNameInTable="columnJobTitle" msprop:Generator_ColumnPropNameInRow="JobTitle" msprop:Generator_ColumnPropNameInTable="JobTitleColumn" msprop:Generator_UserColumnName="JobTitle">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="OfficeName" msprop:Generator_ColumnVarNameInTable="columnOfficeName" msprop:Generator_ColumnPropNameInRow="OfficeName" msprop:Generator_ColumnPropNameInTable="OfficeNameColumn" msprop:Generator_UserColumnName="OfficeName" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DivisionName" msprop:Generator_ColumnVarNameInTable="columnDivisionName" msprop:Generator_ColumnPropNameInRow="DivisionName" msprop:Generator_ColumnPropNameInTable="DivisionNameColumn" msprop:Generator_UserColumnName="DivisionName">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="NumberOfPosts" msprop:Generator_ColumnVarNameInTable="columnNumberOfPosts" msprop:Generator_ColumnPropNameInRow="NumberOfPosts" msprop:Generator_ColumnPropNameInTable="NumberOfPostsColumn" msprop:Generator_UserColumnName="NumberOfPosts" type="xs:int" />
+              <xs:element name="Prerequisites" msprop:Generator_ColumnVarNameInTable="columnPrerequisites" msprop:Generator_ColumnPropNameInRow="Prerequisites" msprop:Generator_ColumnPropNameInTable="PrerequisitesColumn" msprop:Generator_UserColumnName="Prerequisites" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SalaryLevel" msprop:Generator_ColumnVarNameInTable="columnSalaryLevel" msprop:Generator_ColumnPropNameInRow="SalaryLevel" msprop:Generator_ColumnPropNameInTable="SalaryLevelColumn" msprop:Generator_UserColumnName="SalaryLevel" type="xs:int" />
+              <xs:element name="SalaryNotch" msprop:Generator_ColumnVarNameInTable="columnSalaryNotch" msprop:Generator_ColumnPropNameInRow="SalaryNotch" msprop:Generator_ColumnPropNameInTable="SalaryNotchColumn" msprop:Generator_UserColumnName="SalaryNotch" type="xs:decimal" />
+              <xs:element name="RemunerationDescription" msprop:Generator_ColumnVarNameInTable="columnRemunerationDescription" msprop:Generator_ColumnPropNameInRow="RemunerationDescription" msprop:Generator_ColumnPropNameInTable="RemunerationDescriptionColumn" msprop:Generator_UserColumnName="RemunerationDescription" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="OpeningDate" msprop:Generator_ColumnVarNameInTable="columnOpeningDate" msprop:Generator_ColumnPropNameInRow="OpeningDate" msprop:Generator_ColumnPropNameInTable="OpeningDateColumn" msprop:Generator_UserColumnName="OpeningDate" type="xs:dateTime" />
+              <xs:element name="ClosingDate" msprop:Generator_ColumnVarNameInTable="columnClosingDate" msprop:Generator_ColumnPropNameInRow="ClosingDate" msprop:Generator_ColumnPropNameInTable="ClosingDateColumn" msprop:Generator_UserColumnName="ClosingDate" type="xs:dateTime" />
+              <xs:element name="ReferenceNumber" msprop:Generator_ColumnVarNameInTable="columnReferenceNumber" msprop:Generator_ColumnPropNameInRow="ReferenceNumber" msprop:Generator_ColumnPropNameInTable="ReferenceNumberColumn" msprop:Generator_UserColumnName="ReferenceNumber">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="IsPermanent" msprop:Generator_ColumnVarNameInTable="columnIsPermanent" msprop:Generator_ColumnPropNameInRow="IsPermanent" msprop:Generator_ColumnPropNameInTable="IsPermanentColumn" msprop:Generator_UserColumnName="IsPermanent" type="xs:boolean" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

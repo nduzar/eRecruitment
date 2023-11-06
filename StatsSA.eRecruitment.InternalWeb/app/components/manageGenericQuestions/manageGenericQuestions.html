@@ -1,0 +1,72 @@
+<div class="container" style="padding-left:10%; padding-right:10%; margin-top:2%" ng-init="vm.initialisePage()">
+    <div class="well card">
+        <fieldset>
+            <legend>Manage Generic Questions</legend>
+            <div class="row" style="margin-top: 10%;" ng-show="vm.isLoading">
+                <div class="col-lg-offset-2 col-lg-8 alert alert-info">
+                    <i class="fa fa-cog fa-spin fa-lg pull-right"></i> <strong>Loading!</strong>  please wait...
+                </div>
+            </div>
+            <div ng-hide="vm.isLoading" class="row">
+                <form name="frmGenericQuestions" id="frmGenericQuestions" novalidate>
+
+                    <div class="row">
+                        <div id="question" ng-repeat="q in vm.questions">
+                            <div class="form-group">
+                                <div class="col-sm-2">
+                                    <label style="padding-top:8px" class="control-label">Question</label>
+                                </div>  
+                                <div class="col-sm-10" style="padding-top:8px"  >
+                                    <input type="text" class="form-control col-sm-4" ng-model="q.question" />                                   
+                                </div>                                
+                            </div><br />
+
+
+                            <!--<div class="form-group">
+                                                            <label class="control-label">Question</label>
+                                                            <div class="input-group">
+                                                                <input type="text"
+                                                                       class="form-control input-sm" ng-model="q.question" />
+                                                                <span class="input-group-btn" ng-click="vm.remove(q, vm.questions)">
+                                <button class="btn btn-danger btn-sm"
+                                        type="button"
+                                        ng-click="vm.deleteQuestion(q)"
+                                        title="Remove this question">
+                                    X
+                                </button>
+                            </span>
+                                                </div>
+                                            </div>-->
+                            <button class="btn btn-primary btn-sm"
+                                    ng-show="$last"
+                                    ng-click="vm.addNewGeneric()">
+                                + Add New Question
+                            </button>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-lg-1 col-lg-offset-8">
+                            <button type="button" ng-click="vm.cancel()" class="btn btn-default btn-sm btn-primary pull-right">Cancel</button>
+                        </div>
+                        <div class="col-lg-1">
+                            <button type="button" ng-disabled="frmGenericQuestions.$invalid" ng-click="vm.saveGenericQuestions()" class="btn btn-default btn-sm btn-primary pull-right">Save</button>
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-lg-1">&nbsp;</div>
+                <div ng-hide="!vm.ShowError" class="alert alert-danger alert-dismissable col-lg-10">
+                    <strong>Whoops {{vm.ErrorMessage}}</strong>
+                </div>
+                <div ng-hide="!vm.ShowSuccess" class="alert alert-success alert-dismissable col-lg-10">
+                    <strong>Congratulations {{vm.SuccessMessage}}</strong>
+                </div>
+                <div class="col-lg-1">&nbsp;</div>
+            </div>
+        </fieldset>
+    </div>
+</div>

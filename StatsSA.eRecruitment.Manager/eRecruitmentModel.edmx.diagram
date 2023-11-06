@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="1f18deb5f9b341c790e589598d00de6c" Name="Diagram1" ZoomLevel="86">
+        <EntityTypeShape EntityType="eRecruitmentModel.ApplicantAttachment" Width="1.5" PointX="11.25" PointY="38.75" />
+        <EntityTypeShape EntityType="eRecruitmentModel.ApplicantContactDetail" Width="1.5" PointX="11.25" PointY="44" />
+        <EntityTypeShape EntityType="eRecruitmentModel.ApplicantDeclaration" Width="1.5" PointX="8.25" PointY="34.5" />
+        <EntityTypeShape EntityType="eRecruitmentModel.ApplicantExperience" Width="1.5" PointX="8.25" PointY="70.125" />
+        <EntityTypeShape EntityType="eRecruitmentModel.ApplicantLangProficiency" Width="1.5" PointX="11.25" PointY="33.875" />
+        <EntityTypeShape EntityType="eRecruitmentModel.ApplicantPubServProhibition" Width="1.5" PointX="8.25" PointY="73.875" />
+        <EntityTypeShape EntityType="eRecruitmentModel.ApplicantReference" Width="1.5" PointX="8.25" PointY="66.875" />
+        <EntityTypeShape EntityType="eRecruitmentModel.ApplicationRequirement" Width="1.5" PointX="15.75" PointY="49.25" />
+        <EntityTypeShape EntityType="eRecruitmentModel.Application" Width="1.5" PointX="13.5" PointY="49" />
+        <EntityTypeShape EntityType="eRecruitmentModel.ApplicationStatus" Width="1.5" PointX="11.25" PointY="52.5" />
+        <EntityTypeShape EntityType="eRecruitmentModel.ClientRole" Width="1.5" PointX="0.75" PointY="44.125" />
+        <EntityTypeShape EntityType="eRecruitmentModel.Client" Width="1.5" PointX="0.75" PointY="33.75" />
+        <EntityTypeShape EntityType="eRecruitmentModel.ContactMethod" Width="1.5" PointX="9" PointY="55.5" />
+        <EntityTypeShape EntityType="eRecruitmentModel.DocumentType" Width="1.5" PointX="9" PointY="52.5" />
+        <EntityTypeShape EntityType="eRecruitmentModel.Gender" Width="1.5" PointX="3.75" PointY="32" />
+        <EntityTypeShape EntityType="eRecruitmentModel.HRRole" Width="1.5" PointX="0.75" PointY="1.125" />
+        <EntityTypeShape EntityType="eRecruitmentModel.HRUserRole" Width="1.5" PointX="3" PointY="1" />
+        <EntityTypeShape EntityType="eRecruitmentModel.HRUser" Width="1.5" PointX="0.75" PointY="5.875" />
+        <EntityTypeShape EntityType="eRecruitmentModel.LanguageProficiency" Width="1.5" PointX="9" PointY="25.875" />
+        <EntityTypeShape EntityType="eRecruitmentModel.Language" Width="1.5" PointX="8.25" PointY="30.25" />
+        <EntityTypeShape EntityType="eRecruitmentModel.QualificationType" Width="1.5" PointX="6" PointY="33.5" />
+        <EntityTypeShape EntityType="eRecruitmentModel.Race" Width="1.5" PointX="3.75" PointY="47" />
+        <EntityTypeShape EntityType="eRecruitmentModel.RefreshToken" Width="1.5" PointX="3" PointY="35.25" />
+        <EntityTypeShape EntityType="eRecruitmentModel.Role" Width="1.5" PointX="1.5" PointY="48.375" />
+        <EntityTypeShape EntityType="eRecruitmentModel.UserClientRole" Width="1.5" PointX="3" PointY="43.25" />
+        <EntityTypeShape EntityType="eRecruitmentModel.UserClient" Width="1.5" PointX="3" PointY="39.25" />
+        <EntityTypeShape EntityType="eRecruitmentModel.VacancyStatus" Width="1.5" PointX="9" PointY="21.25" />
+        <EntityTypeShape EntityType="eRecruitmentModel.VerApplicantAttachment" Width="1.5" PointX="16.5" PointY="39.75" />
+        <EntityTypeShape EntityType="eRecruitmentModel.VerApplicantContactDetail" Width="1.5" PointX="13.5" PointY="45" />
+        <EntityTypeShape EntityType="eRecruitmentModel.VerApplicantDeclaration" Width="1.5" PointX="10.5" PointY="70.875" />
+        <EntityTypeShape EntityType="eRecruitmentModel.VerApplicantExperience" Width="1.5" PointX="10.5" PointY="48.375" />
+        <EntityTypeShape EntityType="eRecruitmentModel.VerApplicantLangProficiency" Width="1.5" PointX="16.5" PointY="44.875" />
+        <EntityTypeShape EntityType="eRecruitmentModel.VerApplicantProfile" Width="1.5" PointX="8.25" PointY="43" />
+        <EntityTypeShape EntityType="eRecruitmentModel.VerApplicantPubServProhibition" Width="1.5" PointX="10.5" PointY="67.875" />
+        <EntityTypeShape EntityType="eRecruitmentModel.VerApplicantReference" Width="1.5" PointX="10.5" PointY="60.125" />
+        <AssociationConnector Association="eRecruitmentModel.FK_ApplicantAttachments_DocumentTypes" />
+        <AssociationConnector Association="eRecruitmentModel.FK_ApplicantContactDetails_ContactMethods" />
+        <AssociationConnector Association="eRecruitmentModel.FK_ApplicantContactDetails_Languages" />
+        <AssociationConnector Association="eRecruitmentModel.FK_ApplicantLangProficiencies_LanguageProficiencies" />
+        <AssociationConnector Association="eRecruitmentModel.FK_ApplicantLangProficiencies_LanguageProficiencies1" />
+        <AssociationConnector Association="eRecruitmentModel.FK_ApplicantLangProficiencies_LanguageProficiencies2" />
+        <AssociationConnector Association="eRecruitmentModel.FK_ApplicantLangProficiency_Languages" />
+        <AssociationConnector Association="eRecruitmentModel.FK_ApplicationRequirements_Applications" />
+        <AssociationConnector Association="eRecruitmentModel.FK_Applications_ApplicationStatus" />
+        <AssociationConnector Association="eRecruitmentModel.FK_Applications_VerApplicantProfiles" />
+        <AssociationConnector Association="eRecruitmentModel.FK_ClientRoles_Clients" />
+        <AssociationConnector Association="eRecruitmentModel.FK_ClientRoles_Roles" />
+        <AssociationConnector Association="eRecruitmentModel.FK_UserClientRoles_ClientRoles" />
+        <AssociationConnector Association="eRecruitmentModel.FK_RefreshTokens_Clients" />
+        <AssociationConnector Association="eRecruitmentModel.FK_UserClients_Clients" />
+        <AssociationConnector Association="eRecruitmentModel.FK_VerApplicantContactDetails_ContactMethods" />
+        <AssociationConnector Association="eRecruitmentModel.FK_VerApplicantAttachments_DocumentTypes" />
+        <AssociationConnector Association="eRecruitmentModel.FK_VerApplicantProfiles_Genders" />
+        <AssociationConnector Association="eRecruitmentModel.FK_HRUserRoles_HRRoles" />
+        <AssociationConnector Association="eRecruitmentModel.FK_HRUserRoles_HRUsers" />
+        <AssociationConnector Association="eRecruitmentModel.FK_VerApplicantLangProficiencies_LanguageProficiencies" />
+        <AssociationConnector Association="eRecruitmentModel.FK_VerApplicantLangProficiencies_LanguageProficiencies1" />
+        <AssociationConnector Association="eRecruitmentModel.FK_VerApplicantLangProficiencies_LanguageProficiencies2" />
+        <AssociationConnector Association="eRecruitmentModel.FK_VerApplicantContactDetails_Languages" />
+        <AssociationConnector Association="eRecruitmentModel.FK_VerApplicantLangProficiencies_Languages" />
+        <AssociationConnector Association="eRecruitmentModel.FK_VerApplicantProfiles_Races" />
+        <AssociationConnector Association="eRecruitmentModel.FK_VerApplicantAttachments_VerApplicantProfiles" />
+        <AssociationConnector Association="eRecruitmentModel.FK_VerApplicantContactDetails_VerApplicantProfiles" />
+        <AssociationConnector Association="eRecruitmentModel.FK_VerApplicantDeclarations_VerApplicantProfiles" />
+        <AssociationConnector Association="eRecruitmentModel.FK_VerApplicantExperiences_VerApplicantProfiles1" />
+        <AssociationConnector Association="eRecruitmentModel.FK_VerApplicantLangProficiencies_VerApplicantProfiles" />
+        <AssociationConnector Association="eRecruitmentModel.FK_VerApplicantPubServProhibitions_VerApplicantProfiles" />
+        <AssociationConnector Association="eRecruitmentModel.FK_VerApplicantReferences_VerApplicantProfiles" />
+        <EntityTypeShape EntityType="eRecruitmentModel.ApplicantProfile" Width="1.5" PointX="6" PointY="37.125" />
+        <AssociationConnector Association="eRecruitmentModel.FK_ApplicantAttachments_ApplicantProfile" />
+        <AssociationConnector Association="eRecruitmentModel.FK_ApplicantContactDetails_ApplicantProfile" />
+        <AssociationConnector Association="eRecruitmentModel.FK_ApplicantDeclaration_ApplicantProfile" />
+        <AssociationConnector Association="eRecruitmentModel.FK_ApplicantExperience_ApplicantProfile" />
+        <AssociationConnector Association="eRecruitmentModel.FK_ApplicantLangProficiency_ApplicantProfile" />
+        <AssociationConnector Association="eRecruitmentModel.FK_ApplicantProfile_Genders" />
+        <AssociationConnector Association="eRecruitmentModel.FK_ApplicantProfile_Races" />
+        <AssociationConnector Association="eRecruitmentModel.FK_ApplicantPubServProhibition_ApplicantProfile" />
+        <AssociationConnector Association="eRecruitmentModel.FK_ApplicantReferences_ApplicantProfile" />
+        <AssociationConnector Association="eRecruitmentModel.FK_VerApplicantProfiles_ApplicantProfiles" />
+        <EntityTypeShape EntityType="eRecruitmentModel.PasswordRequestStatus" Width="1.5" PointX="3.75" PointY="50.875" />
+        <EntityTypeShape EntityType="eRecruitmentModel.PasswordResetRequest" Width="1.5" PointX="6" PointY="45.375" />
+        <AssociationConnector Association="eRecruitmentModel.FK_PasswordResetRequests_PasswordRequestStatuses" />
+        <EntityTypeShape EntityType="eRecruitmentModel.Salary" Width="1.5" PointX="7.375" PointY="2.75" />
+        <EntityTypeShape EntityType="eRecruitmentModel.Vacancy" Width="1.5" PointX="11.25" PointY="10.375" />
+        <AssociationConnector Association="eRecruitmentModel.FK_Applications_Vacancies" />
+        <AssociationConnector Association="eRecruitmentModel.FK_Vacancies_Salaries" />
+        <AssociationConnector Association="eRecruitmentModel.FK_Vacancies_VacancyStatus" />
+        <EntityTypeShape EntityType="eRecruitmentModel.Institution" Width="1.5" PointX="4.875" PointY="3.375" />
+        <EntityTypeShape EntityType="eRecruitmentModel.ApplicantQualification" Width="1.5" PointX="11.25" PointY="23.75" />
+        <EntityTypeShape EntityType="eRecruitmentModel.VerApplicantQualification" Width="1.5" PointX="11.5" PointY="27.875" />
+        <AssociationConnector Association="eRecruitmentModel.FK_ApplicantQualifications_ApplicantProfile" />
+        <AssociationConnector Association="eRecruitmentModel.FK_ApplicantQualifications_Institution" />
+        <AssociationConnector Association="eRecruitmentModel.FK_ApplicantQualifications_QualificationTypes" />
+        <AssociationConnector Association="eRecruitmentModel.FK_VerApplicantQualifications_Institution" />
+        <AssociationConnector Association="eRecruitmentModel.FK_VerApplicantQualifications_QualificationTypes" />
+        <AssociationConnector Association="eRecruitmentModel.FK_VerApplicantQualifications_VerApplicantProfiles" />
+        <EntityTypeShape EntityType="eRecruitmentModel.Programme" Width="1.5" PointX="3.375" PointY="6.875" />
+        <AssociationConnector Association="eRecruitmentModel.FK_ApplicationRequirements_Programme" />
+        <EntityTypeShape EntityType="eRecruitmentModel.AnswersGenericQuestion" Width="1.5" PointX="5.75" PointY="6.75" />
+        <EntityTypeShape EntityType="eRecruitmentModel.AnswersSpecificQuestion" Width="1.5" PointX="7.75" PointY="5.75" />
+        <EntityTypeShape EntityType="eRecruitmentModel.Attachment" Width="1.5" PointX="7.75" PointY="8.75" />
+        <EntityTypeShape EntityType="eRecruitmentModel.GenericQuestion" Width="1.5" PointX="9.75" PointY="0.75" />
+        <EntityTypeShape EntityType="eRecruitmentModel.NewApplicationRequirement" Width="1.5" PointX="0.75" PointY="9.75" />
+        <EntityTypeShape EntityType="eRecruitmentModel.SpecificQuestion" Width="1.5" PointX="9.75" PointY="3.75" />
+        <EntityTypeShape EntityType="eRecruitmentModel.VerAttachment" Width="1.5" PointX="14.625" PointY="54.125" />
+        <EntityTypeShape EntityType="eRecruitmentModel.ListOfApplicationsNew" Width="1.5" PointX="4.75" PointY="10.75" />
+        <EntityTypeShape EntityType="eRecruitmentModel.ViewApplication" Width="1.5" PointX="11.75" PointY="0.75" />
+        <AssociationConnector Association="eRecruitmentModel.FK_VerAttachments_DocumentTypes" />
+        <AssociationConnector Association="eRecruitmentModel.FK_VerAttachments_VerApplicantProfiles" />
+        <EntityTypeShape EntityType="eRecruitmentModel.Requirement" Width="1.5" PointX="15.75" PointY="59.375" />
+        <AssociationConnector Association="eRecruitmentModel.FK_Requirements_Applications" />
+        <EntityTypeShape EntityType="eRecruitmentModel.AnswersThreshold" Width="1.5" PointX="10.375" PointY="6.75" />
+        <EntityTypeShape EntityType="eRecruitmentModel.VerifyEmail" Width="1.5" PointX="12.375" PointY="4.75" />
+        <EntityTypeShape EntityType="eRecruitmentModel.VerifyEmailRequestStatu" Width="1.5" PointX="7.375" PointY="13.75" />
+        <EntityTypeShape EntityType="eRecruitmentModel.ListOfApplication" Width="1.5" PointX="0.75" PointY="12.75" />
+        <EntityTypeShape EntityType="eRecruitmentModel.viewApplicantQuestionAnswer" Width="2" PointX="13.375" PointY="8.75" />
+        <EntityTypeShape EntityType="eRecruitmentModel.HiringManagersVacancyAccess" Width="1.5" PointX="13.375" PointY="12.75" />
+        <EntityTypeShape EntityType="eRecruitmentModel.RequestAllApplication" Width="1.5" PointX="14.375" PointY="0.75" />
+        <EntityTypeShape EntityType="eRecruitmentModel.User" Width="1.5" PointX="0.75" PointY="39.125" />
+        <AssociationConnector Association="eRecruitmentModel.FK_ApplicantProfile_Users" />
+        <AssociationConnector Association="eRecruitmentModel.FK_PasswordResetRequests_Users" />
+        <AssociationConnector Association="eRecruitmentModel.FK_RefreshTokens_Users" />
+        <AssociationConnector Association="eRecruitmentModel.FK_UserClientRoles_Users" />
+        <AssociationConnector Association="eRecruitmentModel.FK_UserClients_Users" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

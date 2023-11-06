@@ -1,0 +1,27 @@
+﻿<div class="container" style="padding-left:10%; padding-right:10%; margin-top:2%" ng-init="vm.initialisePage()">
+    <div class="well card">
+        <fieldset>
+            <legend>REPORTS</legend>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label> Report Type <span style="color:red">*</span></label>
+                            </div>
+                            <div class="col-md-3">
+                                <select class="form-control controls" ng-model="vm.filter.rptType" style="width:400px">
+                                    <option ng-repeat="rpt in vm.reports" value="{{rpt.type_id}}">{{rpt.type_desc}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="btn-group">
+                                    <input id="btnView" type="button" class="btn btn-primary  btn-group-sm" data-ng-click="vm.ViewReport()" value="View Report" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+        </fieldset>
+    </div>
+</div>

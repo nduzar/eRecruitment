@@ -1,0 +1,202 @@
+
+
+    <div class="container" style="padding-left:10%; padding-right:10%; margin-top:2%" ng-init="vm.initialisePage()">
+         <div ng-show="!(vm.sentEmailClicked)" class="well card">
+             <fieldset>
+                 <legend>List of all applications received for <span>{{vm.currentPost.jobTitle}}</span> </legend>
+                 <div class="row" style="margin-top: 10%;" ng-show="vm.isLoading">
+                     <div class="col-lg-offset-2 col-lg-8 alert alert-info">
+                         <i class="fa fa-cog fa-spin fa-lg pull-right"></i> <strong>Loading!</strong>  please wait...
+                     </div>
+                 </div>
+                 <div ng-show="vm.showNoPost" class="row">
+                     <div class="alert alert-dismissible alert-info">
+                         <strong>No Applications!</strong> There are no applications.
+                     </div>
+                 </div>
+                 <div ng-hide="vm.applications.length == 0" class="row">
+                     <span>Number of Application:  </span> <span>{{vm.noOfApplications}}</span>
+                     <br />
+                     <br />
+                     <div class="col-lg-12">
+                         <div class="row">
+                             <div class="input-group input-group-sm">
+                                 <input type="text" class="form-control input-group-sm" ng-model="vm.searchString" placeholder="Search" />
+                                 <span class="input-group-btn input-group-sm">
+                                     <button class="btn btn-default btn-xs" title="Search" ng-click="vm.setFilter()"><i class="glyphicon glyphicon-search"></i></button>
+                                     <button class="btn btn-default btn-xs" title="Reset search" ng-click="vm.clearFilter()"><i class="glyphicon glyphicon-refresh"></i></button>
+
+                                 </span>
+                             </div>
+                         </div>
+                         <div class="row" ng-show="!(vm.isInternship)">
+                             <table class="table table-striped table-hover table-condensed">
+                                 <tr>
+                                     <th ng-click="vm.setSorting('firstNames')">Name</th>
+                                     <th ng-click="vm.setSorting('surname')">Surname</th>
+                                     <th ng-click="vm.setSorting('applicationStatusDesc')">Application Status</th>
+                                     <th ng-click="vm.setSorting('maintUser')">Updated By</th>
+                                     <th ng-click="vm.setSorting('maintDate')">Updated Date</th>
+                                     <th>View</th>
+                                 </tr>
+
+                                 <!-- Enable this once the is connectivity -->
+                                 <!-- <tr ng-repeat="app in vm.allApplications">-->
+                                 <tr ng-repeat="app in vm.allApplications">
+                                     <td>{{app.firstNames}}</td>
+                                     <td>{{app.surname}}</td>
+                                     <td>
+                                         <span>{{app.applicationStatusDesc}}</span>
+                                     </td>
+                                     <td>{{app.maintUser}}</td>
+                                     <td>{{app.maintDate  | date:'dd-MM-yyyy'}}</td>
+                                     <td>
+                                         <button ng-click="vm.viewApplication(app)" class="btn btn-default btn-xs"><i class="glyphicon glyphicon-chevron-right"></i></button>
+                                     </td>
+                                 </tr>
+                             </table>
+                             <ul ng-if="vm.pager.pages.length" class="pagination">
+                                 <li ng-class="{disabled:vm.pager.currentPage === 1}">
+                                     <a ng-click="vm.setPager(1)">First</a>
+                                 </li>
+                                 <li ng-class="{disabled:vm.pager.currentPage === 1}">
+                                     <a ng-click="vm.setPager(vm.pager.currentPage - 1)">Previous</a>
+                                 </li>
+                                 <li ng-repeat="page in vm.pager.pages" ng-class="{active:vm.pager.currentPage === page}">
+                                     <a ng-click="vm.setPager(page)">{{page}}</a>
+                                 </li>
+                                 <li ng-class="{disabled:vm.pager.currentPage === vm.pager.totalPages}">
+                                     <a ng-click="vm.setPager(vm.pager.currentPage + 1)">Next</a>
+                                 </li>
+                                 <li ng-class="{disabled:vm.pager.currentPage === vm.pager.totalPages}">
+                                     <a ng-click="vm.setPager(vm.pager.totalPages)">Last</a>
+                                 </li>
+                             </ul>
+                         </div>
+
+                         <div class="row" ng-show="vm.isInternship">
+                             <table class="table table-striped table-hover table-condensed">
+                                 <tr>
+                                     <th ng-click="vm.setSorting('firstNames')">Name</th>
+                                     <th ng-click="vm.setSorting('surname')">Surname</th>
+                                     <th ng-click="vm.setSorting('average')">Average</th>
+                                     <th ng-click="vm.setSorting('programme')">Programme</th>
+                                     <th ng-click="vm.setSorting('applicationStatusDesc')">Application Status</th>
+                                     <!--<th ng-click="vm.setSorting('maintUser')">Updated By</th>
+                                     <th ng-click="vm.setSorting('maintDate')">Updated Date</th>-->
+                                     <th>View</th>
+                                 </tr>
+
+                                 <!-- Enable this once the is connectivity -->
+                                 <!-- <tr ng-repeat="app in vm.allApplications">-->
+                                 <tr ng-repeat="app in vm.allApplications">
+                                     <td>{{app.application.firstNames}}</td>
+                                     <td>{{app.application.surname}}</td>
+                                     <td>{{app.average}}</td>
+                                     <td>{{app.programme}}</td>
+                                     <td>
+                                         <span>{{app.application.applicationStatusDesc}}</span>
+                                     </td>
+                                     <td>
+                                         <button ng-click="vm.viewApplication(app.application)" class="btn btn-default btn-xs"><i class="glyphicon glyphicon-chevron-right"></i></button>
+                                     </td>
+                                 </tr>
+                             </table>
+                             <ul ng-if="vm.pager.pages.length" class="pagination">
+                                 <li ng-class="{disabled:vm.pager.currentPage === 1}">
+                                     <a ng-click="vm.setPager(1)">First</a>
+                                 </li>
+                                 <li ng-class="{disabled:vm.pager.currentPage === 1}">
+                                     <a ng-click="vm.setPager(vm.pager.currentPage - 1)">Previous</a>
+                                 </li>
+                                 <li ng-repeat="page in vm.pager.pages" ng-class="{active:vm.pager.currentPage === page}">
+                                     <a ng-click="vm.setPager(page)">{{page}}</a>
+                                 </li>
+                                 <li ng-class="{disabled:vm.pager.currentPage === vm.pager.totalPages}">
+                                     <a ng-click="vm.setPager(vm.pager.currentPage + 1)">Next</a>
+                                 </li>
+                                 <li ng-class="{disabled:vm.pager.currentPage === vm.pager.totalPages}">
+                                     <a ng-click="vm.setPager(vm.pager.totalPages)">Last</a>
+                                 </li>
+                             </ul>
+                         </div>
+                     </div>
+                 </div>
+
+                 <div class="row">
+                     <button class="btn btn-default btn-xs" ng-click="vm.backToPosts()"><i class="glyphicon glyphicon-chevron-left"></i> Vacancies</button>
+                     <button class="btn btn-default btn-xs" ng-click="vm.toggleScreen()"><i class="glyphicon glyphicon-chevron-right"></i> Send shortlisted applications to Hiring Line Manager</button>
+                     <button class="btn btn-default btn-xs" ng-click="vm.sendAllApplicationsHiringManager()"><i class="glyphicon glyphicon-chevron-right"></i> Send all applications to Hiring Manager</button>
+
+                 </div>
+                 <br />
+
+                 <div class="row">
+                     <div class="col-lg-1">&nbsp;</div>
+                     <div ng-hide="!vm.ShowError1" class="alert alert-danger alert-dismissable col-lg-10">
+                         <strong>Whoops {{vm.ErrorMessage1}}</strong>
+                     </div>
+                     <div class="col-lg-1">&nbsp;</div>
+                     <div ng-hide="!vm.ShowSuccess1" class="alert alert-success alert-dismissable col-lg-10">
+                         <strong>Congratulations {{vm.SuccessMessage1}}</strong>
+                     </div>
+                     <div class="col-lg-1">&nbsp;</div>
+                 </div>
+
+             </fieldset>
+                    </div>
+         <div ng-show="(vm.sentEmailClicked)" class="well card">
+             <fieldset>
+                 <legend><span>Sent email to hiring managers:</span></legend>
+                 <div class="row">
+                     <div class="form-group">
+                         <label class="control-label" for="users">Select User</label>
+                         <select name="salaryLevel"
+                                 class="form-control input-sm" required
+                                 ng-model="vm.selectedUser"
+                                 ng-options="user as user.fullName for user in vm.allUsers track by user.hrUserId"></select>
+                         <br />
+                         <button ng-click="vm.addUser()" class="btn btn-default btn-xs pull-right">Add the Selected User</button>
+                     </div>
+                 </div>
+
+             </fieldset>
+
+             <div class="row">
+                 <div id="selectedUsers" ng-repeat="selectedUser in vm.userList">
+                     <div class="form-group">
+                         <label for="answer" class="control-label">Hiring Manager {{ $index+1 }}</label>
+                         <div class="input-group">
+                             <input type="text" ng-disabled="true" class="form-control input-sm" name="" ng-model="selectedUser.fullName" />
+                             <span class="input-group-btn" ng-click="vm.remove(selectedUser, vm.userList)">
+                                 <button class="btn btn-danger btn-sm"
+                                         type="button"
+                                         title="Remove this answer">
+                                     X
+                                 </button>
+                             </span>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+             <br />
+             <div class="row">
+                 <button ng-click="vm.backToList()" class="btn btn-default btn-xs">Back</button>
+                 <button ng-show="vm.editMode" ng-click="vm.sentEmail()" class="btn btn-default btn-xs pull-right">Send to Selected Users</button>
+             </div>
+
+             <div class="row">
+                 <div class="col-lg-1">&nbsp;</div>
+                 <div ng-hide="!vm.ShowError" class="alert alert-danger alert-dismissable col-lg-10">
+                     <strong>Whoops {{vm.ErrorMessage}}</strong>
+                 </div>
+                 <div ng-hide="!vm.ShowSuccess" class="alert alert-success alert-dismissable col-lg-10">
+                     <strong>Congratulations {{vm.SuccessMessage}}</strong>
+                 </div>
+                 <div class="col-lg-1">&nbsp;</div>
+             </div>
+
+
+
+         </div>
+    </div>

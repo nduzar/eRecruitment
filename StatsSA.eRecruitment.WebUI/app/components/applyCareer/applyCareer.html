@@ -1,0 +1,242 @@
+﻿<style type="text/css">
+    .input-xs {
+        height: 25px;
+        padding: 2px 5px;
+        font-size: 12px;
+        line-height: 1.8; /* If Placeholder of the input is moved up, rem/modify this. */
+        border-radius: 2px;
+    }
+
+    .questions {
+        font-size: 14px;
+        position: relative;
+        top: 20px;
+    }
+</style>
+<link href="assets/css/angular-material.css" rel="stylesheet" />
+<div class="container" ng-cloak ng-init="vm.initialisePage()">
+    <div class="row container-inner">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="panel panel-primary">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                    <h4>{{vm.vacancy.jobTitle}}: {{vm.vacancy.divisionName}}</h4>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <h4>Reference No: {{vm.vacancy.referenceNumber}}</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12" style="font-size:12px!important">
+                                <div ng-hide="vm.successMessageShow || vm.savingMessageShow || vm.errorMessageShow" class="alert alert-dismissible alert-info">
+                                    <strong>Almost done!</strong>
+                                    Please answer the questions below as accurately as possible (information to be verified against your CV).
+                                </div>
+                                <div ng-hide="!vm.savingMessageShow" class="alert alert-dismissible alert-warning">
+                                    <strong>Attention!</strong>
+                                    Please wait for us to save your application.
+                                    &nbsp;
+                                    <img src="assets/images/ajax-loader.gif" alt="saving..." title="...saving" />
+                                </div>
+                                <div ng-hide="!vm.successMessageShow" class="alert alert-dismissible alert-success">
+                                    <strong>Success!</strong>
+                                    Your application was successfully saved. You will shortly be redirected back to the list of vacancies.
+                                </div>
+                                <div ng-hide="!vm.errorMessageShow" class="alert alert-dismissible alert-danger">
+                                    <strong>Whoops!</strong>
+                                    {{vm.errorMessage}}.
+                                </div>
+                            </div>
+                        </div>
+                        <div ng-hide="vm.errorMessageShow" class="row">
+                            <form name="applicationRequirementsForm">
+                                <div class="col-md-1"></div>
+                                <div class="col-md-10">
+                                    <!--Generic Questions-->
+                                    <div class="row" ng-repeat="g in vm.genericQuestions">
+                                        <div class="col-md-4 questions"><!--{{ $index + 1}}.--> {{g.genericQuestion.question}}</div>
+                                        <div class="col-md-4">
+                                            <md-select ng-model="vm.selectedAnswersGenericQuestions[$index].answer"
+                                                       ng-change="vm.genericQuestionAnswerChange(g, vm.selectedAnswersGenericQuestions[$index].answer, $index )" required>
+                                                <md-option ng-repeat="a in g.listAnswersGenericQuestions"
+                                                           ng-value="a.id">{{a.answer}}</md-option>
+                                            </md-select>
+                                        </div>
+                                        <br />
+                                        <br />
+                                        <div class="col-md-4" ng-if="vm.listOtherGenericAnswers[$index].showOther">
+                                            <input type="text" style="position: relative; bottom: 25px" id="{{ g.genericQuestion.id }}"
+                                                   ng-model="vm.listOtherGenericAnswers[$index].specifyAnswer"
+                                                   placeholder="Please specify"
+                                                   class="form-control">
+                                        </div>
+                                        <br />
+                                        <br />
+                                    </div>
+                                    <!--End Generic Questions-->
+                                    <!--Specific Questions-->
+                                    <div class="row" ng-repeat="s in vm.specificQuestions">
+                                        <div class="col-md-4 questions"><!--{{ $index + 1}}.--> {{s.specificQuestion.question}}</div>
+                                        <div class="col-md-4">
+                                            <md-select ng-model="vm.selectedAnswersSpecificQuestions[$index].answer"
+                                                       ng-change="vm.specificQuestionAnswerChange(s, vm.selectedAnswersSpecificQuestions[$index].answer )" required>
+                                                <md-option ng-repeat="a in s.listAnswersSpecificQuestions"
+                                                           ng-value="a.id">{{a.answer}}</md-option>
+                                            </md-select>
+                                        </div>
+                                    </div>
+
+                                    <!--End Specific Questions-->
+                                    <!--<div class="row">
+                    <div class="col-md-8 questions">1. Are you a south african citizen?</div>
+                    <div class="col-md-4">
+                        <md-select ng-model="vm.requirement.isSouthAfricanCitizen" required>
+                            <md-option ng-repeat="southAfrican in vm.southAfricanCitizen" ng-value="vm.convertToBoolean(southAfrican)"> {{southAfrican}}</md-option>
+                        </md-select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8 questions">2. What is your highest relevant qualification?</div>
+                    <div class="col-md-4">
+                        <md-select ng-model="vm.requirement.highestQualification" required>
+                            <md-option ng-repeat="qualification in vm.qualification" ng-value="qualification"> {{qualification}}</md-option>
+                        </md-select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8 questions">3. Do you have relevant experience?</div>
+                    <div class="col-md-4">
+                        <md-select name="experienceQuestion" ng-model="vm.requirement.experience" required>
+                            <md-option ng-repeat="experience in vm.experience" ng-value="experience"> {{experience}}</md-option>
+                        </md-select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8 questions">4. Do you have managerial experience?</div>
+                    <div class="col-md-4">
+                        <md-select name="mangExperienceQuestion" ng-model="vm.requirement.managementExperience" required>
+                            <md-option ng-repeat="mangExperience in vm.mangExperience" ng-value="mangExperience"> {{mangExperience}}</md-option>
+                        </md-select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8 questions">5. Do you have relevant training?</div>
+                    <div class="col-md-4">
+                        <md-select name="trainingQuestion" ng-model="vm.requirement.hasTraining" required>
+                            <md-option ng-repeat="training in vm.training" ng-value="vm.convertToBoolean(training)"> {{training}}</md-option>
+                        </md-select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8 questions">6. Do you have relevant skills/knowledge?</div>
+                    <div class="col-md-4">
+                        <md-select name="knowledgeQuestion" ng-model="vm.requirement.hasKnowledge" required>
+                            <md-option ng-repeat="knowledge in vm.knowledge" ng-value="vm.convertToBoolean(knowledge)"> {{knowledge}}</md-option>
+                        </md-select>
+                    </div>
+                </div>-->
+
+                                </div>
+                                <div class="col-md-1"></div>
+                            </form>
+                        </div>
+                        <br />
+                        <div ng-hide="vm.errorMessageShow" class="row">
+                            <div class="col-md-1"></div>
+                            <div class="col-md-10">
+                                <h4>My Documents</h4>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="alert alert-dismissible alert-info" aria-hidden="false">
+                                            <span>Max file size must not exceed <strong>20 MB</strong> on each field</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <p style="color: red">
+                                    <b>Follow these steps to upload documents</b> <br />
+                                    1. Click the browser button <br />
+                                    2. Select a file that you want to upload <br />
+                                    3. Click Save file button to save a file
+                                </p>
+                                <table class="table table-hover" style="width:100%">
+                                    <tbody>
+                                        <tr ng-repeat="type in vm.documentTypes">
+                                            <td>{{type.documentTypeDesc}}</td>
+                                            <td>
+                                                <input class="form-control" type="file" onload="vm.onLoad" ng-model="vm.file" id="inputFile" name="inputFile" base-sixty-four-input required>
+                                            </td>
+                                            <td>
+                                                <button ng-click="vm.SaveFile(type);" class="btn btn-primary">Save file</button>
+                                            </td>
+                                            <td>
+                                                <button ng-click="vm.viewFile(type);" class="btn btn-primary" ng-if="vm.getFileName(type)">{{vm.getFileName(type)}}</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-md-1"></div>
+                        </div>
+                        <div ng-hide="vm.errorMessageShow" class="row">
+                            <form class="form-horizontal" name="vm.frmDeclaration" novalidate>
+                                <fieldset>
+                                    <legend style="padding-left:50px"> DECLARATION</legend>
+                                    <!--<div class="row">
+                                        <div class="col-md-1">&nbsp;</div>
+                                        <div class="col-md-10">
+                                            <p>
+                                                I declare that all the information provided (including any attachments and profile information) is complete/updated and correct to the best of my knowledge. I understand that any false information supplied could lead to my application being disqualified or my discharge if I am appointed.
+                                            </p>
+                                        </div>
+                                        <div class="col-md-1">&nbsp;</div>
+                                    </div>-->
+                                    <div class="row">
+                                        <div class="col-sm-4" style="padding-left:50px">
+                                            <div class="form-group has-feedback" ng-class="{ 'has-error' : (vm.frmDeclaration.inputDeclaration.$invalid && !vm.frmDeclaration.inputDeclaration.$pristine) || (vm.frmDeclaration.inputDeclaration.$invalid && vm.frmDeclaration.$submitted) }">
+                                                <div class="checkbox">
+                                                    <label>
+                                                        <input ng-model="vm.applicantDeclaration.acceptedDeclaration" name="inputDeclaration" id="inputDeclaration" type="checkbox" required> 
+                                                            I declare that all the information provided (including any attachments and profile information) is complete/updated and correct to the best of my knowledge. I understand that any false information supplied could lead to my application being disqualified or my discharge if I am appointed.
+                                                        
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group has-feedback" ng-class="{ 'has-error' : (vm.frmDeclaration.inputDeclarationDate.$invalid && !vm.frmDeclaration.inputDeclarationDate.$pristine) || (vm.frmDeclaration.inputDeclarationDate.$invalid && vm.frmDeclaration.$submitted) }">
+                                                <label for="inputDeclarationDate" class="col-md-3 control-label">Declaration Date</label>
+                                                <div class="col-md-9">
+                                                    <p class="input-group">
+                                                        <input type="text" style="text-align:center;" disabled ng-bind="" class="form-control" name="inputDeclare" id="inputDeclare" value="{{vm.applicantDeclaration.acceptedDeclarationOn | date : 'yyyy/MM/dd'}}" autofocus readonly>
+                                                        <span class="form-control-feedback" ng-show="(vm.frmDeclaration.inputDeclarationDate.$invalid && !vm.frmDeclaration.inputDeclarationDate.$pristine) || (vm.frmDeclaration.inputDeclarationDate.$invalid && vm.frmDeclaration.$submitted)"></span>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2">&nbsp;</div>
+                                    </div>
+                                </fieldset>
+                            </form>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <button ng-click="vm.sendApplication()" ng-disabled="applicationRequirementsForm.$invalid || vm.errorMessageShow" class="btn btn-primary btn-xs pull-right">Send Application</button>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+               
+            </div>           
+        </div>
+       
+    </div>
+</div>
+
+

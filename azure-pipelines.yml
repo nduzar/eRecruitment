@@ -1,0 +1,65 @@
+trigger:
+- master
+
+pool:
+  vmImage: 'windows-latest'
+
+variables:
+  solution: '**/*.sln'
+  buildPlatform: 'Any CPU'
+  buildConfiguration: 'Release'
+
+steps:
+- task: NuGetToolInstaller@1
+
+- task: NuGetCommand@2
+  inputs:
+    restoreSolution: '$(solution)'
+
+- task: PowerShell@2
+  inputs:
+    targetType: 'inline'
+    script: |
+      Invoke-WebRequest -Uri "https://aka.ms/vs/17/release/vc_redist.x64.exe" -OutFile "vcredist_x64.exe"
+      Start-Process "vcredist_x64.exe" -ArgumentList "/install", "/quiet", "/norestart" -Wait
+  displayName: 'Install Visual C++ Redistributable Packages for Visual Studio 2013'
+
+- task: PowerShell@2
+  inputs:
+    targetType: 'inline'
+    script: |
+      $dllUrls = @(
+        "https://windll.com/dll/29776/download",
+        "https://windll.com/dll/22165/download"
+      )
+      $dllPaths = @(
+        "$(Build.SourcesDirectory)\StatsSA.eRecruitment.Reports\SqlServerTypes\x64\SqlServerSpatial140.dll",
+        "$(Build.SourcesDirectory)\StatsSA.eRecruitment.Reports\SqlServerTypes\x86\msvcr120.dll"
+      )
+      for ($i = 0; $i -lt $dllUrls.Length; $i++) {
+        $directory = [System.IO.Path]::GetDirectoryName($dllPaths[$i])
+        if (-not (Test-Path -Path $directory -PathType Container)) {
+          New-Item -Path $directory -ItemType Directory
+        }
+        Invoke-WebRequest -Uri $dllUrls[$i] -OutFile $dllPaths[$i]
+      }
+  displayName: 'Download and Place Required DLLs'
+
+- task: PowerShell@2
+  inputs:
+    targetType: 'inline'
+    script: |
+      Get-ChildItem -Path "$(Build.SourcesDirectory)" -Filter TemporaryGeneratedFile_*.cs -Recurse | Remove-Item -Force
+  displayName: 'Delete Temporary Generated Files'
+
+- task: VSBuild@1
+  inputs:
+    solution: '$(solution)'
+    msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:DesktopBuildPackageLocation="$(build.artifactStagingDirectory)\WebApp.zip" /p:DeployIisAppPath="Default Web Site"'
+    platform: '$(buildPlatform)'
+    configuration: '$(buildConfiguration)'
+
+- task: VSTest@2
+  inputs:
+    platform: '$(buildPlatform)'
+    configuration: '$(buildConfiguration)'

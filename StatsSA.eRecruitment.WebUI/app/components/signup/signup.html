@@ -1,0 +1,252 @@
+﻿<link href="assets/css/angular-material.css" rel="stylesheet" />
+<div class="container" style="padding-left:10%; padding-right:10%; margin-top:0px !important">
+    <form class="" id="vm.frmUser" method="post" name="vm.frmUser" role="form" novalidate style="padding-top:10px">
+        <div class="row">
+            <div ng-hide="!vm.errorMessageShow" class="alert alert-dismissible alert-danger">
+                <strong>Whoops!</strong>
+                {{vm.errorMessage}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group has-feedback" ng-class="{ 'has-error' : (vm.frmUser.inputFirstName.$invalid && !vm.frmUser.inputFirstName.$pristine) || (vm.frmUser.inputFirstName.$invalid && vm.frmUser.$submitted) }">
+                    <label class="control-label" for="inputFirstName">First Name</label>
+                    <input type="text" data-ng-model="vm.user.firstName" class="form-control input-sm" id="inputFirstName" name="inputFirstName" required>
+                    <span class="glyphicon glyphicon-remove form-control-feedback" ng-show="(vm.frmUser.inputFirstName.$invalid && !vm.frmUser.inputFirstName.$pristine) || (vm.frmUser.inputFirstName.$invalid && vm.frmUser.$submitted)"></span>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="form-group has-feedback" ng-class="{ 'has-error' : (vm.frmUser.inputSurname.$invalid && !vm.frmUser.inputSurname.$pristine) || (vm.frmUser.inputSurname.$invalid && vm.frmUser.$submitted) }">
+                    <label class="control-label" for="inputSurname">Surname</label>
+                    <input type="text" data-ng-model="vm.user.surname" class="form-control input-sm" id="inputSurname" name="inputSurname" required>
+                    <span class="glyphicon glyphicon-remove form-control-feedback" ng-show="(vm.frmUser.inputSurname.$invalid && !vm.frmUser.inputSurname.$pristine) || (vm.frmUser.inputSurname.$invalid && vm.frmUser.$submitted)"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group has-feedback" ng-class="{ 'has-error' : (vm.frmUser.inputEmail.$invalid && !vm.frmUser.inputEmail.$pristine) || (vm.frmUser.inputEmail.$invalid && vm.frmUser.$submitted) }">
+                    <label class="control-label" for="inputFirstName">Email address</label>
+                    <input validate-email type="text" required data-ng-model="vm.user.userName" class="form-control input-sm" id="inputUsername" name="inputUsername"  onselectstart="return false"
+                    oncut="return false"  oncopy="return false"  onpaste="return false"  ondrag="return false" ondrop="return false">
+                    <span class="glyphicon glyphicon-remove form-control-feedback" ng-show="(vm.frmUser.inputEmail.$invalid && !vm.frmUser.inputEmail.$pristine) || (vm.frmUser.inputEmail.$invalid && vm.frmUser.$submitted)"></span>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group has-feedback" ng-class="{ 'has-error' : (vm.frmUser.inputConfirmPrimaryEmail.$invalid && !vm.frmUser.inputConfirmPrimaryEmail.$pristine) || (vm.frmUser.inputConfirmPrimaryEmail.$invalid && vm.frmUser.$submitted) }">
+                    <label class="control-label" for="inputConfirmPrimaryEmail">Confirm Primary Email address</label>
+                    <!--<input validate-email type="text" required data-ng-model="vm.user.inputConfirmPrimaryEmail" class="form-control input-sm" id="inputConfirmPrimaryEmail" name="inputConfirmPrimaryEmail">-->
+                    <input validate-email type="text" required data-ng-model="vm.user.inputConfirmPrimaryEmail" compare-to="vm.user.userName" class="form-control input-sm" id="inputConfirmPrimaryEmail" name="inputConfirmPrimaryEmail"
+                           oncut="return false" oncopy="return false" onpaste="return false" ondrag="return false" ondrop="return false">
+                    <span class="glyphicon glyphicon-remove form-control-feedback" ng-show="(vm.frmUser.inputConfirmPrimaryEmail.$invalid && !vm.frmUser.inputConfirmPrimaryEmail.$pristine) || (vm.frmUser.inputConfirmPrimaryEmail.$invalid && vm.frmUser.$submitted)"></span>
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group has-feedback" data-ng-hide="vm.authentication.isAuth" ng-class="{ 'has-error' : (vm.frmUser.inputCellnumber.$invalid && !vm.frmUser.inputCellnumber.$pristine) || (vm.frmUser.inputCellnumber.$invalid && vm.frmUser.$submitted) }">
+                    <label class="control-label" for="inputSurname">Mobile number</label>
+                    <input type="text" data-ng-model="vm.user.cellphone" maxlength="15" class="form-control input-sm" id="inputCellnumber" name="inputCellnumber" required ng-pattern="/^[0-9]{1,10}$/">
+                    <span class="glyphicon glyphicon-remove form-control-feedback" ng-show="(vm.frmUser.inputCellnumber.$invalid && !vm.frmUser.inputCellnumber.$pristine) || (vm.frmUser.inputCellnumber.$invalid && vm.frmUser.$submitted)"></span>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-6 form-group has-feedback" ng-class="{ 'has-error' : (vm.frmUser.optionsCitizen.$invalid && !vm.frmUser.optionsCitizen.$pristine) || (vm.frmUser.optionsCitizen.$invalid && vm.frmUser.$submitted) }">
+                <label class="col-md-3 control-label">RSA Citizen?</label>
+                <div class="col-md-9">
+                    <div class="radio">
+                        <label style="margin-right: 5px;">
+                            <input type="radio" name="optionsCitizen" id="optionsCitizen" data-ng-model="vm.citizen" ng-value="true" required />Yes
+                        </label>
+                        <label style="margin-right: 5px;">
+                            <input type="radio" name="optionsCitizen" id="optionsCitizen" data-ng-model="vm.citizen" ng-value="false" required />No
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-6">
+                <div ng-if="vm.citizen" class="form-group has-feedback" ng-class="{ 'has-error' : (vm.frmUser.inputIdNumber.$invalid && !vm.frmUser.inputIdNumber.$pristine) || (vm.frmUser.inputIdNumber.$invalid && vm.frmUser.$submitted) }">
+                    <label for="inputIdNumber" class="control-label">ID number</label>
+                    <input validate-sa-id-number type="text" data-ng-model="vm.user.identityNumber" class="form-control input-sm" id="inputIdNumber" name="inputIdNumber" placeholder="ID Number" ng-required="(vm.user.citizen)">
+                    <span class="glyphicon glyphicon-remove form-control-feedback" ng-show="(vm.frmUser.inputIdNumber.$invalid && !vm.frmUser.inputIdNumber.$pristine) || (vm.frmUser.inputIdNumber.$invalid && vm.frmUser.$submitted)"></span>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div ng-if="!(vm.citizen)" class="form-group has-feedback" ng-class="{ 'has-error' : (vm.frmUser.passportNumber.$invalid && !vm.frmUser.passportNumber.$pristine) || (vm.frmUser.passportNumber.$invalid && vm.frmUser.$submitted) }">
+                    <label for="passportNumber" class="col-md-3 control-label">Passport Number</label>
+                    <div class="col-md-9">
+                        <input type="text" data-ng-model="vm.profile.passportNumber" class="form-control input-sm" id="passportNumber" name="passportNumber" placeholder="Passport Number" ng-required="!(vm.profile.citizen)">
+                        <span class="glyphicon glyphicon-remove form-control-feedback" ng-show="(vm.frmUser.passportNumber.$invalid && !vm.frmUser.passportNumber.$pristine) || (vm.frmUser.passportNumber.$invalid && vm.frmUser.$submitted)"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div ng-if="!(vm.citizen)" class="form-group has-feedback" ng-class="{ 'has-error' : (vm.frmUser.inputDateOfBirth.$invalid && !vm.frmUser.inputDateOfBirth.$pristine) || (vm.frmUser.inputDateOfBirth.$invalid && vm.frmUser.$submitted) }">
+                    <label class="control-label" for="inputDateOfBirth">Date of Birth</label>
+                    <p class="input-group">
+                        <md-datepicker required ng-model="vm.user.dateOfBirth" name="dateOfBirth" md-current-view="year" md-min-date="vm.dateOptions.minDate" md-max-date="vm.dateOptions.maxDate" md-placeholder="YYYY/MM/DD"></md-datepicker>
+                        <span class="form-control-feedback" ng-show="(vm.frmUser.inputDateOfBirth.$invalid && !vm.frmUser.inputDateOfBirth.$pristine) || (vm.frmUser.inputDateOfBirth.$invalid && vm.frmUser.$submitted)"></span>
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-6">
+                <div class="form-group has-feedback" ng-class="{ 'has-error' : (vm.frmUser.SecondaryEmail.$invalid && !vm.frmUser.SecondaryEmail.$pristine) || (vm.frmUser.SecondaryEmail.$invalid && vm.frmUser.$submitted) }">
+                    <label class="control-label" for="SecondaryEmail">Recovery/Secondary Email address</label>
+                    <input validate-email type="text" required data-ng-model="vm.user.SecondaryEmail" class="form-control input-sm" id="SecondaryEmail" name="SecondaryEmail"
+                           oncut="return false"  oncopy="return false"  onpaste="return false"  ondrag="return false" ondrop="return false">
+                    <span class="glyphicon glyphicon-remove form-control-feedback" ng-show="(vm.frmUser.SecondaryEmail.$invalid && !vm.frmUser.SecondaryEmail.$pristine) || (vm.frmUser.SecondaryEmail.$invalid && vm.frmUser.$submitted)"></span>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group has-feedback" ng-class="{ 'has-error' : (vm.frmUser.SecondaryEmailConfirm.$invalid && !vm.frmUser.SecondaryEmailConfirm.$pristine) || (vm.frmUser.SecondaryEmailConfirm.$invalid && vm.frmUser.$submitted) }">
+                    <label class="control-label" for="SecondaryEmailConfirm">Confirm Recovery/Secondary Email address</label>
+                    <!--<input validate-email type="text" required data-ng-model="vm.user.SecondaryEmailConfirm" class="form-control input-sm" id="SecondaryEmailConfirm" name="SecondaryEmailConfirm">-->
+                    <input validate-email type="text" required data-ng-model="vm.user.SecondaryEmailConfirm" compare-to="vm.user.SecondaryEmail" class="form-control input-sm" id="SecondaryEmailConfirm" name="SecondaryEmailConfirm"
+                           oncut="return false" oncopy="return false" onpaste="return false" ondrag="return false" ondrop="return false">
+                    <span class="glyphicon glyphicon-remove form-control-feedback" ng-show="(vm.frmUser.SecondaryEmailConfirm.$invalid && !vm.frmUser.SecondaryEmailConfirm.$pristine) || (vm.frmUser.SecondaryEmailConfirm.$invalid && vm.frmUser.$submitted)"></span>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group has-feedback" data-ng-hide="vm.authentication.isAuth" ng-class="{ 'has-error' : (vm.frmUser.inputPassword.$invalid && !vm.frmUser.inputPassword.$pristine) || (vm.frmUser.inputPassword.$invalid && vm.frmUser.$submitted) }">
+                    <label class="control-label" for="inputSurname">New password (Minimum 8 characters)</label>
+                    <input type="password" data-ng-model="vm.user.password" class="form-control input-sm" pattern=".{8,20}" id="inputPassword" name="inputPassword" ng-required="!vm.authentication.isAuth">
+                    <span class="glyphicon glyphicon-remove form-control-feedback" ng-show="(vm.frmUser.inputPassword.$invalid && !vm.frmUser.inputPassword.$pristine) || (vm.frmUser.inputPassword.$invalid && vm.frmUser.$submitted)"></span>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group has-feedback" data-ng-hide="vm.authentication.isAuth" ng-class="{ 'has-error' : (vm.frmUser.inputConfirmPassword.$invalid && !vm.frmUser.inputConfirmPassword.$pristine) || (vm.frmUser.inputConfirmPassword.$invalid && vm.frmUser.$submitted) }">
+                    <label class="control-label" for="inputSurname">Re-enter password (Minimum 8 characters)</label>
+                    <input type="password" data-ng-model="vm.confirmPassword" compare-to="vm.user.password" class="form-control input-sm" pattern=".{8,20}" id="inputConfirmPassword" name="inputConfirmPassword" ng-required="!vm.authentication.isAuth">
+                    <span class="glyphicon glyphicon-remove form-control-feedback" ng-show="(vm.frmUser.inputConfirmPassword.$invalid && !vm.frmUser.inputConfirmPassword.$pristine)  || (vm.frmUser.inputConfirmPassword.$invalid && vm.frmUser.$submitted)"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <div class="">
+                        <button type="submit" class="btn btn-primary full-width" ng-disabled="vm.frmUser.$invalid" data-ng-click="vm.saveUser(vm.user)">Sign up</button>
+                    </div>
+                    <p class="text-muted"><h6>By clicking on "Sign up", you accept the Terms and Conditions of Use.</h6></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" ng-show="vm.message">
+            <div class="alert alert-dismissible alert-danger">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <strong>Oh snap!</strong> <a href="#" class="alert-link">{{vm.message}}
+            </div>
+        </div>
+
+    </form>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--<div class="container" style="top:300px">
+    <div class="card">
+        <form class="form-horizontal" id="vm.frmUser" method="post" name="vm.frmUser" role="form" novalidate style="padding-top:10px">
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="form-group has-feedback" ng-class="{ 'has-error' : (vm.frmUser.inputFirstName.$invalid && !vm.frmUser.inputFirstName.$pristine) || (vm.frmUser.inputFirstName.$invalid && vm.frmUser.$submitted) }">
+                        <label for="inputFirstName" class="col-md-4 control-label">First Name</label>
+                        <div class="col-md-8">
+                            <input type="text" data-ng-model="vm.user.firstName" class="form-control" id="inputFirstName" name="inputFirstName" placeholder="First name" required>
+                            <span class="glyphicon glyphicon-remove form-control-feedback" ng-show="(vm.frmUser.inputFirstName.$invalid && !vm.frmUser.inputFirstName.$pristine) || (vm.frmUser.inputFirstName.$invalid && vm.frmUser.$submitted)"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="form-group has-feedback" ng-class="{ 'has-error' : (vm.frmUser.inputSurname.$invalid && !vm.frmUser.inputSurname.$pristine) || (vm.frmUser.inputSurname.$invalid && vm.frmUser.$submitted) }">
+                        <label for="inputSurname" class="col-md-3 control-label">Surname</label>
+                        <div class="col-md-9">
+                            <input type="text" data-ng-model="vm.user.surname" class="form-control" id="inputSurname" name="inputSurname" placeholder="Surname" required>
+                            <span class="glyphicon glyphicon-remove form-control-feedback" ng-show="(vm.frmUser.inputSurname.$invalid && !vm.frmUser.inputSurname.$pristine) || (vm.frmUser.inputSurname.$invalid && vm.frmUser.$submitted)"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2"></div>
+            </div>
+            <div class="row">
+                <div class="col-md-10">
+                    <div class="form-group has-feedback" ng-class="{ 'has-error' : (vm.frmUser.inputUsername.$invalid && !vm.frmUser.inputUsername.$pristine) || (vm.frmUser.inputUsername.$invalid && vm.frmUser.$submitted) }">
+                        <label for="inputUsername" class="col-md-2 control-label">Email</label>
+                        <div class="col-md-10">
+                            <input type="email" required data-ng-model="vm.user.userName" class="form-control" id="inputUsername" name="inputUsername" placeholder="Email address">
+                            <span class="glyphicon glyphicon-remove form-control-feedback" ng-show="(vm.frmUser.inputUsername.$invalid && !vm.frmUser.inputUsername.$pristine) || (vm.frmUser.inputUsername.$invalid && vm.frmUser.$submitted)"></span>
+                        </div>
+                    </div>
+                    <div class="form-group has-feedback" ng-class="{ 'has-error' : (vm.frmUser.inputCellnumber.$invalid && !vm.frmUser.inputCellnumber.$pristine) || (vm.frmUser.inputCellnumber.$invalid && vm.frmUser.$submitted) }">
+                        <label for="inputCellnumber" class="col-md-2 control-label">Cell Number</label>
+                        <div class="col-md-10">
+                            <input type="text" data-ng-model="vm.user.cellphone" class="form-control" id="inputCellnumber" name="inputCellnumber" placeholder="Mobile number" required>
+                            <span class="glyphicon glyphicon-remove form-control-feedback" ng-show="(vm.frmUser.inputCellnumber.$invalid && !vm.frmUser.inputCellnumber.$pristine) || (vm.frmUser.inputCellnumber.$invalid && vm.frmUser.$submitted)"></span>
+                        </div>
+                    </div>
+                    <div class="form-group has-feedback" data-ng-hide="vm.authentication.isAuth" ng-class="{ 'has-error' : (vm.frmUser.inputPassword.$invalid && !vm.frmUser.inputPassword.$pristine) || (vm.frmUser.inputPassword.$invalid && vm.frmUser.$submitted) }">
+                        <label for="inputPassword" class="col-md-2 control-label">Password</label>
+                        <div class="col-md-10">
+                            <input type="password" data-ng-model="vm.user.password" class="form-control" id="inputPassword" name="inputPassword" placeholder="New password" ng-required="!vm.authentication.isAuth">
+                            <span class="glyphicon glyphicon-remove form-control-feedback" ng-show="(vm.frmUser.inputPassword.$invalid && !vm.frmUser.inputPassword.$pristine) || (vm.frmUser.inputPassword.$invalid && vm.frmUser.$submitted)"></span>
+                        </div>
+                    </div>
+                    <div class="form-group has-feedback" data-ng-hide="vm.authentication.isAuth" ng-class="{ 'has-error' : (vm.frmUser.inputConfirmPassword.$invalid && !vm.frmUser.inputConfirmPassword.$pristine) || (vm.frmUser.inputConfirmPassword.$invalid && vm.frmUser.$submitted) }">
+                        <label for="inputConfirmPassword" class="col-md-2 control-label">Confirm password</label>
+                        <div class="col-md-10">
+                            <input type="password" data-ng-model="vm.confirmPassword" compare-to="vm.user.password" class="form-control" id="inputConfirmPassword" name="inputConfirmPassword" placeholder="Re-enter password"  ng-required="!vm.authentication.isAuth">
+                            <span class="glyphicon glyphicon-remove form-control-feedback" ng-show="(vm.frmUser.inputConfirmPassword.$invalid && !vm.frmUser.inputConfirmPassword.$pristine)  || (vm.frmUser.inputConfirmPassword.$invalid && vm.frmUser.$submitted)"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-10 col-md-offset-2">
+                            <button type="submit" class="btn btn-primary" data-ng-click="vm.saveUser(vm.user, vm.frmUser)">Create Account</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2"></div>
+            </div>
+        </form>
+    </div>
+</div>-->

@@ -1,0 +1,194 @@
+﻿<style type="text/css">
+    .input-xs {
+        height: 25px;
+        padding: 2px 5px;
+        font-size: 12px;
+        line-height: 1.8; /* If Placeholder of the input is moved up, rem/modify this. */
+        border-radius: 2px;
+    }
+
+    .questions {
+        font-size: 14px;
+    }
+</style>
+<link href="assets/css/angular-material.css" rel="stylesheet" />
+<div class="container" ng-init="vm.initialisePage()">
+    <div class="row container-inner">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="panel panel-primary">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                    <h4>{{vm.vacancy.jobTitle}}: {{vm.vacancy.divisionName}}</h4>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <h4>Reference No: {{vm.requirement.programme}}</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12" style="font-size:12px!important">
+                                <div ng-hide="vm.successMessageShow || vm.savingMessageShow || vm.errorMessageShow" class="alert alert-dismissible alert-info">
+                                    <strong>Almost done!</strong>
+                                    Please answer the questions below as accurately as possible (information to be verified against your CV).
+                                </div>
+                                <div ng-hide="!vm.savingMessageShow" class="alert alert-dismissible alert-warning">
+                                    <strong>Attention!</strong>
+                                    Please wait for us to save your application.
+                                    &nbsp;
+                                    <img src="assets/images/ajax-loader.gif" alt="saving..." title="...saving" />
+                                </div>
+                                <div ng-hide="!vm.successMessageShow" class="alert alert-dismissible alert-success">
+                                    <strong>Success!</strong>
+                                    Your application was successfully saved. You will shortly be redirected back to the list of vacancies.
+                                </div>
+                                <div ng-hide="!vm.errorMessageShow" class="alert alert-dismissible alert-danger">
+                                    <strong>Whoops!</strong>
+                                    {{vm.errorMessage}}.
+                                </div>
+                            </div>
+                        </div>
+                        <div ng-hide="vm.errorMessageShow" class="row">
+                            <form name="applicationRequirementsForm">
+                                <div class="col-md-1"></div>
+                                <div class="col-md-10">
+                                    <div class="row">
+                                        <div class="col-md-8 questions">1. What is your highest relevant qualification?</div>
+                                        <div class="col-md-4">
+                                            <md-select ng-model="vm.requirement.highestQualification" required>
+                                                <md-option ng-repeat="qualification in vm.qualification" ng-value="qualification"> {{qualification}}</md-option>
+                                            </md-select>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-8 questions">2. Overall Academic Performance Average for above qualification?</div>
+                                        <div class="col-md-4">
+                                            <div class="input-group">
+                                                <input is-numeric type="text" step="1" class="form-control input-sm" name="inputAverage" id="inputAverage" data-ng-model="vm.average" required autofocus>
+                                                <span class="input-group-addon"><i class="fa fa-percent" aria-hidden="true"></i></span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <button type="button" class="btn btn-danger" ng-click="vm.showAlert($event)">Calculate Average Instructions</button>
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <div class="row">
+                                        <div class="col-md-8 questions">4. Are you 35 years or below?</div>
+                                        <div class="col-md-4">
+                                            <md-select name="ageQuestion" ng-model="vm.requirement.age" required>
+                                                <md-option ng-repeat="age in vm.age" ng-value="vm.convertBoolean(age)"> {{age}}</md-option>
+                                            </md-select>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-8 questions">5. Have you done an Internship Programme before?</div>
+                                        <div class="col-md-4">
+                                            <md-select name="internshipScoreQuestion" ng-model="vm.requirement.doneInternship" required>
+                                                <md-option ng-repeat="internship in vm.internship" ng-value="vm.convertBoolean(internship)"> {{internship}}</md-option>
+                                            </md-select>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-8 questions">6. Which Programme are you applying for?</div>
+                                        <div class="col-md-4">
+                                            <md-select required ng-change="vm.updateReference(vm.requirement.programme);" ng-model="vm.requirement.programme" id="selectProgramme" name="selectProgramme" style="margin:0px;">
+                                                <md-option ng-repeat="programme in vm.programmes" ng-value="programme.referenceNo"> {{programme.programmeDesc}}</md-option>
+                                            </md-select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-1"></div>
+                            </form>
+                        </div>
+                        <br />
+                        <div ng-hide="vm.errorMessageShow" class="row">
+                            <div class="col-md-1"></div>
+                            <div class="col-md-10">
+                                <h4>My Documents</h4>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="alert alert-dismissible alert-info" aria-hidden="false">
+                                            <span>Max file size must not exceed <strong>100 MB</strong> on each field</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <p style="color: red">
+                                    <b>Follow these steps to upload documents</b> <br />
+                                    1. Click the browser button <br />
+                                    2. Select a file that you want to upload <br />
+                                    3. Click Save file button to save a file
+                                </p>
+                                <table class="table table-hover" style="width:100%">
+                                    <tbody>
+                                        <tr ng-repeat="type in vm.documentTypes">
+                                            <td>{{type.documentTypeDesc}}</td>
+                                            <td>
+                                                <input class="form-control" type="file" onload="vm.onLoad" ng-model="vm.file" id="inputFile" name="inputFile" base-sixty-four-input required >
+                                            </td>
+                                            <td>
+                                                <button ng-click="vm.SaveFile(type);" class="btn btn-primary">Save file</button>
+                                            </td>
+                                            <td>
+                                                <button ng-click="vm.viewFile(type);" class="btn btn-primary" ng-if="vm.getFileName(type)">{{vm.getFileName(type)}}</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-md-1"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <button ng-click="vm.sendApplication()" ng-disabled="applicationRequirementsForm.$invalid || vm.errorMessageShow" class="btn btn-primary btn-xs pull-right">Send Application</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+               
+            </div>           
+        </div>
+       
+    </div>
+</div>
+
+
+<div style="visibility: hidden">
+    <div class="md-dialog-container" style="top: -20px !important;" id="myDialog">
+        <md-dialog aria-label="How to calculate average">
+            <form ng-cloak>
+                <md-toolbar>
+                    <div class="md-toolbar-tools">
+                        <h2>How to calculate average</h2>
+                        <span flex></span>
+                        <md-button class="md-icon-button" ng-click="cancel()">
+                            <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+                        </md-button>
+                    </div>
+                </md-toolbar>
+                <md-dialog-content>
+                    <div class="md-dialog-content">
+                        <ul>
+                            <li>Add all the marks of your first to final year modules for your undergraduate qualification</li>
+                            <li>If you are currently enrolled for your postgraduate qualification please note that we only require the average for your undergraduate qualification.</li>
+                            <li>Divide the total of your added markes with the number of modules and multiply by 100.</li>
+                            <li>Round off to the nearest 10</li>
+                        </ul>
+                    </div>
+                </md-dialog-content>
+
+            </form>
+        </md-dialog>
+    </div>
+</div>
+

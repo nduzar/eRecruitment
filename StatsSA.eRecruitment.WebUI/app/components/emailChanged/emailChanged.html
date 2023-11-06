@@ -1,0 +1,229 @@
+﻿<style type="text/css">
+</style>
+
+<div class="content-container">
+    <div class="well" style="padding-left:5%; padding-right:5%;">
+        <div class="">
+            <wizard on-finish="vm.addDeclaration(vm.applicantDeclaration)" indicators-position="top" hide-indicators="true">
+                <wz-step wz-title="Find Your Account">
+                    <div class="outer-div">
+                        <div class="inner-div">
+                            <form class="form-horizontal" id="vm.frmPersonalInfo" method="post" name="vm.frmPersonalInfo" role="form" novalidate>
+                                <div class="card panel">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">Find Your Account</h3>
+                                        <hr />
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-md-4 col-md-offset-3">
+                                                <canvas id="captcha_image"></canvas>
+                                            </div>
+                                        </div>
+                                        <div class="row" ng-init="vm.initialisePage()">
+                                            <div class="col-md-8">
+                                                <div class="form-group col-sm-12">
+                                                    <span style="font-size:12px!important; left:0!important;">Please enter your Email to search for your account.</span>
+                                                    <br />
+                                                    <input class="form-control input-sm" ng-model="vm.searchTerms.email" type="text" id="idNumber" name="idNumber" placeholder="Email">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <span style="font-size:12px!important; left:0!important;">Enter the code above.</span>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <div class="input-group">
+                                                            <input type="text" id="txtSecurityCode" name="securityCode" class="form-control input-sm" compare-To="vm.emailChangeData.captcha" required placeholder="must match captcha value above" ng-model="vm.searchTerms.captcha" autofocus />
+                                                            <span class="input-group-btn">
+                                                                <button type="button" class="btn btn-primary btn-sm-statssa full-width" id="btnRefresh" data-ng-click="vm.generateCaptcha()"><span class="glyphicon glyphicon-refresh"></span></button>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row" ng-show="vm.message">
+                                            <div class="col-md-12">
+                                                <div class="alert alert-dismissible alert-danger">
+                                                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                                    <strong>Oh snap!</strong> {{vm.message}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel-footer">
+                                        <div class="">
+                                            <div class="form-group col-sm-12">
+                                                <a ng-click="vm.searchAccount(vm.searchTerms)" class="btn btn-primary btn-xs pull-right">Search</a>
+                                                <a href="#/login" class="btn btn-default btn-xs pull-right">Cancel</a>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </wz-step>
+                <wz-step wz-title="Reset Your Password">
+                    <div class="outer-div">
+                        <div class="inner-div">
+                            <form class="form-horizontal" id="vm.frmPersonalInfo" method="post" name="vm.frmPersonalInfo" role="form" novalidate>
+                                <div class="card panel">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">Change Your Email</h3>
+                                        <hr />
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <!--<div class="col-md-12">
+                                    <span>How would you like to reset your password?</span>
+                                </div>-->
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <div class="col-md-10">
+                                                        <label>
+                                                            <i class="fa fa-envelope-o fa-lg" aria-hidden="true"><strong> Email OTP to my seconday email, in order to change primary email : </strong></i>
+                                                            <br />
+                                                            <span>{{vm.userAccount.hashedSecondaryEmail}}</span>
+                                                        </label>
+                                                        <!--</div>-->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row" ng-show="vm.message">
+                                            <div class="col-md-12">
+                                                <div class="alert alert-dismissible alert-danger">
+                                                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                                    <strong>Oh snap!</strong> {{vm.message}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel-footer">
+                                        <div class="">
+                                            <div class="form-group col-sm-12">
+                                                <a ng-click="vm.send()" class="btn btn-primary btn-xs pull-right">Continue</a>
+                                                <a wz-previous class="btn btn-default btn-xs pull-right">Not you?</a>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </wz-step>
+                <wz-step wz-title="Change Your Email">
+                    <div class="outer-div">
+                        <div class="inner-div">
+                            <form class="form-horizontal" id="vm.frmPersonalInfo" method="post" name="vm.frmPersonalInfo" role="form" novalidate>
+                                <div class="card panel">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">Change Your Email</h3>
+                                        <hr />
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-md-8">
+                                                <div class="form-group col-sm-12">
+                                                    <span style="font-size:12px!important; left:0!important;">Please enter new Email you want to add.</span>
+                                                    <br />
+                                                    <input class="form-control input-sm" ng-model="vm.newEmailData.email" type="text" id="email" name="email" placeholder="Email">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <span style="font-size:12px!important; left:0!important;">Enter the code sent on your email.</span>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <div class="input-group">
+                                                            <input type="text" id="txtotp" name="otp" class="form-control input-sm" required placeholder="Enter OTP from email" ng-model="vm.newEmailData.otp" autofocus />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row" ng-show="vm.message">
+                                            <div class="col-md-12">
+                                                <div class="alert alert-dismissible alert-danger">
+                                                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                                    <strong>Oh snap!</strong> {{vm.message}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel-footer">
+                                        <div class="">
+                                            <div class="form-group col-sm-12">
+                                                <a ng-click="vm.changeEmailNow(vm.newEmailData)" class="btn btn-primary btn-xs pull-right">Change Email</a>
+                                                <a href="#/login" class="btn btn-default btn-xs pull-right">Cancel</a>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </wz-step>
+                <wz-step wz-title="Email Changed Success">
+                    <div class="outer-div">
+                        <div class="inner-div">
+                            <form class="form-horizontal" id="vm.frmPersonalInfo" method="post" name="vm.frmPersonalInfo" role="form" novalidate>
+                                <div class="card panel">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">Email Changed Successfull</h3>
+                                        <hr />
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="row">
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <div class="col-md-10">
+                                                        <label>
+                                                            <i class="fa fa-envelope-o fa-lg" aria-hidden="true"><strong> Your email changed successfully, please try login now.</strong></i>
+                                                        </label>
+                                                        <!--</div>-->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row" ng-show="vm.message">
+                                            <div class="col-md-12">
+                                                <div class="alert alert-dismissible alert-danger">
+                                                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                                    <strong>Oh snap!</strong> {{vm.message}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel-footer">
+                                        <div class="">
+                                            <div class="form-group col-sm-12">
+                                                <a href="#/login" class="btn btn-default btn-xs pull-right">Login</a>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </wz-step>
+            </wizard>
+        </div>
+    </div>
+</div>

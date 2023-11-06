@@ -1,0 +1,234 @@
+﻿<!DOCTYPE html>
+<html data-ng-app="eRecruitmentApp">
+<head>
+    <meta charset="utf-8" />
+    <meta name="keywords" content="vacancy, vacancies, treasury, national treasury, gov, government, jobs, jobs" />
+    <meta name="description" content="Vacancies at National Treasury" />
+    <meta content="IE=edge, chrome=1" http-equiv="X-UA-Compatible" />
+    <title>National Treasury | e-Recruitment</title>
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="assets/css/bootstrap-statssa-custom.css" rel="stylesheet" />
+    <link href="assets/css/site.css" rel="stylesheet" />
+    <link href="assets/css/loading-bar.css" rel="stylesheet" />
+    <link href="assets/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="assets/css/social-buttons.css" rel="stylesheet" />
+    <link href="assets/css/landing-page.css" rel="stylesheet" />
+    <link href="assets/css/types.css" rel="stylesheet" />
+    <link href="assets/css/angular-wizard.css" rel="stylesheet" />
+
+    <link href="assets/css/angular-toastr.min.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <link rel="shortcut icon" href="/favicon.png">
+    <script type="text/javascript" src="assets/js/jquery.min.js"></script>
+
+    <style type="text/css">
+        @media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2) {
+            .navbar1 img {
+                margin: 2px;
+            }
+
+            .navbar1 {
+                min-height: 39px !important;
+            }
+
+            .navbar {
+                margin-bottom: 1px;
+            }
+
+            .body-top {
+                margin-top: 80px;
+            }
+
+            .navbar-fixed2-top {
+                top: 40px;
+            }
+
+            .text {
+                font-size: 15px !important;
+                padding-left: 13% !important;
+                padding-bottom: 10px;
+            }
+        }
+
+        @media screen and (max-width: 600px) {
+            .text {
+                font-size: 15px !important;
+                padding-left: 13% !important;
+                padding-bottom: 10px;
+            }
+        }
+
+        @media screen and (max-width: 600px) {
+
+            .hide-header-mobile {
+                /*visibility: hidden;*/
+                clear: both;
+                float: left;
+                /*margin: 10px auto 5px 20px;*/
+                width: 28%;
+                display: none;
+            }
+
+            .navbar-fixed2-top {
+                top: 0px;
+                position: fixed;
+                right: 0;
+                left: 0;
+                z-index: 1030;
+                width: 100%;
+            }
+
+            .body-top {
+                margin-top: 80px;
+            }
+        }
+    </style>
+</head>
+<body data-ng-controller="indexController" class="body-top">
+
+    <div class="navbar navbar1 navbar-fixed-top text-center hide-header-mobile" style="z-index: 1030; background-color: #ffffff;">
+        <a href="#/home"> <img src="assets/images/NT.png" style="width:150px;" class="side-image" /></a>
+        <!-- <span class="statssa-tag-line">Welcome to National Treasury eRecruitment</span>-->
+    </div>
+    <div class="navbar navbar-default navbar-fixed2-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button class="btn btn-success navbar-toggle" data-ng-click="navbarExpanded = !navbarExpanded" data-toggle="collapse" data-target=".navbar-collapse">
+                    <!--<span class="glyphicon glyphicon-chevron-down"></span>-->
+                    <span class="sr-only">Toggle navigation</span>
+                    <i class="fa fa-bars fa-lg" aria-hidden="true"></i>
+                </button>
+                <a class="navbar-brand" href="#/browseJobs">
+                    <!--Browse Jobs-->
+                </a>
+            </div>
+            <div class="collapse navbar-collapse" uib-collapse="!navbarExpanded">
+                <ul class="nav navbar-nav navbar-right">
+                    <li data-ng-hide="!authentication.isAuth"><a href="#/viewProfile"><i class="fa fa-user fa-lg"></i> My Profile</a></li> <!--{{authentication.fullname}}-->
+                    <!-- <li data-ng-hide="!authentication.isAuth"><a href="#/viewProfile"><i class="fa fa-user fa-lg"> MY Profile [{{authentication.fullname}}]</i></a></li> {{authentication.fullname}}-->
+                    <li><a href="#/browseJobs"><i class="fa fa-search fa-lg" aria-hidden="true"></i> Browse Jobs</a></li>
+                    <li data-ng-hide="!authentication.isAuth"><a href="#/viewApplications" data-ng-click="viewApplications()"><i class="fa fa-list fa-lg" aria-hidden="true"></i> My Applications</a></li>
+                    <li data-ng-hide="!authentication.isAuth"><a href="" data-ng-click="logOut()"><i class="fa fa-unlock fa-lg" aria-hidden="true"></i> Sign out</a></li>
+                    <li data-ng-hide="authentication.isAuth"> <a href="#/login"><i class="fa fa-lock fa-lg" aria-hidden="true"></i> Sign In</a></li>
+                    <!--<li data-ng-hide="authentication.isAuth"> <a href="#/signup"><i class="fa fa-sign-in fa-lg" aria-hidden="true"></i> Sign Up</a></li>-->
+                    <!--<li data-ng-hide="authentication.isAuth"> <a href="#/forgotpassword">Forgot Password?</a></li>
+                    <li data-ng-hide="authentication.isAuth"> <a href="#/resetpassword">Reset Password?</a></li>-->
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div data-ng-view="" ng-cloak>
+        </div>
+    </div>
+    <div id="footer" ng-if="authentication.isAuth">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    <p class="text-muted">Copyright &copy; <span id="copyright" data-ng-bind="copyrightYear"></span> <a target="_blank" href="http://www.treasury.gov.za">National Treasury</a></p>
+                </div>
+                <!--<div class="col-sm-6">
+                    <p class="text-muted">
+                        <a href="#/legal">Terms & Conditions</a>
+                        <a href="#/download" data-ng-click= "download('app/components/legal/Terms and Conditions.pdf')" >Terms & Conditions</a> |
+                        <a target="_blank" href="#">Security & Fraud</a>
+                    </p>
+
+                </div>-->
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+<!-- 3rd party libraries -->
+<script src="assets/js/angular.min.js"></script>
+<script src="assets/js/angular-route.min.js"></script>
+<script src="assets/js/angular-animate.js"></script>
+<script src="assets/js/angular-aria.js"></script>
+<script src="assets/js/angular-material.js"></script>
+<!--<script src="assets/js/angular-animate.min.js"></script>-->
+<script src="assets/js/angular-toastr.min.js"></script>
+<script src="assets/js/angular-toastr.tpls.min.js"></script>
+<!--<script src="assets/js/angular-sessionstorage.js"></script>-->
+<script src="assets/js/ngStorage.min.js"></script>
+<script src="assets/js/loading-bar.min.js"></script>
+<!--<script src="assets/js/angular-drag-and-drop-lists.min.js"></script>-->
+<script src="assets/js/angular-wizard.min.js"></script>
+<script src="assets/js/angular-sanitize.min.js"></script>
+<script src="assets/js/ng-file-upload.min.js"></script>
+<script src="assets/js/angular-base64-upload.min.js"></script>
+
+<script src="assets/js/ui-bootstrap-tpls-2.5.0.min.js"></script>
+
+<script src="assets/js/angular-statssa.js"></script>
+
+<!-- Load app main script -->
+<script src="app/app.js"></script>
+<script src="app/config-route.js"></script>
+
+<!-- Load services -->
+<script src="app/authInterceptorService.js"></script>
+<script src="app/components/login/authService.js"></script>
+<script src="app/components/home/homeService.js"></script>
+<script src="app/components/createProfile/createProfileService.js"></script>
+<script src="app/components/browseJobs/browseJobsService.js"></script>
+<script src="app/components/apply/applyService.js"></script>
+<script src="app/components/viewApplications/viewApplicationsService.js"></script>
+<script src="app/components/forgotpassword/forgotpasswordService.js"></script>
+<script src="app/components/emailChanged/emailChanged.Service.js"></script>
+<script src="app/components/resetpassword/resetpasswordService.js"></script>
+<script src="app/components/signup/signupService.js"></script>
+<script src="app/components/profile/profileService.js"></script>
+<script src="app/components/viewProfile/viewProfileService.js"></script>
+<script src="app/components/forgotpassword/passwordRecoveryService.js"></script>
+<script src="app/components/verifyemail/verifyEmailRecoveryService.js"></script>
+<script src="app/components/verifyemail/verifyEmailService.js"></script>
+
+
+<!-- Load directives -->
+<script src="app/directives/usernameAvailable.js"></script>
+<script src="app/directives/passwordConfirm.js"></script>
+<script src="app/directives/isNumeric.js"></script>
+<script src="app/directives/showErrors.js"></script>
+<script src="app/directives/filterByArray.js"></script>
+<script src="app/directives/validateEmail.js"></script>
+<script src="app/directives/validateSaIdNumber.js"></script>
+<script src="app/directives/calendarReadOnly.js"></script>
+<script src="app/directives/validateCharacters.js"></script>
+
+
+<!-- Load controllers -->
+<script src="indexController.js"></script>
+<script src="app/components/home/homeController.js"></script>
+<script src="app/components/login/loginController.js"></script>
+<script src="app/components/createProfile/createProfileController.js"></script>
+<script src="app/components/browseJobs/browseJobsController.js"></script>
+<script src="app/components/viewVacancy/viewVacancyController.js"></script>
+<script src="app/components/viewInternshipVacancy/viewInternshipVacancyController.js"></script>
+<script src="app/components/apply/applyController.js"></script>
+<script src="app/components/resetpassword/resetpasswordController.js"></script>
+<script src="app/components/forgotpassword/forgotpasswordController.js"></script>
+<script src="app/components/emailChanged/emailChangedController.js"></script>
+<script src="app/components/viewApplications/viewApplicationsController.js"></script>
+<script src="app/components/applyCareer/applyCareerController.js"></script>
+<script src="app/components/signup/signupController.js"></script>
+<script src="app/components/profile/profileController.js"></script>
+<script src="app/components/viewProfile/viewProfileController.js"></script>
+<script src="app/components/forgotpassword/passwordRecoveryController.js"></script>
+<script src="app/components/legal/legalController.js"></script>
+<script src="app/components/verifyemail/verifyEmailRecoveryController.js"></script>
+<script src="app/components/verifyemail/verifyEmailController.js"></script>
+<script>
+    window.addEventListener('storage', function (e) {
+        if (e.key) {
+            if (JSON.parse(localStorage.getItem('ngStorage-NewWindow')) == "1" || JSON.parse(localStorage.getItem('ngStorage-NewWindow')) == 1) {
+                localStorage.removeItem('ngStorage-NewWindow');
+                localStorage.removeItem('ngStorage-authorizationData');
+                localStorage.clear();
+                window.location.href = '/#/login';
+                e = "";
+            }
+        }
+    })
+</script>

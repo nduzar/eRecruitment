@@ -1,0 +1,817 @@
+﻿<!--https://github.com/angular-wizard/angular-wizard-->
+<style>
+    .form-group input[type="checkbox"] {
+        display: none;
+    }
+
+        .form-group input[type="checkbox"] + .btn-group > label span {
+            width: 20px;
+        }
+
+            .form-group input[type="checkbox"] + .btn-group > label span:first-child {
+                display: none;
+            }
+
+            .form-group input[type="checkbox"] + .btn-group > label span:last-child {
+                display: inline-block;
+            }
+
+        .form-group input[type="checkbox"]:checked + .btn-group > label span:first-child {
+            display: inline-block;
+        }
+
+        .form-group input[type="checkbox"]:checked + .btn-group > label span:last-child {
+            display: none;
+        }
+        .uib-datepicker-popup > li{
+            padding:0px !important;
+        } 
+</style>
+
+<div class="container" style="padding-left:10%; padding-right:10%; margin-top:2%" ng-init="vm.initialisePage()">
+    <div class="well card">
+        <wizard on-finish="finished()" hide-indicators="vm.hideIndicators">
+            <!-- LOGIN INFORMATION -->
+            <wz-step title="LOGIN INFORMATION" wz-order="0">
+                <form class="form-horizontal" id="LoginInfoForm" method="post" name="loginInfo" role="form" novalidate>
+                    <fieldset>
+                        <legend>LOGIN INFORMATION</legend>
+                        <div class="row">
+                            <div class="col-md-10">
+                                <div class="form-group has-feedback" ng-class="{ 'has-error' : loginInfo.emailAddress.$invalid && !loginInfo.emailAddress.$pristine }">
+                                    <label for="txtEmailAddress" class="col-md-3 control-label">Email address</label>
+                                    <div class="col-md-9">
+                                        <input type="email" class="form-control" ng-model="vm.applicantProfile.email" name="emailAddress" id="txtEmailAddress" required placeholder="e.g. John@Domain.com">
+                                        <span class="glyphicon glyphicon-remove form-control-feedback" ng-show="loginInfo.emailAddress.$invalid && !loginInfo.emailAddress.$pristine"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-10">
+                                <div class="form-group has-feedback" ng-class="{ 'has-error' : loginInfo.cellphoneNumber.$invalid && !loginInfo.cellphoneNumber.$pristine }">
+                                    <label for="numCellphone" class="col-md-3 control-label">Cell phone number</label>
+                                    <div class="col-md-9">
+                                        <input type="text" pattern="[0-9]{10}" class="form-control" maxlength="10" ng-model="vm.applicantProfile.cellphone" name="cellphoneNumber" id="numCellphone" required placeholder="e.g. 0760000000">
+                                        <span class="glyphicon glyphicon-remove form-control-feedback" ng-show="loginInfo.cellphoneNumber.$invalid && !loginInfo.cellphoneNumber.$pristine"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-10" data-ng-hide="vm.loggedIn">
+                                <div class="form-group has-feedback" ng-class="{ 'has-error' : loginInfo.password.$invalid && !loginInfo.password.$pristine }">
+                                    <label for="inputFirstName" class="col-md-3 control-label">Password</label>
+                                    <div class="col-md-9">
+                                        <input type="password" class="form-control" ng-model="vm.applicantProfile.password" pattern=".{8,20}" name="password" id="txtUserPassword" required>
+                                        <span class="glyphicon glyphicon-remove form-control-feedback" ng-show="loginInfo.password.$invalid && !loginInfo.password.$pristine"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" data-ng-hide="vm.loggedIn">
+                            <div class="col-md-10">
+                                <div class="form-group has-feedback" ng-class="{ 'has-error' : loginInfo.confpassword.$invalid && !loginInfo.confpassword.$pristine  }">
+                                    <label for="inputFirstName" class="col-md-3 control-label">Confirm Password</label>
+                                    <div class="col-md-9">
+                                        <input type="password" class="form-control" ng-model="vm.applicantProfile.Confpassword" compare-to="vm.applicantProfile.password" name="confpassword" id="txtConfPassword" required>
+                                        <span class="glyphicon glyphicon-remove form-control-feedback" ng-show="loginInfo.confpassword.$invalid && !loginInfo.confpassword.$pristine"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button ng-disabled="loginInfo.$invalid" data-ng-hide="vm.loggedIn" ng-click="vm.saveUser(vm.applicantProfile)" class="btn btn-primary pull-right">Save & Continue</button>
+                            <button wz-next ng-disabled="loginInfo.cellphoneNumber.$invalid || loginInfo.emailAddress.$invalid" data-ng-hide="!vm.loggedIn" class="btn btn-primary pull-right">Save & Continue</button>
+                        </div>
+                    </div>
+                </form>
+            </wz-step>
+            <!-- PERSONAL INFORMATION -->
+            <wz-step title="PERSONAL INFORMATION" wz-order="1">
+                <form class="form-horizontal" id="frmPernalInfo" method="post" name="persInfo" role="form" novalidate>
+                    <fieldset>
+                        <legend>PERSONAL INFORMATION</legend>
+                        <div>
+                            <div class="alert alert-dismissible alert-info">
+
+                                <strong>Heads up!</strong> Please complete your profile, it shouldn't take more than 5 to 10 minutes. Your profile is used when Recruiters search for suitable candidates, and for job applications.
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group has-feedback" ng-class="{ 'has-error' : persInfo.firstName.$invalid && !persInfo.firstName.$pristine }">
+                                    <label for="inputFirstName" class="col-md-3 control-label">First Names</label>
+                                    <div class="col-md-9">
+                                        <input type="hidden" ng-model="vm.applicantProfile.applicantProfiles[0].userId" />
+                                        <input type="text" class="form-control" ng-model="vm.applicantProfile.applicantProfiles[0].firstNames" name="firstName" id="inputFirstName" required placeholder="e.g. John Thabo">
+                                        <span class="glyphicon glyphicon-remove form-control-feedback" ng-show="persInfo.firstName.$invalid && !persInfo.firstName.$pristine"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group has-feedback" ng-class="{ 'has-error' : persInfo.lastName.$invalid && !persInfo.lastName.$pristine }">
+                                    <label for="inputLastName" class="col-md-3 control-label">Last Name</label>
+                                    <div class="col-md-9">
+                                        <input type="text" class="form-control" required ng-model="vm.applicantProfile.applicantProfiles[0].surname" name="lastName" id="inputLastName" placeholder="e.g. Ndlala">
+                                        <span class="glyphicon glyphicon-remove form-control-feedback" ng-show="persInfo.lastName.$invalid && !persInfo.lastName.$pristine"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group has-feedback" ng-class="{ 'has-error' : persInfo.dateOne.$invalid && !persInfo.dateOne.$pristine }">
+                                    <label for="inputDateOfBirth" class="col-md-3 control-label">Date of Birth</label>
+                                    <div class="col-md-9">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control"
+                                                   uib-datepicker-popup="{{ vm.dateControl.format }}"
+                                                   ng-model="vm.applicantProfile.applicantProfiles[0].dateOfBirth"
+                                                   value="{{vm.applicantProfile.applicantProfiles[0].dateOfBirt | date :'yyyy/MM/dd'}}"
+                                                   is-open="vm.dateControl.state[0].opened"
+                                                   datepicker-options="vm.dateControl.dateOptions"
+                                                   close-text="Close" />
+                                            <span class="input-group-btn">
+                                                <button type="button" class="btn btn-default" ng-click="vm.dateControl.open(0)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                            </span>
+                                        </div>
+
+                                        <span class="glyphicon glyphicon-remove form-control-feedback" ng-show="persInfo.dateOne.$invalid && !persInfo.dateOne.$pristine"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group has-feedback" ng-class="{ 'has-error' : persInfo.textID.$invalid && !persInfo.textID.$pristine }">
+                                    <label for="inputIDNo" class="col-md-3 control-label">ID Number</label>
+                                    <div class="col-md-9">
+                                        <input type="text" required ng-model="vm.applicantProfile.applicantProfiles[0].identityNumber" name="textID" class="form-control" pattern="[0-9]{13}" maxlength="13" placeholder="ID Number">
+                                        <span class="glyphicon glyphicon-remove form-control-feedback" ng-show="persInfo.textID.$invalid && !persInfo.textID.$pristine"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group has-feedback" ng-class="{ 'has-error' : persInfo.optionsRace.$invalid }">
+                                    <label class="col-md-3 control-label">Race</label>
+                                    <div class="col-md-9">
+                                        <div class="radio">
+                                            <label ng-repeat="race in vm.races" style="margin-right: 5px;">
+                                                <input type="radio" name="optionsRace" ng-checked="race.raceId == vm.applicantProfile.applicantProfiles[0].raceId" ng-required="$index == 0" required ng-model="vm.applicantProfile.applicantProfiles[0].raceId" value="{{race.raceId}}">{{race.raceDesc}}
+                                            </label>
+                                        </div>
+                                        <span class="glyphicon glyphicon-remove form-control-feedback" ng-show="persInfo.optionsRace.$invalid"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">Gender</label>
+                                    <div class="col-md-9">
+                                        <div class="radio">
+                                            <label ng-repeat="gender in vm.genders" style="margin-right: 5px;">
+                                                <input type="radio" name="optionsGender" ng-checked="gender.genderId == vm.applicantProfile.applicantProfiles[0].genderId" ng-required="$index == 0" required ng-model="vm.applicantProfile.applicantProfiles[0].genderId" value="{{gender.genderId}}">{{gender.genderDesc}}
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group has-feedback">
+                                    <label for="tokenLifeTime" class="col-md-6 control-label" style="padding-top:2px;">Do you have a Disability?</label>
+                                    <div class="col-md-6">
+                                            <input type="radio" value="true" ng-checked="vm.applicantProfile.applicantProfiles[0].disability==true" name="disability" ng-model="vm.applicantProfile.applicantProfiles[0].disability" /> <label>Yes</label>
+                                            <input type="radio" value="false" ng-checked="vm.applicantProfile.applicantProfiles[0].disability==false" name="disability" ng-model="vm.applicantProfile.applicantProfiles[0].disability" /> <label>No</label>
+                                        <span class="glyphicon glyphicon-remove form-control-feedback" ng-show="persInfo.disability.$invalid"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group has-feedback" ng-class="{ 'has-error' : !data.PersonalInformaion.saCitizen && !persInfo.nationality.$pristine && persInfo.nationality.$invalid }">
+                                    <label for="natureDisability" class="col-md-3 control-label">Nature of Disablility</label>
+                                    <div class="col-md-9">
+                                        <input type="text" class="form-control" name="natureDisability" ng-model="vm.applicantProfile.applicantProfiles[0].disabilityDesc" ng-required="vm.applicantProfile.applicantProfiles[0].disability=='true'" placeholder="Nature of disability">
+                                        <span class="glyphicon glyphicon-remove form-control-feedback" ng-show="data.PersonalInformaion.disability && !persInfo.natureDisability.$pristine && persInfo.natureDisability.$invalid"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group has-feedback">
+                                    <div class="col-md-12">
+                                        <label class="col-md-6 control-label" style="padding-top:2px;">Are you a South African Citizen?</label>
+                                        <div class="col-md-6">
+                                                <input type="radio" value="true" required ng-checked="vm.applicantProfile.applicantProfiles[0].citizen==true" name="isSACitizen" ng-change="vm.citizenChange()" ng-model="vm.applicantProfile.applicantProfiles[0].citizen" /> <label>Yes</label>
+                                                <input type="radio" value="false" ng-checked="vm.applicantProfile.applicantProfiles[0].citizen==false" name="isSACitizen" ng-change="vm.citizenChange()" ng-model="vm.applicantProfile.applicantProfiles[0].citizen" /> <label>No</label>
+                                            <span class="glyphicon glyphicon-remove form-control-feedback" ng-show="persInfo.isSACitizen.$invalid"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group has-feedback" ng-class="{ 'has-error' : !data.PersonalInformaion.saCitizen && !persInfo.nationality.$pristine && persInfo.nationality.$invalid }">
+                                    <label for="inputLastName" class="col-md-3 control-label">Nationality</label>
+                                    <div class="col-md-9">
+                                        <input type="text" class="form-control" required name="nationality" id="inputNationality" ng-model="vm.applicantProfile.applicantProfiles[0].nationality" placeholder="Nationality">
+                                        <span class="glyphicon glyphicon-remove form-control-feedback" ng-show="!data.PersonalInformaion.saCitizen && !persInfo.nationality.$pristine && persInfo.nationality.$invalid"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group has-feedback">
+                                    <div class="col-md-12">
+                                        <label class="col-md-6 control-label" style="padding-top:2px;">Do you have a valid work permit?</label>
+                                        <div class="col-md-6" >
+                                            <input type="radio" value="true" required ng-checked="vm.applicantProfile.applicantProfiles[0].workPermit==true" name="WorkPermit" ng-model="vm.applicantProfile.applicantProfiles[0].workPermit" /> <label>Yes</label>
+                                            <input type="radio" value="false" ng-checked="vm.applicantProfile.applicantProfiles[0].workPermit==false" name="WorkPermit" ng-model="vm.applicantProfile.applicantProfiles[0].workPermit" /> <label>No</label>
+                                            <span class="glyphicon glyphicon-remove form-control-feedback" ng-show="persInfo.WorkPermit.$invalid"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group has-feedback">
+                                    <div class="col-md-12">
+                                        <label class="col-md-6 control-label" style="padding-top:2px;">Do you have a criminal offence?</label>
+                                        <div class="col-md-6"  style="vertical-align: middle;">
+                                            <input type="radio" value="true" required ng-checked="vm.applicantProfile.applicantProfiles[0].criminalOffence==true" name="CriminalOffence" ng-model="vm.applicantProfile.applicantProfiles[0].criminalOffence" /> <label>Yes</label>
+                                            <input type="radio" value="false" ng-checked="vm.applicantProfile.applicantProfiles[0].criminalOffence==false" name="CriminalOffence" ng-model="vm.applicantProfile.applicantProfiles[0].criminalOffence" /> <label>No</label>
+                                            <span class="glyphicon glyphicon-remove form-control-feedback" ng-show="persInfo.CriminalOffence.$invalid"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                &nbsp;
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="inputFirstName" class="col-md-2 control-label"></label>
+                                    <div class="col-md-10">
+                                        <label class="control-label" style="text-align:left!important">
+                                            If your profession or occupation
+                                            requires State or official
+                                            registration, provide date and
+                                            particulars of registration.
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="inputRegistrationDate" class="col-md-3 control-label">Reg. Date</label>
+                                    <div class="col-md-9">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control"
+                                                   uib-datepicker-popup="{{ vm.dateControl.format }}"
+                                                   ng-model="vm.applicantProfile.applicantProfiles[0].occupationRegistrationDate"
+                                                   value="{{vm.applicantProfile.applicantProfiles[0].occupationRegistrationDate | date : 'yyyy/MM/dd'}}"
+                                                   is-open="vm.dateControl.state[1].opened"
+                                                   datepicker-options="vm.dateControl.dateOptions"
+                                                   close-text="Close" />
+                                            <span class="input-group-btn">
+                                                <button type="button" class="btn btn-default" ng-click="vm.dateControl.open(1)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="inputFirstName" class="col-md-3 control-label">Particulars</label>
+                                    <div class="col-md-9">
+                                        <input type="text" class="form-control" id="inputParticulars"
+                                               ng-model="vm.applicantProfile.applicantProfiles[0].occupationRegistrationDesc"
+                                               placeholder="e.g. Security Certification">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <a href="" wz-previous class="btn btn-primary pull-left">Back</a>
+                        </div>
+                        <div class="col-md-6">
+                            <button ng-disabled="persInfo.$invalid" class="btn btn-primary pull-right" ng-click="vm.saveProfile(vm.applicantProfile)">Save & Continue</button>
+                        </div>
+                    </div>
+                </form>
+            </wz-step>
+        <!-- CONTACT & LANGUAGE INFORMATION -->
+        <wz-step title="HOW DO WE CONTACT YOU" wz-order="2">
+            <form class="form-horizontal" name="ContactLanguageForm">
+                <fieldset>
+                    <legend>LANGUAGE PROFICIENCY</legend>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label>Language</label>
+                        </div>
+                        <div class="col-md-2">
+                            <label>Speak</label>
+                        </div>
+                        <div class="col-md-2">
+                            <label>Read</label>
+                        </div>
+                        <div class="col-md-2">
+                            <label>Write</label>
+                        </div>
+                        <div class="col-md-3">
+                            &nbsp;
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <select class="form-control" required ng-model="vm.langProfStaticModel.language">
+                                <option ng-repeat="language in vm.languages" value="{{language.languageId}}">{{language.languageDesc}}</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <select class="form-control" required ng-model="vm.langProfStaticModel.speak">
+                                <option ng-repeat="languageProficiency in vm.languageProficiencies" value="{{languageProficiency.languageProficiencyId}}">{{languageProficiency.languageProficiencyDesc}}</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <select class="form-control" required ng-model="vm.langProfStaticModel.read">
+                                <option ng-repeat="languageProficiency in vm.languageProficiencies" value="{{languageProficiency.languageProficiencyId}}">{{languageProficiency.languageProficiencyDesc}}</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <select class="form-control" required ng-model="vm.langProfStaticModel.write">
+                                <option ng-repeat="languageProficiency in vm.languageProficiencies" value="{{languageProficiency.languageProficiencyId}}">{{languageProficiency.languageProficiencyDesc}}</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <button ng-click="vm.addLangProficiency(vm.langProfStaticModel);" ng-disabled="ContactLanguageForm.$invalid" class="btn btn-sm btn-primary">Add</button>
+                        </div>
+                    </div>
+                    <br />
+                    <div ng-hide="!vm.hasLanguages" class="row">
+                        <table class="table table-hover">
+                            <tr>
+                                <th>Language</th>
+                                <th>Speak</th>
+                                <th>Read</th>
+                                <th>Write</th>
+                                <th>Remove</th>
+                            </tr>
+                            <tr class="info" ng-repeat="proficiency in vm.applicantProfile.applicantProfiles[0].applicantLangProficiencies">
+                                <td>{{proficiency.language.languageDesc}}</td>
+                                <td>{{proficiency.languageProficiency.languageProficiencyDesc}}</td>
+                                <td>{{proficiency.languageProficiency1.languageProficiencyDesc}}</td>
+                                <td>{{proficiency.languageProficiency2.languageProficiencyDesc}}</td>
+                                <td><button class="btn btn-default btn-xs" ng-click="vm.removeLangProficiency(proficiency)"><i class="glyphicon glyphicon-remove"></i></button></td>
+                            </tr>
+                        </table>
+                    </div>
+                </fieldset>
+            </form>
+            <form class="form-horizontal" name="setThree" novalidate>
+                <fieldset>
+                    <legend>HOW DO WE CONTACT YOU</legend>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="inputFirstName" class="col-md-3 control-label">Preferred language</label>
+                                <div class="col-md-9">
+                                    <select class="form-control"
+                                            ng-model="vm.applicantProfile.applicantProfiles[0].applicantContactDetails[0].languageId"
+                                            ng-options="vm.getKey(language.languageId) as language.languageDesc for language in vm.languages"></select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group has-feedback" ng-class="{ 'has-error' : setTwo.cellNo.$invalid && ! setTwo.cellNo.$pristine }">
+                                <label for="inputLastName" class="col-md-3 control-label">Alternative Contact Number</label>
+                                <div class="col-md-9">
+                                    <input type="text" name="cellNo" class="form-control" maxlength="10" pattern="[0][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]" ng-model="vm.applicantProfile.applicantProfiles[0].applicantContactDetails[0].cellNumber" required placeholder="e.g. 0821234567">
+                                    <span class="glyphicon glyphicon-remove form-control-feedback" ng-show="setTwo.cellNo.$invalid && !setTwo.cellNo.$pristine"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group has-feedback">
+                                <label class="col-md-3 control-label">Preferred method</label>
+                                <div class="col-md-9">
+                                    <div class="radio">
+                                        <label ng-repeat="contactMethod in vm.contactMethods" style="margin-right: 5px;">
+                                            <input type="radio" ng-required="$index == 0" ng-model="vm.applicantProfile.applicantProfiles[0].applicantContactDetails[0].contactMethodId" ng-checked="vm.applicantProfile.applicantProfiles[0].applicantContactDetails[0].contactMethodId == contactMethod.contactMethodId" name="optionsRace" value="{{contactMethod.contactMethodId}}">
+                                            {{contactMethod.contactMethodDesc}}
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group has-feedback" ng-class="{ 'has-error' :  setTwo.alternateCont.$invalid && ! setTwo.alternateCont.$pristine }">
+                                <label for="inputIDNo" class="col-md-3 control-label"> Contact details</label>
+                                <div class="col-md-9">
+                                    <input type="text" class="form-control" name="alternateCont" ng-model="vm.applicantProfile.applicantProfiles[0].applicantContactDetails[0].contactMethogDetails" required placeholder="Correspondence contact details (in terms of contact method)">
+                                    <span class="glyphicon glyphicon-remove form-control-feedback" ng-show="setTwo.alternateCont.$invalid && ! setTwo.alternateCont.$pristine"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+            <div class="row">
+                <div class="col-md-6">
+                    <button wz-previous class="btn btn-primary pull-left">Back</button>
+                </div>
+                <div class="col-md-6">
+                    <button ng-click="vm.saveContactInfo(vm.applicantProfile.applicantProfiles[0].applicantContactDetails[0])"
+                            class="btn btn-primary pull-right">
+                        Save & Continue
+                    </button>
+                </div>
+            </div>
+
+        </wz-step>
+        <!-- QUALIFICATIONS REFERENCES -->
+        <wz-step title="QUALIFICATIONS" wz-order="3">
+            <fieldset>
+                <legend>QUALIFICATIONS</legend>
+                <form class="form-horizontal" name="QualificationsForm">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label>Name of institution</label>
+                        </div>
+                        <div class="col-md-3">
+                            <label>Type of Qualification</label>
+                        </div>
+                        <div class="col-md-3">
+                            <label>Name of Qualification</label>
+                        </div>
+                        <div class="col-md-2">
+                            <label>Year Obtained</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" required name="institution" ng-model="vm.newQualificationModel.institution" placeholder="University of South Africa">
+                        </div>
+                        <div class="col-md-3">
+                            <select class="form-control" required name="qualificationType" ng-model="vm.newQualificationModel.qualificationTypeId">
+                                <option ng-repeat="qualificationType in vm.qualificationTypes" value="{{qualificationType.qualificationTypeId}}">{{qualificationType.qualificationTypeDesc}}</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <input type="text" class="form-control" ng-model="vm.newQualificationModel.nameOfQualification" name="qualificationName" placeholder="NDIP: Information Tech...">
+                        </div>
+                        <div class="col-md-2">
+                            <input type="number" ng-model="vm.newQualificationModel.yearObtained" pattern="[1-2][0-9][0-9][0-9]" maxlength="4" max="2030" class="form-control" id="inputFirstName" placeholder="2001">
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-md-11">
+                            <div class="form-group">
+                                <div class="col-md-6">
+                                    <input type="checkbox" ng-model="vm.newQualificationModel.currentStudies" name="currentStudy" id="currentStudy" autocomplete="off" />
+                                    <div class="[ btn-group ]">
+                                        <label for="currentStudy" class="[ btn btn-default ]">
+                                            <span class="[ glyphicon glyphicon-ok ]"></span>
+                                            <span> </span>
+                                        </label>
+                                        <label for="currentStudy" class="[ btn btn-default active ]">
+                                            Current Study
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-1">
+                            <button ng-click="vm.addQualification(vm.newQualificationModel)" ng-disabled="QualificationsForm.$invalid" class="btn pull-right btn-sm btn-primary">Add</button>
+                        </div>
+                    </div>
+                </form>
+                <br />
+                <div ng-hide="!vm.applicantProfile.applicantProfiles[0].applicantQualifications.length > 0" class="row">
+                    <table class="table table-hover">
+                        <tr>
+                            <th>Name of institution</th>
+                            <th>Qualification type</th>
+                            <th>Name of qualification</th>
+                            <th>Year obtained</th>
+                            <th>Remove</th>
+                        </tr>
+                        <tr ng-repeat="qualification in vm.applicantProfile.applicantProfiles[0].applicantQualifications track by $index" class="info">
+                            <td>{{qualification.institution}}</td>
+                            <td>{{qualification.qualificationType.qualificationTypeDesc}}</td>
+                            <td>{{qualification.nameOfQualification}}</td>
+                            <td>{{qualification.yearObtained}}</td>
+                            <td style="text-align:center;"><button class="btn btn-default btn-xs" ng-click="vm.removeQualification(qualification)"><i class="glyphicon glyphicon-remove"></i></button></td>
+                        </tr>
+                    </table>
+                </div>
+            </fieldset>
+            <div class="row">
+                <div class="col-md-6">
+                    <button wz-previous class="btn btn-primary pull-left">Back</button>
+                </div>
+                <div class="col-md-6">
+                    <button wz-next
+                            class="btn btn-primary pull-right"
+                            ng-disabled="!vm.applicantProfile.applicantProfiles[0].applicantQualifications.length > 0">
+                        Save & Continue
+                    </button>
+                </div>
+            </div>
+        </wz-step>
+        <!-- EXPERIENCE & REFERENCES -->
+        <wz-step title="WORK EXPERIENCE" wz-order="5">
+            <form class="form-horizontal" name="ExperienceForm">
+                <fieldset>
+                    <legend>WORK EXPERIENCE</legend>
+                    <div class="row">
+                        <div class="col-md-2">
+                            <label>Employer</label>
+                            <input type="text" class="form-control" required ng-model="vm.newExperienceModel.employer">
+                        </div>
+                        <div class="col-md-3">
+                            <label>Post Held</label>
+                            <input type="text" class="form-control" required ng-model="vm.newExperienceModel.postHeld">
+                        </div>
+                        <div class="col-md-2">
+                            <label>From</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control"
+                                       uib-datepicker-popup="{{ vm.dateControl.format }}"
+                                       ng-model="vm.newExperienceModel.dateFrom"
+                                       is-open="vm.dateControl.state[2].opened"
+                                       datepicker-options="vm.dateControl.dateOptions"
+                                       required
+                                       close-text="Close" />
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-default" ng-click="vm.dateControl.open(2)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <label>To</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control"
+                                       uib-datepicker-popup="{{ vm.dateControl.format }}"
+                                       ng-model="vm.newExperienceModel.dateTo"
+                                       is-open="vm.dateControl.state[3].opened"
+                                       required
+                                       datepicker-options="vm.dateControl.dateOptions"
+                                       close-text="Close" />
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-default" ng-click="vm.dateControl.open(3)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <label>Reason for Leaving</label>
+                            <input type="text" class="form-control" ng-model="vm.newExperienceModel.reasonForLeaving">
+                        </div>
+                        <div class="col-md-1">
+                            <label>&nbsp;</label>
+                            <button href="" class="btn btn-sm btn-primary" ng-disabled="ExperienceForm.$invalid" ng-click="vm.addExperience(vm.newExperienceModel)">Add</button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+            <br />
+            <div ng-hide="!vm.applicantProfile.applicantProfiles[0].applicantExperiences.length > 0" class="row">
+                <table class="table table-hover">
+                    <tr>
+                        <th>Employer</th>
+                        <th>Post Held</th>
+                        <th>From</th>
+                        <th>To</th>
+                        <th>Reason for Leaving</th>
+                        <th>Remove</th>
+
+                    </tr>
+                    <tr ng-repeat="experience in vm.applicantProfile.applicantProfiles[0].applicantExperiences track by $index" class="info">
+                        <td>{{experience.employer}}</td>
+                        <td>{{experience.postHeld}}</td>
+                        <td>{{experience.dateFrom | date : 'yyyy/MM/dd'}}</td>
+                        <td>{{experience.dateTo | date: 'yyyy/MM/dd'}}</td>
+                        <td>{{experience.reasonForLeaving}}</td>
+                        <td><button class="btn btn-default btn-xs" ng-click="vm.removeExperience(experience)"><i class="glyphicon glyphicon-remove"></i></button></td>
+                    </tr>
+                </table>
+            </div>
+            <form class="form-horizontal" name="ReferenceForm">
+                <fieldset>
+                    <legend>REFERENCES</legend>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label>Name of reference</label>
+                            <input type="text" class="form-control" required ng-model="vm.newReferencesModel.referenceName" placeholder="John Sipho">
+                        </div>
+                        <div class="col-md-4">
+                            <label>Relationship to you</label>
+                            <input type="text" class="form-control" required ng-model="vm.newReferencesModel.referenceRelationship" placeholder="Manager">
+                        </div>
+                        <div class="col-md-3">
+                            <label>Tel. No. (office hours)</label>
+                            <input type="text" class="form-control" required ng-model="vm.newReferencesModel.referenceContactNumber" placeholder="0123456789">
+                        </div>
+                        <div class="col-md-1">
+                            <label>&nbsp;</label>
+                            <button class="btn btn-sm btn-primary" ng-disabled="ReferenceForm.$invalid" ng-click="vm.addReference(vm.newReferencesModel);">Add</button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+            <br />
+            <div ng-hide="!vm.applicantProfile.applicantProfiles[0].applicantReferences.lenght > 0" class="row">
+                <table class="table table-hover">
+                    <tr>
+                        <th>Name of reference</th>
+                        <th>Relationship to you</th>
+                        <th>Tel. No.</th>
+                        <th>Remove</th>
+                    </tr>
+                    <tr ng-repeat="reference in vm.applicantProfile.applicantProfiles[0].applicantReferences" class="info">
+                        <td>{{reference.referenceName}}</td>
+                        <td>{{reference.referenceRelationship}}</td>
+                        <td>{{reference.referenceContactNumber}}</td>
+                        <td><button class="btn btn-default btn-xs" ng-click="vm.removeReference(reference)"><i class="glyphicon glyphicon-remove"></i></button></td>
+                    </tr>
+                </table>
+            </div>
+            <form class="form-horizontal" name="PSProhibitionForm">
+                <fieldset>
+                    <div class="row">
+                        <div class="col-md-2">&nbsp</div>
+                        <div class="col-md-8 panel panel-body">
+                            <div class="row">
+                                <p>
+                                    If you were previously employed in the Public Service, indicate whether any condition exists that prevents your re-appointment
+                                </p>
+                                <div class="radio">
+                                    <label style="margin-right: 5px;" class="ng-binding ng-scope">
+                                        <input type="radio" required
+                                               ng-model="vm.applicantProfile.applicantProfiles[0].applicantPubServProhibition.publicServiceProhibition"
+                                               ng-checked="vm.applicantProfile.applicantProfiles[0].applicantPubServProhibition.publicServiceProhibition == true"
+                                               value="true"
+                                               name="prohibition">
+                                        Yes
+                                    </label><label style="margin-right: 5px;" class="ng-binding ng-scope">
+                                        <input type="radio" required
+                                               ng-model="vm.applicantProfile.applicantProfiles[0].applicantPubServProhibition.publicServiceProhibition"
+                                               ng-checked="vm.applicantProfile.applicantProfiles[0].applicantPubServProhibition.publicServiceProhibition == false"
+                                               value="false"
+                                               name="prohibition">
+                                        No
+                                    </label>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-md-2">&nbsp</div>
+                                <div class="col-md-2">
+                                    <label>Department name:</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text"
+                                           ng-model="vm.applicantProfile.applicantProfiles[0].applicantPubServProhibition.departmentName"
+                                           ng-required="vm.applicantProfile.applicantProfiles[0].applicantPubServProhibition.publicServiceProhibition == true"
+                                           class="form-control"
+                                           placeholder="Dept. Name"
+                                           name="ProhibitionDepartmentName" />
+                                </div>
+                                <div class="col-md-2">&nbsp</div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">&nbsp</div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <button wz-previous class="btn btn-primary pull-left">Back</button>
+                        </div>
+                        <div class="col-md-6">
+                            <button ng-click="vm.addProhibition(vm.applicantProfile.applicantProfiles[0].applicantPubServProhibition)"
+                                    ng-disabled="PSProhibitionForm.$invalid"
+                                    class="btn btn-primary pull-right">
+                                Save & Continue
+                            </button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </wz-step>
+        <!-- ATTACHMENTS -->
+        <wz-step title="ATTACHMENTS" wz-order="6">
+            <form class="form-horizontal" name="attAndDeclaration">
+                <fieldset>
+                    <legend> ATTACHMENTS</legend>
+                    <div class="row">
+                        <div class="row">
+                            <div class="col-md-2"></div>
+                            <div class="col-md-8">
+                                <table class="table table-hover">
+                                    <tbody>
+                                        <tr>
+                                            <td>Identity Document</td>
+                                            <td>{{vm.id.originalFileName}}</td>
+                                            <td>
+                                                <a ng-if="!(vm.id)" ngf-select="vm.uploadFileClick($files, undefined, 1)" multiple accept="image/*, application/*" class="btn btn-primary btn-xs">Add</a>
+                                                <a ng-if="vm.id" ngf-select="vm.uploadFileClick($files, vm.id, 1)" multiple accept="image/*, application/*" class="btn btn-primary btn-xs">Update</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Curriculum Vitae</td>
+                                            <td>{{vm.cv.originalFileName}}</td>
+                                            <td>
+                                                <a ng-if="!(vm.cv)" ngf-select="vm.uploadFileClick($files, undefined, 5)" multiple accept="image/*, application/*" class="btn btn-primary btn-xs">Add</a>
+                                                <a ng-if="vm.cv" ngf-select="vm.uploadFileClick($files, vm.cv, 5)" multiple accept="image/*, application/*" class="btn btn-primary btn-xs">Update</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Senior Certificate</td>
+                                            <td>{{vm.seniorCertificate.originalFileName}}</td>
+                                            <td>
+                                                <a ng-if="!(vm.seniorCertificate)" ngf-select="vm.uploadFileClick($files, undefined, 2)" multiple accept="image/*, application/*" class="btn btn-primary btn-xs">Add</a>
+                                                <a ng-if="vm.seniorCertificate" ngf-select="vm.uploadFileClick($files,vm.seniorCertificate, 2)" multiple accept="image/*, application/*" class="btn btn-primary btn-xs">Update</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Tertiary Results</td>
+                                            <td>{{vm.tertiaryQualification.originalFileName}}</td>
+                                            <td>
+                                                <a ng-if="!(vm.tertiaryQualification)" ngf-select="vm.uploadFileClick($files, undefined, 3)" multiple accept="image/*, application/*" class="btn btn-primary btn-xs">Add</a>
+                                                <a ng-if="vm.tertiaryQualification" ngf-select="vm.uploadFileClick($files,vm.tertiaryQualification, 3)" multiple accept="image/*, application/*" class="btn btn-primary btn-xs">Update</a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-md-2"></div>
+                        </div>
+                        <br />
+                    </div>
+                    <br />
+                    <legend> DECLARATION</legend>
+                    <!--<div class="row">
+                        <div class="col-md-1">&nbsp;</div>
+                        <div class="col-md-10">
+                            <p>
+                                I declare that all the information provided (including any attachments) is complete and correct to the best of my knowledge. I understand that any false information supplied could lead to my application being disqualified or my discharge if I am appointed:
+                            </p>
+                        </div>
+                        <div class="col-md-1">&nbsp;</div>
+                    </div>-->
+                    <div class="row">
+                        <div class="col-md-1">&nbsp;</div>
+                        <div class="col-md-5" style="text-align:center;">
+                            <input ng-model="vm.applicantProfile.applicantProfiles[0].applicantDeclaration.acceptedDelaration" required type="checkbox">  <p>
+                                I declare that all the information provided (including any attachments and profile information) is complete/updated and correct to the best of my knowledge. I understand that any false information supplied could lead to my application being disqualified or my discharge if I am appointed.
+                            </p>
+                        </div>
+                        <div class="col-md-5" style="text-align:center;">
+                            <input type="text" style="text-align:center;" disabled ng-bind="" class="form-control" name="inputDeclare" id="inputDeclare" value="{{vm.declarationDate | date : 'yyyy/MM/dd'}}" autofocus readonly>
+                        </div>
+                        <div class="col-md-1">&nbsp;</div>
+                    </div>
+                </fieldset>
+            </form>
+            <br />
+            <div class="row">
+                <div class="col-md-6">
+                    <button href="" wz-previous class="btn btn-primary pull-left">Back</button>
+                </div>
+                <div class="col-md-6">
+                    <button ng-click="vm.addDeclaration(vm.applicantProfile.applicantProfiles[0].applicantDeclaration);" ng-disabled="attAndDeclaration.$invalid" class="btn btn-primary pull-right">Save Profile</button>
+                </div>
+            </div>
+
+        </wz-step>
+        </wizard>
+        <br />
+        <div class="row">
+            <div class="col-md-1">&nbsp;</div>
+            <div ng-hide="!vm.ShowError" class="alert alert-danger alert-dismissable col-md-10">
+                <strong>Whoops!</strong> &nbsp; {{vm.ErrorMessage}}
+            </div>
+            <div ng-hide="!vm.ShowSuccess" class="alert alert-success alert-dismissable col-md-10">
+                <strong>Congratulations!</strong> &nbsp; {{vm.SuccessMessage}}
+            </div>
+            <div class="col-md-1">&nbsp;</div>
+        </div>
+
+    </div>
+</div>

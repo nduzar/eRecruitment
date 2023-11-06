@@ -1,0 +1,33 @@
+﻿<style>
+.row {
+    margin-left: 0;
+    margin-right: 0;
+}
+</style>
+<div class="intro-header" ng-init="vm.initialisePage()">
+    <div class="">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="intro-message">
+                    <h1>Stats SA Authentication Server</h1>
+                    <h3>Who Am I Online</h3>
+                    <hr class="intro-divider">
+                    <ul class="list-inline intro-social-buttons">
+                        <li>
+                            <a href="#/manageuser" class="btn btn-default btn-lg"><i class="fa fa-users fa-fw"></i> <span class="network-name">Users</span><span class="badge">{{vm.userCount}}</span></a>
+                            
+                        </li>
+                        <li>
+                            <a href="#/manageclient" class="btn btn-default btn-lg"><i class="fa fa-desktop fa-fw"></i> <span class="network-name">Applications</span><span class="badge">{{vm.appCount}}</span></a>
+                        </li>
+                        <li>
+                            <a href="#/roles" class="btn btn-default btn-lg"><i class="fa fa-tasks fa-fw"></i> <span class="network-name">Roles</span><span class="badge">{{vm.roleCount}}</span></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</div>
+<!-- /.intro-header -->

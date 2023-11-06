@@ -1,0 +1,47 @@
+<div class="container" style="padding-left:10%; padding-right:10%; margin-top:2%" ng-init="vm.initialisePage()">
+    <div class="well card">
+        <fieldset>
+            <legend>SALARY LEVELS</legend>
+            <div class="row" style="margin-top: 10%;" ng-show="vm.isLoading">
+                <div class="col-lg-offset-2 col-lg-8 alert alert-info">
+                    <i class="fa fa-cog fa-spin fa-lg pull-right"></i> <strong>Loading!</strong>  please wait...
+                </div>
+            </div>
+            <div ng-hide="vm.isLoading" class="row">
+                <form name="frmSalaryAdmin" id="frmSalaryAdmin" novalidate>
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="col-lg-4 form-group">
+                                <label class="col-lg-6" for="salLevel">Salary Level:</label>
+                                <div class="col-lg-6"> 
+                                    <select name="salaryLevel" id="salLevel" ng-change="vm.updateNotch()"
+                                            class="form-control input-sm" required
+                                            ng-model="vm.salaryModel.salary"
+                                            ng-options="salary as salary.salaryLevel for salary in vm.salaries track by salary.salaryId"></select>
+                                </div>
+                            </div>
+                            <div class="col-lg-8 form-group">
+                                <label class="col-lg-3" for="salNotch">Salary Notch:</label>
+                                <div class="col-lg-8">
+                                    <input type="text" id="salNotch" name="salaryNotch" required class="form-control input-sm" ng-model="vm.salaryModel.salaryNotch" ng-pattern="/^[0-9]{1,15}$/" />
+                                    <span style="color:Red" ng-show="frmSalaryAdmin.salaryNotch.$dirty&&frmSalaryAdmin.salaryNotch.$error.pattern">Only Numbers Allowed</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-lg-1 col-lg-offset-8">
+                            <button type="button" ng-click="vm.cancel()" class="btn btn-default btn-sm btn-primary pull-right">Cancel</button>
+                        </div>
+                        <div class="col-lg-1">
+                            <button type="button" ng-disabled="frmSalaryAdmin.$invalid" ng-click="vm.saveNotch()" class="btn btn-default btn-sm btn-primary pull-right">Save</button>
+                                
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </fieldset>
+    </div>
+</div>

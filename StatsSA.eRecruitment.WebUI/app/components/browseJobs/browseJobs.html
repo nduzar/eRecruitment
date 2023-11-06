@@ -1,0 +1,325 @@
+﻿<style>
+    .desc {
+        padding-left: 73px;
+        padding-right: 77px
+    }
+</style>
+<link href="assets/css/angular-material.css" rel="stylesheet" />
+
+<div class="mr15" ng-init="vm.initialisePage()" style="padding:15px">
+    <div class="row">
+        <img class="bannerImage" src="assets/images/bannerNT.jpg">
+        <div class="col-sm-8">
+            <div class="browseJobsContainer well card">
+                <fieldset style="padding:20px">
+                    <legend>List of Vacancies</legend>
+
+                    <div ng-show="vm.availableVacancies.length == 0" class="row">
+                        <div class="alert alert-dismissible alert-info">
+                            <strong>No Vacancies!</strong> There are no vacancies available.
+                        </div>
+                    </div>
+                    <div ng-hide="vm.availableVacancies.length == 0" class="row">
+                        <div class="col-lg-12">
+                            <div class="row">
+                                <div class="input-group input-group-sm">
+                                    <input type="text" class="form-control input-group-sm" ng-model="vm.searchString" placeholder="Search" />
+                                    <span class="input-group-btn input-group-sm">
+                                        <button class="btn btn-default btn-xs" title="Search" ng-click="vm.setFilter()"><i class="glyphicon glyphicon-search"></i> Search</button>
+                                        <button class="btn btn-default btn-xs" title="Reset search" ng-click="vm.clearFilter()"><i class="glyphicon glyphicon-refresh"></i> Reset</button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+                        <br />
+                        <br />
+                        <div class="col-lg-12">
+                            <div class="row">
+                                <table class="table table-striped table-hover table-condensed">
+                                    <tr>
+                                        <th ng-click="vm.setSorting('position')">
+                                            Position
+                                        </th>
+                                        <th ng-click="vm.setSorting('closingDate')">Closing Date</th>
+                                        <th>View and Apply</th>
+                                    </tr>
+                                    <tr ng-repeat="vacancy in vm.availableVacancies  | orderBy: vm.sortBy | filter: vm.searchFilter">
+                                        <td style="width:70%">
+                                            <a style="text-decoration: none; color: black; cursor: pointer" ng-click="vm.onViewApply(vacancy)">
+                                                {{vacancy.jobTitle}}
+                                            </a>
+                                        </td>
+                                        <td>{{vacancy.closingDate | date: "d MMMM y"}}</td>
+                                        <td>
+                                            <div ng-if="!(vm.appliedForVacancy(vacancy.vacancyId))">
+                                                <button class="btn btn-default btn-xs" ng-click="vm.onViewApply(vacancy)">
+                                                    <span class="glyphicon glyphicon-edit"> APPLY</span>
+                                                </button>
+                                            </div>
+                                            <div ng-if="vm.appliedForVacancy(vacancy.vacancyId)">
+                                                <a class="btn btn-default btn-xs" href="#/viewApplications">
+                                                    <span class="glyphicon glyphicon-edit">
+                                                        APPLIED
+                                                    </span>
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="row alert alert-warning" ng-show="(vm.appliedForVacancy(vacancy.vacancyId))">
+                                <div>You have already applied for this vacancy <a href="#/viewApplications" class="btn btn-warning btn-xs pull-right">VIEW APPLICATION</a></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </fieldset>
+                <button type="button" class="btn btn-default" ng-click="vm.showAlert($event)">Terms and Conditions</button>
+                <button type="button" class="btn btn-default" ng-click="vm.showInternshipAlert($event)">Terms and Conditions for Graduates</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div style="visibility: hidden">
+    <div class="md-dialog-container" id="myDialog">
+        <md-dialog aria-label="Terms and Conditions" style="position: relative; top: 17%">
+            <form ng-cloak>
+                <md-toolbar>
+                    <div class="md-toolbar-tools alert-info ">
+                        <span flex></span>
+                        <md-button class="md-icon-button" ng-click="vm.cancel()">
+                            <md-icon md-svg-src="assets/images/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+                        </md-button>
+                    </div>
+                </md-toolbar>
+                <md-dialog-content>
+                    <div class="md-dialog-content">
+                        <div class="col-sm-8">
+                            <div class="">
+                                <div class="browseJobsContainer well card">
+
+                                    <!--Only show this if the selected position is not internship-->
+                                    <div class="panel panel-primary" style="margin-left: 41px;">
+                                        <div class="panel-body">
+                                            <div class="row" style="padding-left: 12%">
+                                                <h4><strong style="color:#8c1603 !important">TERMS AND CONDITIONS</strong></h4>
+                                                <p><strong>The National Treasury is an equal opportunity employer and encourages applications from women and the persons with disabilities in particular. Our buildings are accessible to people with disabilities.</strong></p>
+                                                <!--<p> Applications should be accompanied by a fully completed <strong> Z83 (non-negotiable) comprehensive CV </strong> in pdf format and originally certified copies of qualifications and ID. Please forward your application, quoting the relevant reference number and the full name of the position on the subject line of the email, to the e-mail address mentioned.</p>-->
+                                                <h5 style="color:#8c1603 !important"><strong>PLEASE NOTE: </strong></h5>
+                                                <h6><strong>APPLICATION PROCESS:</strong></h6>
+                                                <ul>
+                                                    <li>The applicants' profile on the e-Recruitment is equivalent to the newly approved Z83 and it is the responsibility of applicants to ensure their profiles are fully completed or their applications will not be considered.</li>
+                                                    <li>If you do not hear from us within three months of the closing date, please regard your application as unsuccessful; </li>
+                                                    <li>It is the applicant’s responsibility to have all their foreign qualifications evaluated by the South African Qualifications Authority (SAQA), please attach outcome from SAQA, non-negotiable. </li>
+                                                    <li>Applications received after the closing date will not be considered; </li>
+                                                </ul>
+                                                <h6><strong>SHORT-LISTING PROCESS:</strong></h6>
+                                                <ul>
+                                                    <li>Correspondence will be entered into with short-listed candidates only;  </li>
+                                                    <li>All short-listed candidates will be subjected to personnel suitability checks and the successful candidate will undergo security vetting. </li>
+                                                    <li>All shortlisted candidates for SMS posts will be subjected to a technical exercise relating to technical elements of the job. The logistics will be communicated by the Department; </li>
+                                                    <li>Short-listed applicants must be willing to undergo a competency exercise as part of the selection process.</li>
+                                                </ul>
+                                                <h6><strong>APPOINTMENT PROCESS:</strong></h6>
+                                                <ul>
+                                                    <li>The National Treasury reserves the right not to make an appointment, put a position on hold or re-advertise a post without advising candidates;  </li>
+                                                    <li>Appointment is subject to security clearance, the signing of a performance agreement or plan, verification of the applicant’s documents and reference checking, including social media checks; </li>
+                                                    <li>No appointment will be finalised for SMS position until such time shortlisted candidates have completed the Pre-Entry Certificate for Senior Management Services (Nyukela), which is offered at the National School of Government (NSG) <a href="https://www.thensg.gov.za/training-course/sms-pre-entry-programme">https://www.thensg.gov.za/training-course/sms-pre-entry-programme</a>  </li>
+                                                    <li>Successful candidates will be appointed on probation for the period of twelve (12) months into the prescribed rules. </li>
+                                                </ul>
+                                                <h6><strong>REQUIRED DOCUMENTS: </strong></h6>
+                                                <ul>
+                                                    <li>Detailed CV with contact details of three recent references;</li>
+                                                    <li>Certain documentations will still be required to be uploaded on the system such as copies of all qualifications including National Senior Certificate/Matric, ID, etc., however these documents need not be certified at point of application however certification will be required prior to attending the interviews. </li>
+                                                </ul>
+                                                <p><strong>NB: Applicants risk being disqualified for failing to submit all the required documents as indicated above.</strong></p>
+                                                <h7><strong>Enquiries:</strong></h7>
+                                                <p>Kindly contact the Recruitment Team: <a href="mailto:Recruitment.Enquiries@treasury.gov.za">Recruitment.Enquiries@treasury.gov.za</a> </p>
+                                                <p>The above email address is only for enquiries, CVs sent to this mailbox will be auto deleted.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>                                
+                            </div>
+                        </div>
+                    </div>
+                </md-dialog-content>
+
+            </form>
+        </md-dialog>
+    </div>
+
+    <div class="md-dialog-container" id="internshipDialog">
+        <md-dialog aria-label="Terms and Conditions" style="position: relative; top: 17%">
+            <form ng-cloak>
+                <md-toolbar>
+                    <div class="md-toolbar-tools alert-info ">
+                        <span flex></span>
+                        <md-button class="md-icon-button" ng-click="vm.cancel()">
+                            <md-icon md-svg-src="assets/images/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+                        </md-button>
+                    </div>
+                </md-toolbar>
+                <md-dialog-content>
+                    <div class="md-dialog-content">
+                        <div class="col-sm-8">
+                            <div class="">
+                                <div class="browseJobsContainer well card">
+
+                                    <!--Only show this if the selected position is not internship-->
+                                    <div class="panel panel-primary" style="margin-left: 41px;">
+                                        <div class="panel-body">
+                                            <div class="row" style="padding-left: 12%">
+                                                <h4><strong style="color:#8c1603 !important">TERMS AND CONDITIONS</strong></h4>
+                                                <p>
+                                                    The National Treasury is committed to upskilling South African
+                                                    youth. The Graduate Development Programme targets
+                                                    university graduates who have completed, or are in the
+                                                    process of completing their degrees in 2021.
+                                                </p>
+                                                <p>
+                                                    Our 24-month Internship Programme offers graduates an opportunity to enhance their skills and gain
+                                                    meaningful workplace experience to complement their studies. University or University of Technology
+                                                    students with a 3 year diploma/degree or a postgraduate qualification at an accredited higher education
+                                                    institution in the following fields may apply:
+                                                </p>
+                                                <p>
+                                                        •Accounting•Business Administration•Business Management• Computer Science•Development Economics•Development Studies •Econometrics•Economics•Financial Accounting •Financial Management 
+                                                        •Financial Risk Management•General•Governance•Human Resources Management •Industrial Relations•Information Technology •Internal Audit•Informatics•International Economics•International Relations •Investment Management•Law•Labour Relations• Labour Law•LLB•Logistics•Mathematical Economics •Management Accounting•Marketing•Political Science•Public Administration •Public Economics•Public Finance •Public Policy •Purchasing Management •Procurement•Risk Management •Security Management •Statistics•Supply Chain Management•Social Science
+                                                   
+                                                </p>
+                                                <h5 style="color:#8c1603 !important">
+                                                    <strong>
+                                                        Please note that e-mailed, post, hand delivered, faxed and late applications will not be accepted.
+                                                    </strong>
+                                                </h5>
+
+                                                <p>
+                                                    <i class="fa fa-check"></i> Only South African citizens can apply
+                                                </p>
+                                                <p>
+                                                    <i class="fa fa-check"></i> Applicants should not have
+                                                    particitipated in an internship programme before
+                                                </p>
+                                                <p>
+                                                    <i class="fa fa-check"></i> Applicants should be 35 years old and
+                                                    below
+                                                </p>
+                                                <p><i class="fa fa-check"></i> Certified copy of your ID</p>
+                                                <p>
+                                                    <i class="fa fa-check"></i> Certified copy of your school
+                                                    qualifications (eg Senior Certificate)
+                                                </p>
+                                                <p>
+                                                    <i class="fa fa-check"></i> Certified copy of your full official
+                                                    academic record(s) (Required)
+                                                </p>
+                                                <p>
+                                                    <i class="fa fa-check"></i> Certified copy of your tertiary
+                                                    qualifications (If applicable)
+                                                </p>
+                                                <p><b>Follow these steps to upload documents</b></p>
+                                                <p><i class="fa fa-check"></i> Click the browser button</p>
+                                                <p>
+                                                    <i class="fa fa-check"></i> Select a file that you want to upload
+                                                </p>
+                                                <p>
+                                                    <i class="fa fa-check"></i> Click Save file button to save a file
+                                                </p>
+                                                <p>
+                                                    <i class="fa fa-check"></i> The uploaded file should show next to
+                                                    the Save file button
+                                                </p>
+                                                <p>
+                                                    <b>
+                                                        If your document size is more than 5MB, visit one of the sites
+                                                        listed below to upload and shrink your documents
+                                                    </b>
+                                                </p>
+                                                <p>
+                                                    <a href="https://smallpdf.com/compress-pdf" target="_blank">Compress PDF</a>
+                                                </p>
+                                                <p>
+                                                    <a href="https://www.ilovepdf.com/compress_pdf" target="_blank">Compress PDF files</a>
+                                                </p>
+                                                <p>
+                                                    <a href="https://shrinkme.app/" target="_blank">Shrink your images</a>
+                                                </p>
+                                                <p>
+                                                    If you have not heard from the National Treasury within three
+                                                    months after the closing date, please regard your application
+                                                    as unsuccessful.
+                                                </p>
+                                                <p>
+                                                    <strong>How to calculate average</strong>
+                                                    <ul>
+                                                        <li>Add all the marks of your first to final year modules for your undergraduate qualification</li>
+                                                        <li>If you are currently enrolled for your postgraduate qualification please note that we only require the average for your undergraduate qualification.</li>
+                                                        <li>Divide the total of your added mark with the number of modules and multiply by 100.</li>
+                                                        <li>Round off to the nearest 10</li>
+                                                    </ul>
+                                                </p>
+
+                                                <br/>
+                                                <p>
+                                                    The National Treasury is an equal opportunity employer and encourages applications
+                                                    from women and persons living with disabilities in particular. Our buildings are accessible to persons living with
+                                                    disabilities. If you have not heard from the National Treasury within three months after the closing date, please regard
+                                                    your application as unsuccessful.
+                                                </p>
+                                                <p>
+                                                    <strong>
+                                                        For any general and system queries please contact the following NT
+                                                        officials
+                                                    </strong>
+                                                    <br />
+                                                    Mmabatho Sepeng: 012 395 6653 <br />
+                                                    Welcome Nghulele: 012 315 5943 <br />
+                                                </p>
+                                                <br />
+                                                <p>
+                                                    or send an e-mail to
+                                                    <a href="mailto:eRecruitment@Treasury.gov.za">eRecruitment@Treasury.gov.za</a>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <br />
+                                <br />
+                                <!--<div class="card" ng-if="vm.availableVacancies.length > 0">
+                                    <div class="panel panel-primary">
+                                        <div class="panel-body">
+                                            <div class="row alert alert-info">
+                                                <div><i class="fa fa-bullhorn fa-lg" style="font-size: 2.0em;"></i>  <b style="font-size: 1.5em;">Check your documents & confirm that you are ready to apply</b> </div>
+                                            </div>
+
+                                            <p><b>Please note that if you don't meet the exact requirements listed below, your application will be declined.</b></p><br />
+                                            <p><i class="fa fa-check"></i>  Certified copy of your ID</p>
+                                            <p><i class="fa fa-check"></i>  Certified copy of your school qualifications (eg Senior Certificate)</p>
+                                            <p><i class="fa fa-check"></i>  Certified copy of your tertiary qualifications (If applicable)</p>
+                                            <br />
+                                            <p><b>Follow these steps to upload documents</b></p>
+                                            <p><i class="fa fa-check"></i>  Click the browser button </p>
+                                            <p><i class="fa fa-check"></i>  Select a file that you want to upload </p>
+                                            <p><i class="fa fa-check"></i>  Click Save file button to save a file </p>
+                                            <p><i class="fa fa-check"></i>  The uploaded file should show next to the Save file button </p><br />
+                                            <p><b>If your document size is more than 20MB, visit one of the sites listed below to upload and shrink your documents </b></p>
+                                            <p><a href="https://smallpdf.com/compress-pdf" target="_blank">Compress PDF</a> </p>
+                                            <p><a href="https://www.ilovepdf.com/compress_pdf" target="_blank">Compress PDF files</a> </p>
+                                            <p><a href="https://shrinkme.app/" target="_blank">Shrink your images</a> </p>
+                                        </div>
+                                    </div>
+                                </div>-->
+                            </div>
+                        </div>
+                    </div>
+                </md-dialog-content>
+
+            </form>
+        </md-dialog>
+    </div>
+</div>

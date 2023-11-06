@@ -1,0 +1,152 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{6A89F07A-4AE6-4C83-8EEE-076964F41417}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>StatsSA.eRecruitment.Provider</RootNamespace>
+    <AssemblyName>StatsSA.eRecruitment.Provider</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Office.Interop.Word, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\packages\Microsoft.Office.Interop.Word.15.0.4797.1003\lib\net20\Microsoft.Office.Interop.Word.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WebForms, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportViewer.WebForms.v12.12.0.0.0\lib\Microsoft.ReportViewer.WebForms.dll</HintPath>
+    </Reference>
+    <Reference Include="SoftwareKobo.Net.WebUtility, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SoftwareKobo.Net.WebUtility.1.0.4\lib\SoftwareKobo.Net.WebUtility.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="StatsSA.SystemArchitecture.Resolver">
+      <HintPath>..\packages\StatsSA.SystemArchitecture.Resolver\StatsSA.SystemArchitecture.Resolver.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AnswersSpecificQuestions\AnswersSpecificQuestionsProvider.cs" />
+    <Compile Include="AnswersGenericQuestions\AnswersGenericQuestionsProvider.cs" />
+    <Compile Include="AnswerThreshold\AnswersThresholdProvider.cs" />
+    <Compile Include="ApplicantAttachments\ApplicantAttachmentsProvider.cs" />
+    <Compile Include="ApplicantContactDetails\ApplicantContactDetailsProvider.cs" />
+    <Compile Include="ApplicantDeclaration\ApplicantDeclarationProvider.cs" />
+    <Compile Include="ApplicantExperience\ApplicantExperienceProvider.cs" />
+    <Compile Include="ApplicantLangProficiency\ApplicantLangProficiencyProvider.cs" />
+    <Compile Include="ApplicantProfiles\ApplicantProfileProvider.cs" />
+    <Compile Include="ApplicantProhibition\ApplicantProhibitionProvider.cs" />
+    <Compile Include="ApplicantQualifications\ApplicantQualificationsProvider.cs" />
+    <Compile Include="ApplicantReferences\ApplicantReferenceProvider.cs" />
+    <Compile Include="ApplicationStatus\ApplicationStatusProvider.cs" />
+    <Compile Include="Applications\ApplicationProvider.cs" />
+    <Compile Include="Auth\AuthProvider.cs" />
+    <Compile Include="ClientRoles\ClientRoleProvider.cs" />
+    <Compile Include="Clients\ClientProvider.cs" />
+    <Compile Include="ContactMethods\ContactMethodProvider.cs" />
+    <Compile Include="DIResolver\DependencyResolver.cs" />
+    <Compile Include="DocumentTypes\DocumentTypeProvider.cs" />
+    <Compile Include="GenericQuestions\GenericQuestionsProvider.cs" />
+    <Compile Include="HiringManagersVacancy\HiringManagersVacancyAccessProvider.cs" />
+    <Compile Include="Programmes\ProgrammeProvider.cs" />
+    <Compile Include="Institutions\InstitutionProvider.cs" />
+    <Compile Include="Genders\GenderProvider.cs" />
+    <Compile Include="HRRoles\HRRoleProvider.cs" />
+    <Compile Include="HRUserRoles\HRUserRoleProvider.cs" />
+    <Compile Include="HRUsers\HRUserProvider.cs" />
+    <Compile Include="LanguageProficiencies\LanguageProficiencyProvider.cs" />
+    <Compile Include="Languages\LanguageProvider.cs" />
+    <Compile Include="ManagePassword\ManagePasswordProvider.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QualificationTypes\QualificationTypeProvider.cs" />
+    <Compile Include="Races\RaceProvider.cs" />
+    <Compile Include="RequestAllApplications\RequestAllApplicationsProvider.cs" />
+    <Compile Include="Roles\RoleProvider.cs" />
+    <Compile Include="Salaries\SalariesProvider.cs" />
+    <Compile Include="SpecificQuestions\SpecificQuestionsProvider.cs" />
+    <Compile Include="UserClients\UserClientProvider.cs" />
+    <Compile Include="Users\UserProvider.cs" />
+    <Compile Include="Vacancies\VacancyProvider.cs" />
+    <Compile Include="VacancyStatus\VacancyProvider.cs" />
+    <Compile Include="VerApplicantAttachments\VerApplicantAttachmentsProvider.cs" />
+    <Compile Include="VerApplicantContactDetails\VerApplicantContactDetailsProvider.cs" />
+    <Compile Include="VerApplicantDeclarations\VerApplicantDeclarationProvider.cs" />
+    <Compile Include="VerApplicantExperiences\VerApplicantExperienceProvider.cs" />
+    <Compile Include="VerApplicantLangProficiencies\VerApplicantLangProficiencyProvider.cs" />
+    <Compile Include="VerApplicantProfile\VerApplicantProfileProvider.cs" />
+    <Compile Include="VerApplicantPubServProhibitions\VerApplicantProhibitionProvider.cs" />
+    <Compile Include="VerApplicantQualifications\VerApplicantQualificationsProvider.cs" />
+    <Compile Include="VerApplicantReferences\VerApplicantReferenceProvider.cs" />
+    <Compile Include="EmailVerification\VerifyEmailProvider.cs" />
+    <Compile Include="ViewApplicantQuestionAnswers\ViewApplicantQuestionAnswersProvider.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\StatsSA.eRecruitment.Entities\StatsSA.eRecruitment.Entities.csproj">
+      <Project>{54D2AACC-4A85-4646-B905-548FABD2A6B5}</Project>
+      <Name>StatsSA.eRecruitment.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StatsSA.eRecruitment.IManager\StatsSA.eRecruitment.IManager.csproj">
+      <Project>{b869ae84-126f-4413-882b-ebb3e94dc444}</Project>
+      <Name>StatsSA.eRecruitment.IManager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StatsSA.eRecruitment.IProvider\StatsSA.eRecruitment.IProvider.csproj">
+      <Project>{1ae9bc8e-14d2-432e-9b6d-7ad232f726b7}</Project>
+      <Name>StatsSA.eRecruitment.IProvider</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ApplicationRequirement\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>start xcopy /y "$(ProjectDir)$(OutDir)*.dll" "$(SolutionDir)StatsSA.eRecruitment.WebApi\bin\"
+start xcopy /y "$(ProjectDir)$(OutDir)*.dll" "$(SolutionDir)StatsSA.eRecruitment.InternalWeb\bin\"</PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

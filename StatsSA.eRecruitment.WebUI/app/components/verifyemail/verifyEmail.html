@@ -1,0 +1,146 @@
+﻿<style type="text/css">
+</style>
+
+<div class="content-container">
+    <div class="well" style="padding-left:5%; padding-right:5%;">
+        <div class="">
+            <wizard on-finish="vm.addDeclaration(vm.applicantDeclaration)" indicators-position="top" hide-indicators="true">
+                <wz-step wz-title="Verify your email">
+                    <div class="outer-div">
+                        <div class="inner-div">
+                            <form class="form-horizontal" id="vm.frmPersonalInfo" method="post" name="vm.frmPersonalInfo" role="form" novalidate>
+                                <div class="card panel">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">Verify your email</h3>
+                                        <hr />
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-md-4 col-md-offset-3">
+                                                <canvas id="captcha_image"></canvas>
+                                            </div>
+                                        </div>
+                                        <div class="row" ng-init="vm.initialisePage()">
+                                            <div class="col-md-8">
+                                                <div class="form-group col-sm-12">
+                                                    <span style="font-size:12px!important; left:0!important;">Please enter your ID Number to search for your account.</span>
+                                                    <br />
+                                                    <input class="form-control input-sm" ng-model="vm.searchTerms.identityNumber" type="text" id="idNumber" name="idNumber" placeholder="ID Number">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <span style="font-size:12px!important; left:0!important;">Enter the code above.</span>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <div class="input-group">
+                                                            <input type="text" id="txtSecurityCode" name="securityCode" class="form-control input-sm" compare-To="vm.verifyEmailData.captcha" required placeholder="must match captcha value above" ng-model="vm.searchTerms.captcha" autofocus />
+                                                            <span class="input-group-btn">
+                                                                <button type="button" class="btn btn-primary btn-sm-statssa full-width" id="btnRefresh" data-ng-click="vm.generateCaptcha()"><span class="glyphicon glyphicon-refresh"></span></button>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row" ng-show="vm.message">
+                                            <div class="col-md-12">
+                                                <div class="alert alert-dismissible alert-danger">
+                                                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                                    <strong>Oh snap!</strong> {{vm.message}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel-footer">
+                                        <div class="">
+                                            <div class="form-group col-sm-12">
+                                                <a ng-click="vm.searchAccount(vm.searchTerms)" class="btn btn-primary btn-xs pull-right">Search</a>
+                                                <a href="#/login" class="btn btn-default btn-xs pull-right">Cancel</a>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </wz-step>    
+                <wz-step wz-title="Request new code">
+                    <div class="outer-div">
+                        <div class="inner-div">
+                            <form class="form-horizontal" id="vm.frmPersonalInfo" method="post" name="vm.frmPersonalInfo" role="form" novalidate>
+                                <div class="card panel">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">Resend email verification code</h3>
+                                        <hr />
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <!--<div class="col-md-12">
+                                <span>How would you like to reset your password?</span>
+                            </div>-->
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <div class="col-md-10">
+                                                        <!--<div class="radio">
+                                            <label>
+                                                <input type="radio" name="radioResertPasswordMethod" id="radioResertPasswordMethod" ng-model="vm.resertPasswordMethod" value="mobile" checked="">
+                                                <i class="fa fa-mobile fa-lg" aria-hidden="true"><strong> Use my mobile number</strong></i>
+                                                <br />
+                                                <span>{{vm.userAccount.hashedCellNumber}}</span>
+                                            </label>
+                                        </div>-->
+                                                        <div class="radio">
+                                                            <label>
+                                                                <!--<input type="radio" name="radioVerifyEmailMethod" id="radioVerifyEmailMethod" ng-model="vm.verifyEmailMethod" value="email">-->
+                                                                <i class="fa fa-envelope-o fa-lg" aria-hidden="true"><strong> Email me a link to verify my email</strong></i>
+                                                                <br />
+                                                                <span>{{vm.userAccount.hashedEmail}}</span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--<div class="col-md-6" style="border-left-width:1px; border-left-color:dimgray">
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <blockquote>
+                                                            <p>{{vm.userAccount.name}} {{vm.userAccount.surname}}</p>
+                                                        </blockquote>
+                                                    </div>
+                                                </div>
+                                            </div>-->
+                                        </div>
+                                        <div class="row" ng-show="vm.message">
+                                            <div class="col-md-12">
+                                                <div class="alert alert-dismissible alert-danger">
+                                                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                                    <strong>Oh snap!</strong> {{vm.message}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel-footer">
+                                        <div class="">
+                                            <div class="form-group col-sm-12">
+                                                <a ng-click="vm.updateEmailVerification()" class="btn btn-primary btn-xs pull-right">Continue</a>
+                                                <a wz-previous class="btn btn-default btn-xs pull-right">Not you?</a>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </wz-step>
+            </wizard>
+        </div>
+    </div>
+</div>

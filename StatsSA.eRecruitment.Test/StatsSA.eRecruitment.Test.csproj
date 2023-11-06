@@ -1,0 +1,187 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{FB1C2839-2888-4C2F-B8CE-8EA98AA82EE3}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>StatsSA.eRecruitment.Test</RootNamespace>
+    <AssemblyName>StatsSA.eRecruitment.Test</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+    <ReferencePath>$(ProgramFiles)\Common Files\microsoft shared\VSTT\$(VisualStudioVersion)\UITestExtensionPackages</ReferencePath>
+    <IsCodedUITest>False</IsCodedUITest>
+    <TestProjectType>UnitTest</TestProjectType>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <Choose>
+    <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
+      <ItemGroup>
+        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+      </ItemGroup>
+    </When>
+    <Otherwise>
+      <ItemGroup>
+        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework">
+          <Private>False</Private>
+        </Reference>
+      </ItemGroup>
+    </Otherwise>
+  </Choose>
+  <ItemGroup>
+    <Compile Include="ProviderTest\ApplicaitonsProviderTest.cs" />
+    <Compile Include="DataAccessTests\VacancyManagerTest.cs" />
+    <Compile Include="eRecruitmentTestModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>eRecruitmentTestModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="eRecruitmentTestModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>eRecruitmentTestModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="eRecruitmentTestModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>eRecruitmentTestModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="ObjectMother.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestDataBuilder\ApplicantProfileBuilder.cs" />
+    <Compile Include="TestDataBuilder\ApplicationBuilder.cs" />
+    <Compile Include="TestDataBuilder\ClientBuilder.cs" />
+    <Compile Include="TestDataBuilder\GenderBuilder.cs" />
+    <Compile Include="TestDataBuilder\RaceBuilder.cs" />
+    <Compile Include="ProviderTest\ProfileProviderTest.cs" />
+    <Compile Include="TestDataBuilder\UserBuilder.cs" />
+    <Compile Include="TestDataBuilder\VacancyBuilder.cs" />
+    <Compile Include="TestData\ApplicantProfileTestData.cs" />
+    <Compile Include="TestData\ApplicationTestData.cs" />
+    <Compile Include="TestData\ClientTestData.cs" />
+    <Compile Include="TestData\GenderTestData.cs" />
+    <Compile Include="TestData\RaceTestData.cs" />
+    <Compile Include="TestData\UserTestData.cs" />
+    <Compile Include="TestData\VacancyTestData.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="eRecruitmentTestModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>eRecruitmentTestModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config" />
+    <None Include="eRecruitmentTestModel.edmx.diagram">
+      <DependentUpon>eRecruitmentTestModel.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="eRecruitmentTestModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>eRecruitmentTestModel.edmx</DependentUpon>
+      <LastGenOutput>eRecruitmentTestModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="eRecruitmentTestModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>eRecruitmentTestModel.edmx</DependentUpon>
+      <LastGenOutput>eRecruitmentTestModel.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\StatsSA.eRecruitment.Entities\StatsSA.eRecruitment.Entities.csproj">
+      <Project>{54d2aacc-4a85-4646-b905-548fabd2a6b5}</Project>
+      <Name>StatsSA.eRecruitment.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StatsSA.eRecruitment.IManager\StatsSA.eRecruitment.IManager.csproj">
+      <Project>{b869ae84-126f-4413-882b-ebb3e94dc444}</Project>
+      <Name>StatsSA.eRecruitment.IManager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StatsSA.eRecruitment.IProvider\StatsSA.eRecruitment.IProvider.csproj">
+      <Project>{1ae9bc8e-14d2-432e-9b6d-7ad232f726b7}</Project>
+      <Name>StatsSA.eRecruitment.IProvider</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StatsSA.eRecruitment.Manager\StatsSA.eRecruitment.Manager.csproj">
+      <Project>{d989e3bc-3ca7-400c-bb25-7b6ac905c244}</Project>
+      <Name>StatsSA.eRecruitment.Manager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StatsSA.eRecruitment.Provider\StatsSA.eRecruitment.Provider.csproj">
+      <Project>{6a89f07a-4ae6-4c83-8eee-076964f41417}</Project>
+      <Name>StatsSA.eRecruitment.Provider</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Choose>
+    <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
+      <ItemGroup>
+        <Reference Include="Microsoft.VisualStudio.QualityTools.CodedUITestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="Microsoft.VisualStudio.TestTools.UITest.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="Microsoft.VisualStudio.TestTools.UITest.Extension, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="Microsoft.VisualStudio.TestTools.UITesting, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <Private>False</Private>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

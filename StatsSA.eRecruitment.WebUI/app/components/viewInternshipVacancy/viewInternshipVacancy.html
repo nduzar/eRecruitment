@@ -1,0 +1,130 @@
+﻿<style>
+    .desc {
+        padding-left: 73px;
+        padding-right: 77px
+    }
+</style>
+
+<div class="mr15" ng-init="vm.initialisePage()" style="padding:15px">
+    <div class="row">
+        <div class="col-sm-5">
+            <div class="">
+                <div class="card">
+                    <div class="panel panel-primary">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div>
+                                    <img class="img-responsive" style="position: relative;  width: 100%" src="https://erecruitment.treasury.gov.za/eRecruitment/assets/images/2019 NDB Pamphlet.jpg" />
+                                </div>
+                                <div class="alert alert-info">
+                                    <p class="text" style="padding-left:64px;font-weight: bold; font-size: 35px">MAKE <span>2019</span> THE YEAR FOR </p>
+                                    <p class="text" style="padding-left: 46px;font-weight: bold;font-size: 35px;/* bottom: 30px; */position: relative;bottom: 20px;">SERIOUS CAREER DECISIONS</p>
+                                    <p class="text" style="padding-left: 52px;font-size: 17px;position: relative;top: -22px;">Apply for the Internship Programme with the National Treasury </p>
+                                </div>
+                                <div class="alert" style="background-color: black;position: relative;padding-top: 27px;top: -24px;/* margin-bottom: -16px; */">
+                                    <p class="text" style="color: white;padding-left: 52px;font-size: 17px;position: relative;top: -22px;">Join the National Treasury, it is a move in the right direction  </p>
+                                    <p class="text" style="color: white;padding-left: 52px;font-size: 17px;position: relative;top: -22px;">in making 2020 the year for serious career decisions.  </p>
+                                </div>
+                                <p style="font-size: 25px; text-align: center; font-weight: bold;">INTERNSHIP PROGRAMME 2019</p>
+                                <br />
+                                <p class="desc">The National Treasury is committed to youth and skills development in the country. The Graduate Development Programme is directed at university graduates who have completed, or are in the process of completing their degrees in 2019</p>
+                                <br />
+                                <p class="desc">
+                                    Our 24-month Internship Programme offers graduates opportunities to enhance skills and
+                                    gain meaningful workplace experience to complement their studies. University or University
+                                    of Technology students with a 3 year diploma/degree or a postgraduate qualification at an
+                                    accredited higher educational institution in the following fields may apply
+                                </p>
+                                <br />
+                                <p class="desc">
+                                    • Accounting • Banking • Banking & Insurance • Business Administration • Business
+                                    Management • Business Science • Computer Science • Development Finance
+                                    Development Studies • General • Human Resources Management • Econometrics
+                                    Economics • Finance • Financial Management • Financial Accounting
+                                    Internal Audit • Information Systems • Information Technology • Investment
+                                    Management • Law • Logistics • Mathematics • Politics • Philosophy • Public
+                                    Administration • Public Finance • Public Management • Procurement • Project
+                                    Management • Risk Management • Statistics • Supply Chain • Urban & Regional Planning
+                                </p>
+                                <br />
+
+                                <div style="background-color: lightgrey;color: black;width: 80.6%;position: relative;left: 10%;text-align: center;padding: 6px;">
+                                    <p><b>PLEASE NOTE:</b> Preference will be given to high performing students with top grades</p>
+                                    <p>E-MAILED, FAXED AND LATE APPLICATIONS WILL NOT BE ACCEPTED.</p>
+                                </div>
+                                <br />
+                                <p class="desc">
+                                    If you have not heard from the National Treasury within three months after the closing date, please regard your application as unsuccessful.
+                                </p>
+                                <br />
+                                <p style="font-size: 18px; text-align: center; font-weight: bold;">CLOSING DATE: 16 AUGUST 2019</p>
+                                <br />
+                                <p class="desc">
+                                    <strong>
+                                        For any general queries please contact the following NT officials
+                                    </strong>
+                                    <br />
+                                    Mmabatho Sepeng: 012 395 6653  <br />
+                                    Welcome Nghulele: 012 315 5943 <br />
+                                    Anne Tjale: 012 395 6608
+                                </p>
+                                <br />
+                                <p class="desc">For any systems queries please send your query and contact details via e-mail to <a href="mailto:eRecruitment@Treasury.gov.za">eRecruitment@Treasury.gov.za</a></p>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-7">
+            <div class="card">
+                <div class="panel panel-primary">
+                    <div class="panel-body">
+                        <!--<blockquote>
+                            {{vacancy.jobTitle}}
+                            <small> <span ng-if="vacancy.isPermanent">permanent</span> <span ng-if="!vacancy.isPermanent">intern</span> position(s) exists in the {{vacancy.officeName}}</small>
+                        </blockquote>-->
+                        <div class="row alert alert-info" ng-show="!(vm.appliedForVacancy())">
+                            <div style="font-size: 1.5em;">Closing Date: {{vm.closingDate | date: "d MMMM y"}} <a ng-click="vm.onViewApply(vacancy)" class="btn btn-primary btn-xs pull-right">APPLY NOW</a></div>
+                        </div>
+                        <div class="row alert alert-warning" ng-show="(vm.appliedForVacancy())">
+                            <div>You have already applied for this vacancy <a href="#/viewApplications" class="btn btn-warning btn-xs pull-right">VIEW APPLICATION</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card" ng-if="vm.availableVacancies.length > 0">
+                <div class="panel panel-primary">
+                    <div class="panel-body">
+                        <div class="row alert alert-info">
+                            <div><i class="fa fa-bullhorn fa-lg" style="font-size: 2.5em;"></i>  <b style="font-size: 1.5em;">Check your documents & confirm that you are ready to apply</b> </div>
+                        </div>
+                        <div class="row alert alert-warning" ng-show="(vm.appliedForVacancy(vacancy.vacancyId))">
+                            <div>You have already applied for this vacancy <a href="#/viewApplications" class="btn btn-warning btn-xs pull-right">VIEW APPLICATION</a></div>
+                        </div>
+
+                        <p><b>Please note that if you don't meet the exact requirements listed below, your application will be declined.</b></p><br />
+                        <p><i class="fa fa-check"></i>  Only South African citizens can apply</p>
+                        <p><i class="fa fa-check"></i>  Applicants should not have particitipated in an internship programme before</p>
+                        <p><i class="fa fa-check"></i>  Applicants should be 35 years old and below</p>
+                        <p><i class="fa fa-check"></i>  Certified copy of your ID</p>
+                        <p><i class="fa fa-check"></i>  Certified copy of your school qualifications (eg Senior Certificate)</p>
+                        <p><i class="fa fa-check"></i>  Certified copy of your full official academic record(s) (Required)</p>
+                        <p><i class="fa fa-check"></i>  Certified copy of your tertiary qualifications (If applicable)</p>
+                        <br />
+                        <p><b>Follow these steps to upload documents</b></p>
+                        <p><i class="fa fa-check"></i>  Click the browser button </p>
+                        <p><i class="fa fa-check"></i>  Select a file that you want to upload </p>
+                        <p><i class="fa fa-check"></i>  Click Save file button to save a file </p>
+                        <p><i class="fa fa-check"></i>  The uploaded file should show next to the Save file button </p><br />
+                        <p><b>If your document size is more than 20MB, visit one of the sites listed below to upload and shrink your documents </b></p>
+                        <p><a href="https://smallpdf.com/compress-pdf" target="_blank">Compress PDF</a> </p>
+                        <p><a href="https://www.ilovepdf.com/compress_pdf" target="_blank">Compress PDF files</a> </p>
+                        <p><a href="https://shrinkme.app/" target="_blank">Shrink your images</a> </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,362 @@
+﻿<div class="container" style="padding-left:10%; padding-right:10%; margin-top:2%" ng-init="vm.initialisePage()">
+    <div class="well card">
+        <form name="frmVacancy" role="form" class="form-horizontal" novalidate>
+            <fieldset>
+                <legend>CREATE JOB SPECIFICATION - {{vm.vacancy.ReferenceNumber}}</legend>
+                 
+                <div class="row">
+
+                    <div class="form-group has-feedback">
+                        <div class="col-sm-2">
+                            <label for="lblJobTitle" class="control-label"><strong>Job title</strong></label>
+                        </div>
+                        <div class="col-sm-10" ng-class="{'has-error' : frmVacancy.JobTitle.$invalid && !frmVacancy.JobTitle.$pristine }">
+                            <input type="text" id="txtJobTitle" name="JobTitle" class="form-control col-sm-4" ng-model="vm.vacancy.JobTitle" required tabindex="0" />
+                            <span class="glyphicon glyphicon-remove form-control-feedback" ng-show="frmVacancy.JobTitle.$invalid && !frmVacancy.JobTitle.$pristine"></span>
+                        </div>
+                    </div>
+                    <div class="form-group has-feedback">
+                        <div class="col-sm-2">
+                            <label for="lblReferenceNumber" class="control-label">Reference number</label>
+                        </div>
+                        <div class="col-sm-10" ng-class="{'has-error' : frmVacancy.ReferenceNumber.$invalid && !frmVacancy.ReferenceNumber.$pristine }">
+                            <input type="text" id="txtReferenceNumber" name="ReferenceNumber" class="form-control col-sm-4" required ng-model="vm.vacancy.ReferenceNumber" />
+                            <span class="glyphicon glyphicon-remove form-control-feedback" ng-show="frmVacancy.ReferenceNumber.$invalid && !frmVacancy.ReferenceNumber.$pristine"></span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <table class="table">
+                    <tr>
+                        <th>Opening date</th>
+                        <td ng-class="{'has-error' : frmVacancy.OpeningDate.$invalid && !frmVacancy.OpeningDate.$pristine }">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="yyyy-mm-dd" uib-datepicker-popup="{{vm.format}}" ng-model="vm.vacancy.OpeningDate" is-open="vm.openDatePopup.opened" ng-change="vm.updateCloseDateMin()" datepicker-options="vm.openDateOptions" ng-required="true" close-text="Close" />
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-default" ng-click="vm.openDateShowPopup()"><i class="glyphicon glyphicon-calendar"></i></button>
+                                </span>
+                            </div>
+                        </td>
+                        <th>Closing date</th>
+                        <td>
+
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="yyyy-mm-dd" uib-datepicker-popup="{{vm.format}}" ng-model="vm.vacancy.ClosingDate" is-open="vm.closeDatePopup.opened" datepicker-options="vm.closeDateOptions" ng-required="true" close-text="Close" />
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-default" ng-click="vm.closeDateShowPopup()"><i class="glyphicon glyphicon-calendar"></i></button>
+                                </span>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th>Number of posts</th>
+                        <td>
+                            <input type="number" min="1" id="txtNumberOfPosts" name="NumberOfPosts" class="form-control input-sm" required ng-model="vm.vacancy.NumberOfPosts" ng-class="{'has-error' : frmVacancy.NumberOfPosts.$invalid && !frmVacancy.NumberOfPosts.$pristine }" />
+                            <span class="glyphicon glyphicon-remove form-control-feedback" ng-show="frmVacancy.NumberOfPosts.$invalid && !frmVacancy.NumberOfPosts.$pristine"></span>
+                        </td>
+                        <th>Permanent?</th>
+                        <td>
+                            <select class="form-control placeholder" ng-model="vm.vacancy.IsPermanent">
+                                <option value="true">Yes</option>
+                                <option value="false">No</option>
+                            </select>
+                            <span class="glyphicon glyphicon-remove form-control-feedback" ng-show="frmVacancy.IsPermanent.$invalid && !frmVacancy.IsPermanent.$pristine"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Division name</th>
+                        <td>
+                            <input type="text" id="txtDivisionName" name="DivisionName" class="form-control" required ng-model="vm.vacancy.DivisionName" />
+                            <span class="glyphicon glyphicon-remove form-control-feedback" ng-show="frmVacancy.DivisionName.$invalid && !frmVacancy.DivisionName.$pristine"></span>
+                        </td>
+
+                        <th>Office name</th>
+                        <td>
+                            <input type="text" id="txtOfficeName" name="OfficeName" class="form-control col-lg-2" ng-model="vm.vacancy.OfficeName" />
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th>Salary level</th>
+                        <td>
+                            <select name="salaryLevel" ng-change="vm.updateNotch(vm.vacancy.salary)"
+                                    class="form-control input-sm" required
+                                    ng-model="vm.vacancy.salary"
+                                    ng-options="salary as salary.salaryLevel for salary in vm.salarylevels track by salary.salaryId"></select>
+
+                        </td>
+                        <th>Salary notch</th>
+                        <td>
+                            <input type="text" id="txtSalaryNotch" name="SalaryNotch" class="form-control" ng-model="vm.vacancy.salary.salaryNotch" ng-hide="true" />
+                            <input type="text" id="txtSalaryNotch" name="SalaryNotch" class="form-control" value="{{vm.vacancy.salary.salaryNotch | currency : 'R '}}" ng-disabled="true" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Remuneration Description</th>
+                        <td>
+                            <input type="text" class="form-control" ng-disabled="true" ng-model="vm.remunerationDescription" />
+                        </td>
+                    </tr>
+                </table>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group has-feedback" ng-class="{'has-error' : frmVacancy.KeyPerformanceAreas.$invalid && !frmVacancy.KeyPerformanceAreas.$pristine }">
+                            <div>
+                                <h4>Key Performance Areas</h4>
+                                <div text-angular-toolbar class="toolbar" name="toolbar1" ta-toolbar-button-class="btn btn-default btn-xs" ta-toolbar="[['h1', 'h2', 'p', 'pre', 'quote', 'bold', 'italics', 'underline', 'ul', 'ol', 'justifyLeft', 'justifyCenter', 'justifyRight', 'indent', 'outdent', 'undo', 'redo', 'wordcount', 'charcount']]"></div>
+                                <div text-angular name="KeyPerformanceAreas" ta-target-toolbars="toolbar1" ta-toolbar-button-class="btn btn-default btn-xs" required ng-model="vm.vacancy.KeyPerformanceAreas"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group has-feedback" ng-class="{'has-error' : frmVacancy.Prerequisites.$invalid && !frmVacancy.Prerequisites.$pristine }">
+                            <div>
+                                <h4>Prerequisites</h4>
+                                <div text-angular-toolbar class="toolbar" name="toolbar2" ta-toolbar-button-class="btn btn-default btn-xs" ta-toolbar="[['h1', 'h2', 'p', 'pre', 'quote', 'bold', 'italics', 'underline', 'ul', 'ol', 'justifyLeft', 'justifyCenter', 'justifyRight', 'indent', 'outdent', 'undo', 'redo', 'wordcount', 'charcount']]"></div>
+                                <div text-angular name="Prerequisites" ta-target-toolbars="toolbar2" ta-toolbar-button-class="btn btn-default btn-xs" required ng-model="vm.vacancy.Prerequisites"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group has-feedback" ng-class="{'has-error' : frmVacancy.PersonProfile.$invalid && !frmVacancy.PersonProfile.$pristine }">
+                            <div>
+                                <h4>Person profile</h4>
+                                <div text-angular-toolbar class="toolbar" name="toolbar3" ta-toolbar-button-class="btn btn-default btn-xs" ta-toolbar="[['h1', 'h2', 'p', 'pre', 'quote', 'bold', 'italics', 'underline', 'ul', 'ol', 'justifyLeft', 'justifyCenter', 'justifyRight', 'indent', 'outdent', 'undo', 'redo', 'wordcount', 'charcount']]"></div>
+                                <div text-angular name="PersonProfile" ta-target-toolbars="toolbar3" ta-toolbar-button-class="btn btn-default btn-xs" required ng-model="vm.vacancy.PersonProfile"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br />
+
+                <div class="form-group">
+                    <h4>Questions</h4>
+                    <br />
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="checkbox">
+                                <label><input type="checkbox" name="questions" style="margin-right: 5px" ng-click="vm.toggleGenericQuestions()">Generic Questions</label>
+                            </div>
+                            <div class="checkbox">
+                                <label><input type="checkbox" name="questions" style="margin-right: 5px" ng-click="vm.toggleSpecificQuestions()">Specific Questions</label>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                </div>
+
+                <!--Generic Questions-->
+                <div ng-show="vm.visibleGenericQuestions">
+                    <div class="col-md-12 well" id="questions" ng-repeat="question in vm.genericQuestions.questions">
+                        <span class="btn btn-danger pull-right"
+                              title="Remove this question"
+                              ng-click="vm.remove(question, vm.genericQuestions.questions)"
+                              ng-if="$index > 0">X</span>
+                        <div class="form-group">
+                            <h3>Generic Question {{ $index + 1}}</h3>
+                            <select name="questions"
+                                    class="form-control input-sm"
+                                    ng-model="question.title"
+                                    ng-selected="vm.selectedGenericQuestion == question.vacancyId"
+                                    ng-options="question as question.question for question in vm.genericQuestionsDB  track by question.id"
+                                    ng-change="vm.genericQuestionChange(question.title)"></select>
+                        </div>
+
+                        <div class="row">
+                            <div id="answers" ng-repeat="answer in question.answers">
+                                <div class="form-group">
+                                    <label for="answer" class="control-label">Answer {{ $index+1 }}</label>
+                                    <div class="input-group">
+                                        <input type="text" ng-disabled="answer.disable"
+                                               placeholder="Type answer here" class="form-control input-sm" name="" ng-model="answer.title" />
+                                        <span class="input-group-addon input-sm">
+                                            Auto Reject
+                                            <input type="checkbox" checked="{{answer.autoReject}}" title="Auto reject" ng-change="vm.autoRejectChange(answer)"
+                                                   ng-disabled="answer.disable"
+                                                   ng-model='answer.autoReject' />
+                                        </span>
+                                        <span class="input-group-addon">
+                                            Weight
+                                            <input type="text" title="Weight of the answer"
+                                                   ng-disabled="vm.isWeightReadOnly"
+                                                   ng-model='answer.weight'
+                                                   style="width: 50px;" />
+                                        </span>
+                                        <span class="input-group-btn" ng-click="vm.remove(answer, question.answers)">
+                                            <button class="btn btn-danger btn-sm"
+                                                    type="button"
+                                                    title="Remove this answer"
+                                                    ng-show="$index > 0">
+                                                X
+                                            </button>
+                                        </span>
+                                    </div>
+                                </div>
+                                <button class="btn btn-primary btn-sm"
+                                        ng-show="$last"
+                                        ng-click="vm.addOtherAsNewGenericAnswer(question)"
+                                        ng-if="question.answers.length <= 4">
+                                    + Add Other as answer
+                                </button>
+                                <button class="btn btn-primary btn-sm"
+                                        ng-show="$last"
+                                        ng-click="vm.addNewGenericAnswer(question)"
+                                        ng-if="question.answers.length <= 4">
+                                    + Add another answer
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <button class="btn btn-primary"
+                            ng-click="vm.addNewGenericQuestion()"
+                            ng-if="vm.genericQuestions.questions.length <= 9">
+                        + Add another generic question
+                    </button>
+                </div>
+                <br />
+                <br />
+                <!--End Generic Questions-->
+                <!--Specific questions-->
+                <div ng-show="vm.visibleSpecificQuestions">
+                    <div class="col-md-12 well" id="questions" ng-repeat="question in vm.specificQuestions.questions">
+                        <span class="btn btn-danger pull-right"
+                              title="Remove this question"
+                              ng-click="vm.remove(question, vm.specificQuestions.questions)"
+                              ng-if="$index > 0">X</span>
+                        <div class="form-group">
+                            <h3>Specific Question {{ $index + 1}}</h3>
+                            <input type="text" class="form-control" ng-model="question.title" name="" placeholder="Enter a question" />
+                        </div>
+
+                        <div class="row">
+                            <div id="answers" ng-repeat="answer in question.answers">
+                                <div class="form-group">
+                                    <label for="answer" class="control-label">Answer {{ $index+1 }}</label>
+                                    <div class="input-group">
+                                        <input type="text" placeholder="Type answer here" class="form-control input-sm" name="" ng-model="answer.title" />
+                                        <span class="input-group-addon input-sm">
+                                            Auto Reject
+                                            <input type="checkbox" checked="{{answer.autoReject}}" title="Auto reject" ng-change="vm.autoRejectChange(answer)"
+                                                   ng-model='answer.autoReject' />
+                                        </span>
+                                        <span class="input-group-addon">
+                                            Weight
+                                            <input type="text" title="Weight of the answer"
+                                                   ng-disabled="answer.autoReject"
+                                                   ng-model='answer.weight'
+                                                   style="width: 50px;" />
+                                        </span>
+                                        <span class="input-group-btn" ng-click="vm.remove(answer, question.answers)">
+                                            <button class="btn btn-danger btn-sm"
+                                                    type="button"
+                                                    title="Remove this answer"
+                                                    ng-show="$index > 0">
+                                                X
+                                            </button>
+                                        </span>
+                                    </div>
+                                </div>
+                                <!--<button class="btn btn-primary btn-sm"
+                                        ng-show="$last"
+                                        ng-click="vm.addNewSpecificAnswer(question)"
+                                        ng-if="question.answers.length <= 4">
+                                    + Add Other as answer
+                                </button>-->
+                                <button class="btn btn-primary btn-sm"
+                                        ng-show="$last"
+                                        ng-click="vm.addNewSpecificAnswer(question)"
+                                        ng-if="question.answers.length <= 4">
+                                    + Add another specific answer
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <button class="btn btn-primary"
+                            ng-click="vm.addNewSpecificQuestion()"
+                            ng-if="vm.specificQuestions.questions.length <= 9">
+                        + Add another specific question
+                    </button>
+                </div>
+
+                <!--End specific questions-->
+
+                <br />
+                <br />
+                <br />
+                <!--<div class="row">
+                    <div class="col-lg-12">
+                        <div class="col-lg-2">
+                            <button type="button" class="btn btn-sm btn-primary" data-ng-click="vm.calculateSumWeight()">
+                                Calculate sum of the weights
+                                <i class="fa fa-spinner fa-spin fa-2x fa-fw" ng-show=""></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>-->
+                
+                <br />
+                <br />
+                <div class="row">
+                    <span class="input-group-addon">
+                        <!--Weights total is
+                        <input type="text" title="Sum of weights"
+                               disabled="disabled"
+                               ng-model="vm.sumOfWeights"
+                               style="width: 50px;" />-->
+                        Threshold
+                        <input type="text" title="Threshold"
+                               required
+                               name="Threshold"
+                               ng-class="{'has-error' : frmVacancy.Threshold.$invalid && !frmVacancy.Threshold.$pristine }"
+                               ng-model="vm.answersThreshold"
+                               style="width: 50px;" /> % of the total or above
+                    </span>
+                </div>
+                <br />
+                <br />
+
+                <div class="row">
+                    <div class="col-lg-1 col-lg-offset-8">
+                        <button type="button" class="btn btn-sm btn-primary" data-ng-click="vm.initialisePage()" ng-hide="vm.ShowAnother">
+                            Clear
+                            <i class="fa fa-spinner fa-spin fa-2x fa-fw" ng-show="doing_async"></i>
+                        </button>
+                    </div>
+                    <div class="col-lg-1">
+                        <button type="button" class="btn btn-sm btn-primary" ng-disabled="frmVacancy.$invalid" data-ng-click="vm.save(vm.vacancy)" ng-hide="!vm.ShowSave">
+                            Save
+                            <i class="fa fa-spinner fa-spin fa-2x fa-fw" ng-show="doing_async"></i>
+                        </button>
+                    </div>
+                    <div class="col-lg-2">
+                        <button type="button" class="btn btn-sm btn-primary" data-ng-click="vm.initialisePage()" ng-hide="!vm.ShowAnother">
+                            Create another
+                            <i class="fa fa-spinner fa-spin fa-2x fa-fw" ng-show="doing_async"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <br />
+                <div class="row">
+                    <div class="col-lg-1">&nbsp;</div>
+                    <div ng-hide="!vm.ShowError" class="alert alert-danger alert-dismissable col-lg-10">
+                        <strong>Whoops {{vm.ErrorMessage}}</strong>
+                    </div>
+                    <div ng-hide="!vm.ShowSuccess" class="alert alert-success alert-dismissable col-lg-10">
+                        <strong>Congratulations {{vm.SuccessMessage}}</strong>
+                    </div>
+                    <div class="col-lg-1">&nbsp;</div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>
+

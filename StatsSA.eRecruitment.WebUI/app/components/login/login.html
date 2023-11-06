@@ -1,0 +1,67 @@
+﻿<div class="">
+    <div class="container" style="padding-left:10%; padding-right:10%; margin-top:5%" ng-init="vm.initialisePage()">
+        <div class="row">
+            <div class="col-md-2">
+            </div>
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="panel panel-primary">
+                        <div class="panel-body">
+                            <form role="form" name="vm.frmLogin" id="vm.frmLogin" novalidate class="frmLogin">
+                                <div class="row">
+                                    <div ng-hide="!vm.errorMessageShow" class="alert alert-dismissible alert-danger">
+                                        <strong>Whoops!</strong>
+                                        {{vm.errorMessage}}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <h3 class="form-login-heading">Sign In</h3>
+                                        <div class="form-group has-feedback" ng-class="{ 'has-error' : (vm.frmLogin.inputUsername.$invalid && !vm.frmLogin.inputUsername.$pristine) || (vm.frmLogin.inputUsername.$invalid && vm.frmLogin.$submitted) }">
+                                            <label class="control-label" for="inputUsername"></label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
+                                                <input type="text" class="form-control input-sm" name="inputUsername" id="inputUsername" placeholder="Email" data-ng-model="vm.loginData.userName" required autofocus>
+                                                <span class="glyphicon glyphicon-remove form-control-feedback" ng-show="(vm.frmLogin.inputUsername.$invalid && !vm.frmLogin.inputUsername.$pristine) || (vm.frmLogin.inputUsername.$invalid && vm.frmLogin.$submitted)"></span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group  has-feedback" ng-class="{ 'has-error' : (vm.frmLogin.inputPassword.$invalid && !vm.frmLogin.inputPassword.$pristine) || (vm.frmLogin.inputPassword.$invalid && vm.frmLogin.$submitted) }">
+                                            <label class="control-label"></label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="fa fa-key" aria-hidden="true"></i></span>
+                                                <input type="password" name="inputPassword" pattern=".{8,20}" id="inputPassword" class="form-control input-sm" placeholder="Password" data-ng-model="vm.loginData.password" required>
+                                                <span class="glyphicon glyphicon-remove form-control-feedback" ng-show="(vm.frmLogin.inputPassword.$invalid && !vm.frmLogin.inputPassword.$pristine) || (vm.frmLogin.inputPassword.$invalid && vm.frmLogin.$submitted)"></span>
+
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <button class="btn btn-md btn-primary btn-block btn-sm full-width" type="submit" data-ng-click="vm.login()">Sign In</button>
+                                        </div>
+                                        <div class="form-group" style="text-align:center">
+                                            <h5>Not Registered? <a href="#/signup" class="btn btn-link">Register Now</a>  <a class="btn btn-link" href="#/forgotpassword">Forgot Password</a> </h5>
+                                        </div>
+                                        <div class="form-group" style="display: flex; justify-content: center;">
+                                            <h5><a class="btn btn-link" href="#/verifyemailrecovery">Verify Email Address</a> </h5>
+                                            <h5><a class="btn btn-link" href="#/emailChanged">Email Changed Link</a> </h5>
+                                        </div>
+                                        <div class="form-group" style="text-align:center">
+                                            <div data-ng-hide="!(vm.message)" style="padding-top:5px">
+                                                <span class="text-danger">{{vm.message}}.</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+
+            </div>
+        </div>
+
+    </div>
+
+</div>

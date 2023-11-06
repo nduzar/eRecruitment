@@ -1,0 +1,61 @@
+﻿<div class="container" ng-init="vm.initialisePage()">
+    <div class="row container-inner">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="panel panel-primary">
+                    <div class="panel-body">
+                        <h4>{{vm.vacancy.jobTitle}}</h4>
+                        <div class="row">
+                            <ul class="list-unstyled list-group" style="font-size:18px!important">
+                                <li><span>{{vm.vacancy.numberOfPosts}} <span ng-if="vm.vacancy.isPermanent">permanent</span> <span ng-if="!vm.vacancy.isPermanent">contract</span> position(s) available in the {{vm.vacancy.officeName}}</span></li>
+                                <li><span>Salary Level: {{vm.salaryLevel}} </span></li>
+                                <li><span>Salary: {{vm.vacancy.salary.salaryNotch}} <em> {{vm.vacancy.remunerationDescription}}</em></span></li>
+                                <li><span>Reference No: {{vm.vacancy.referenceNumber}} </span></li>
+                            </ul>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <span style="font-size:18px!important">Purpose of the Role</span>
+                                <div ng-bind-html="vm.vacancy.keyPerformanceAreas"></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12" style="font-size:18px!important">
+                                <hr />
+                                <span style="font-size:18px!important">Qualification/s Requirements</span>
+                                <div ng-bind-html="vm.vacancy.prerequisites"></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12" style="font-size:18px!important">
+                                <hr />
+                                <span style="font-size:18px!important">Key Performance Areas</span>
+                                <div ng-bind-html="vm.vacancy.personProfile"></div>
+                            </div>
+                        </div>
+
+                        <!--<div class="row">
+        <div class="col-md-12" style="font-size:12px!important">
+            <h5>Person Profile</h5>
+            <div ng-bind-html="vm.vacancy.personProfile"></div>
+        </div>
+    </div>-->
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="row alert alert-info">
+                                    <div class="btn-grid" style="font-size:18px!important">
+                                        Closing Date: {{vm.vacancy.closingDate| date: "d MMMM y"}}
+                                        <a href="#/applyCareer" ng-show="vm.viewOnly === false" class="btn btn-primary btn-xs pull-right">APPLY NOW</a>&nbsp;
+                                        <a href="#/browseJobs" class="btn btn-primary btn-xs pull-right">BACK TO JOBS</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

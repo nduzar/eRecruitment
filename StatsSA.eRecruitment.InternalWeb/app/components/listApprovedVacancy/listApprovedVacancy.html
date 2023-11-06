@@ -1,0 +1,308 @@
+<div class="container" style="padding-left:10%; padding-right:10%; margin-top:2%" ng-init="vm.initialisePage()">
+    <wizard on-finish="finished()" hide-indicators="true">
+        <wz-step title="LIST OF VACANCIES">
+            <div class="well card">
+                <fieldset>
+                    <legend>List of approved vacancies</legend>
+                    <div class="row" style="margin-top: 10%;" ng-show="vm.isLoading">
+                        <div class="col-lg-offset-2 col-lg-8 alert alert-info">
+                            <i class="fa fa-cog fa-spin fa-lg pull-right"></i> <strong>Loading!</strong>  please wait...
+                        </div>
+                    </div>
+                    <div ng-show="vm.noRecords" style="margin-top: 10%;" class="row">
+                        <div class="alert alert-dismissible alert-info">
+                            <strong>No Vacancies!</strong> There are currently no approved vacancies
+                        </div>
+                    </div>
+                    <div ng-hide="vm.vacancies.length == 0" class="row">
+                        <div class="col-lg-12">
+                            <div class="row">
+                                <div class="input-group input-group-sm">
+                                    <input type="text" class="form-control input-group-sm" ng-model="vm.searchString" placeholder="Search" />
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default input-sm" title="Search" ng-click="vm.setFilter()"><i class="glyphicon glyphicon-search"></i></button>
+                                        <button class="btn btn-default input-sm" title="Reset search" ng-click="vm.clearFilter()"><i class="glyphicon glyphicon-refresh"></i></button>
+                                    </span>
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <table class="table table-striped table-hover table-condensed">
+                                    <tr>
+                                        <th ng-click="vm.setSorting('referenceNumber')">
+                                            Reference Number
+                                        </th>
+                                        <th ng-click="vm.setSorting('jobTitle')">Job Title</th>
+                                        <th ng-click="vm.setSorting('officeName')">Centre</th>
+                                        <th ng-click="vm.setSorting('vacancyStatus.vacancyStatusDesc')">Status</th>
+                                        <th ng-click="vm.setSorting('openingDate')">Opening Date</th>
+                                        <th ng-click="vm.setSorting('closingDate')">Closing Date</th>
+                                        <th>View</th>
+                                    </tr>
+                                    <tr ng-class="{ 'danger' : vacancy.statusId == 4 }" ng-repeat="vacancy in vm.vacancies | orderBy: vm.sortBy | filter: vm.searchFilter">
+                                        <td>{{vacancy.referenceNumber}}</td>
+                                        <td>{{vacancy.jobTitle}}</td>
+                                        <td>{{vacancy.officeName}}</td>
+                                        <td>{{vacancy.vacancyStatus.vacancyStatusDesc}}</td>
+                                        <td>{{vacancy.openingDate | date :'yyyy/MM/dd'}}</td>
+                                        <td>{{vacancy.closingDate | date :'yyyy/MM/dd'}}</td>
+                                        <td><button ng-click="vm.viewVacancy(vacancy);" class="btn btn-default btn-xs"><i class="glyphicon glyphicon-chevron-right"></i></button></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </wz-step>
+        <wz-step title="VIEW VACANCY">
+            <div class="well card">
+                <fieldset>
+                    <legend>Vacancy: {{vm.selectedVacancy.referenceNumber}}</legend>
+                    <form name="frmApproveVacancy" novalidate>
+                        <div ng-show="vm.selectedVacancy.statusId==4" class="row">
+                            <div class="alert alert-dismissible alert-danger">
+                                <strong>Reason for this rejection:</strong> {{vm.selectedVacancy.statusComment}}
+                            </div>
+                        </div>
+                        <table class="table">
+                            <tr>
+                                <th>Job Title: </th>
+                                <td colspan="4"><input type="text" name="jobTitle" required class="form-control input-sm" ng-disabled="!vm.canEdit" ng-model="vm.selectedVacancy.jobTitle" /></td>
+                            </tr>
+                            <tr>
+                                <th>Post Reference: </th>
+                                <td colspan="4"><input type="text" name="postReference" required class="form-control input-sm" ng-disabled="!vm.canEdit" ng-model="vm.selectedVacancy.referenceNumber" /></td>
+                            </tr>
+                            <tr>
+                                <th>Number of posts: </th>
+                                <td><input type="number" min="1" name="numberOfPosts" required class="form-control input-sm" ng-disabled="!vm.canEdit" ng-model="vm.selectedVacancy.numberOfPosts" /></td>
+                                <th>Permanent: </th>
+                                <td>
+                                    <select required class="form-control input-sm" ng-disabled="!vm.canEdit" ng-model="vm.selectedVacancy.isPermanent">
+                                        <option ng-selected="vm.selectedVacancy.isPermanent==true" value="true">Yes</option>
+                                        <option ng-selected="vm.selectedVacancy.isPermanent==false" value="false">No</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Opening Date: </th>
+                                <td>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control input-sm" placeholder="yyyy-mm-dd" uib-datepicker-popup="{{vm.format}}" ng-model="vm.selectedVacancy.openingDate" is-open="vm.openDatePopup.opened" ng-change="vm.updateCloseDateMin()" datepicker-options="vm.openDateOptions" ng-required="true" ng-disabled="!vm.canEdit" close-text="Close" />
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-default input-sm" ng-click="vm.openDateShowPopup()"><i class="glyphicon glyphicon-calendar"></i></button>
+                                        </span>
+                                    </div>
+                                </td>
+                                <th>Centre: </th>
+                                <td><input type="text" name="officeName" class="form-control input-sm" ng-disabled="!vm.canEdit" ng-model="vm.selectedVacancy.officeName" /></td>
+                            </tr>
+                            <tr>
+                                <th>Closing Date: </th>
+                                <td>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control input-sm" placeholder="yyyy-mm-dd" uib-datepicker-popup="{{vm.format}}" ng-model="vm.selectedVacancy.closingDate" is-open="vm.closeDatePopup.opened" datepicker-options="vm.closeDateOptions" ng-required="true" ng-disabled="!vm.canEdit" close-text="Close" />
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-default input-sm" ng-click="vm.closeDateShowPopup()"><i class="glyphicon glyphicon-calendar"></i></button>
+                                        </span>
+                                    </div>
+                                </td>
+                                <th>Division: </th>
+                                <td><input type="text" name="divisionName" class="form-control input-sm" ng-disabled="!vm.canEdit" ng-model="vm.selectedVacancy.divisionName" /></td>
+                            </tr>
+                            <tr>
+                                <th>Salary Level: </th>
+                                <td>
+                                    <select name="salaryLevel" ng-change="vm.updateNotch(vm.selectedVacancy.salary)"
+                                            class="form-control input-sm" required
+                                            ng-disabled="!vm.canEdit"
+                                            ng-model="vm.selectedVacancy.salary"
+                                            ng-options="salary as salary.salaryLevel for salary in vm.salaries track by salary.salaryId"></select>
+
+                                <th>Salary Notch: </th>
+                                <td>
+                                    <!--<input type="text" name="fakeNotch" class="form-control input-sm" ng-disabled="true" ng-show="!vm.canEdit" value="{{vm.selectedVacancy.salary.salaryNotch}}" />-->
+                                    <input type="text" name="salaryNotch" class="form-control input-sm" ng-disabled="true" ng-model="vm.selectedVacancy.salary.salaryNotch" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Remuneration Description</th>
+                                <td>
+                                    <input type="text" class="form-control" ng-disabled="true" ng-model="vm.selectedVacancy.remunerationDescription" />
+                                </td>
+                            </tr>
+                        </table>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <h4>Purpose of the Role</h4>
+                                <div text-angular-toolbar class="toolbar" ng-show="vm.canEdit" name="toolbar" ta-toolbar-button-class="btn btn-default btn-xs" ta-toolbar="[['h1', 'h2', 'p', 'pre', 'quote', 'bold', 'italics', 'underline', 'ul', 'ol', 'justifyLeft', 'justifyCenter', 'justifyRight', 'indent', 'outdent', 'undo', 'redo', 'wordcount', 'charcount']]"></div>
+                                <div text-angular required name="keyPerfAraes" ta-disabled="!vm.canEdit" ta-target-toolbars="toolbar" ta-toolbar-button-class="btn btn-default btn-xs" ng-model="vm.selectedVacancy.keyPerformanceAreas"></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <h4>Qualification/s Requirements</h4>
+                                <div class="row">
+                                    <div text-angular-toolbar class="toolbar" ng-show="vm.canEdit" name="prereq_toolbar" ta-toolbar-button-class="btn btn-default btn-xs" ta-toolbar="[['h1', 'h2', 'p', 'pre', 'quote', 'bold', 'italics', 'underline', 'ul', 'ol', 'justifyLeft', 'justifyCenter', 'justifyRight', 'indent', 'outdent', 'undo', 'redo', 'wordcount', 'charcount']]"></div>
+                                    <div text-angular required name="prerequisites" ta-disabled="!vm.canEdit" ta-target-toolbars="prereq_toolbar" ta-toolbar-button-class="btn btn-default btn-xs" ng-model="vm.selectedVacancy.prerequisites"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <h4>Key Performance Areas</h4>
+                                <div text-angular-toolbar class="toolbar" ng-show="vm.canEdit" name="persprf_toolbar" ta-toolbar-button-class="btn btn-default btn-xs" ta-toolbar="[['h1', 'h2', 'p', 'pre', 'quote', 'bold', 'italics', 'underline', 'ul', 'ol', 'justifyLeft', 'justifyCenter', 'justifyRight', 'indent', 'outdent', 'undo', 'redo', 'wordcount', 'charcount']]"></div>
+                                <div text-angular required name="personprofile" ta-disabled="!vm.canEdit" ta-target-toolbars="persprf_toolbar" ta-toolbar-button-class="btn btn-default btn-xs" ng-model="vm.selectedVacancy.personProfile"></div>
+                            </div>
+                        </div>
+                        <br />
+
+                        <div class="row">
+                            <h4>Questions</h4>
+                            <br />
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="checkbox">
+                                        <label><input type="checkbox" ng-disabled="!vm.canEdit" ng-checked="vm.allQuestionsAndAnswers.genericQuestionsAnswers.length > 0" name="questions" style="margin-right: 5px" ng-click="vm.toggleGenericQuestions()">Generic Questions</label>
+                                    </div>
+                                    <div class="checkbox">
+                                        <label><input type="checkbox" ng-disabled="!vm.canEdit" name="questions" ng-checked="vm.allQuestionsAndAnswers.specificQuestionsAnswers.length > 0" style="margin-right: 5px" ng-click="vm.toggleSpecificQuestions()">Specific Questions</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <br />
+                        </div>
+
+                        <!--Generic Questions-->
+                        <div ng-show="vm.visibleGenericQuestions">
+                            <div class="col-md-12 well" id="questions" ng-repeat="question in vm.genericQuestions.questions">
+
+                                <div class="form-group">
+                                    <h3>Generic Question {{ $index + 1}}</h3>
+                                    <select name="questions"
+                                            ng-disabled="!vm.canEdit"
+                                            class="form-control input-sm"
+                                            ng-model="question.genericQuestion"
+                                            ng-options="question as question.question for question in vm.genericQuestionsDB  track by question.id"
+                                            ng-change="vm.genericQuestionChange(question.title)"></select>
+                                </div>
+
+                                <div class="row">
+                                    <div id="answers" ng-repeat="answer in question.answers">
+                                        <div class="form-group">
+                                            <label for="answer" class="control-label">Answer {{ $index+1 }}</label>
+                                            <div class="input-group">
+                                                <input type="text" ng-disabled="!vm.canEdit"
+                                                       placeholder="Type answer here" class="form-control input-sm" name="" ng-model="answer.title" />
+                                                <span class="input-group-addon input-sm">
+                                                    Auto Reject
+                                                    <input type="checkbox" checked="{{answer.autoReject}}" title="Auto reject" ng-change="vm.autoRejectChange(answer)"
+                                                           ng-disabled="!vm.canEdit"
+                                                           ng-model='answer.autoReject' />
+                                                </span>
+                                                <!--<span class="input-group-addon">
+                                Weight
+                                <input type="text" title="Weight of the answer"
+                                       ng-disabled="(!vm.canEdit || answer.autoReject) ? true : false"
+                                       ng-model='answer.weight'
+                                       style="width: 50px;" />
+                            </span>-->
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <br />
+                        <br />
+                        <!--End Generic Questions-->
+                        <!--Specific questions-->
+                        <div ng-show="vm.visibleSpecificQuestions">
+                            <div class="col-md-12 well" id="questions" ng-repeat="question in vm.specificQuestions.questions">
+
+                                <div class="form-group">
+                                    <h3>Specific Question {{ $index + 1}}</h3>
+                                    <input type="text" class="form-control"
+                                           ng-disabled="!vm.canEdit"
+                                           ng-model="question.specificQuestion.title" name="" placeholder="Enter a question" />
+                                </div>
+
+                                <div class="row">
+                                    <div id="answers" ng-repeat="answer in question.answers">
+                                        <div class="form-group">
+                                            <label for="answer" class="control-label">Answer {{ $index+1 }}</label>
+                                            <div class="input-group">
+                                                <input type="text" placeholder="Type answer here"
+                                                       ng-disabled="!vm.canEdit"
+                                                       class="form-control input-sm" name="" ng-model="answer.title" />
+                                                <span class="input-group-addon input-sm">
+                                                    Auto Reject
+                                                    <input type="checkbox" checked="{{answer.autoReject}}" title="Auto reject"
+                                                           ng-disabled="!vm.canEdit"
+                                                           ng-change="vm.autoRejectChange(answer)"
+                                                           ng-model='answer.autoReject' />
+                                                </span>
+                                                <span class="input-group-addon">
+                                                    Weight
+                                                    <input type="text" title="Weight of the answer"
+                                                           ng-disabled="(!vm.canEdit || answer.autoReject) ? true : false"
+                                                           ng-model='answer.weight'
+                                                           style="width: 50px;" />
+                                                </span>
+                                                <span class="input-group-btn" ng-click="vm.removeSpecificAnswers(answer, question.answers)">
+
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <!--<button class="btn btn-primary btn-sm"
+                            ng-show="$last"
+                            ng-click="vm.addNewSpecificAnswer(question)"
+                            ng-if="question.answers.length <= 4">
+                        + Add Other as answer
+                    </button>-->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+
+                        <!--End specific questions-->
+                        <br />
+                        <br />
+                    </form>
+            <div ng-hide="vm.hideConfirmReason" class="row">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">Please confirm the reason for rejecting this vacancy:</div>
+                    <div class="panel-body">
+                        <form name="rejectionForm">
+                            <textarea class="form-control" required cols="10" rows="5" ng-model="vm.rejectionReason"></textarea>
+                            <br />
+                            <button ng-click="vm.back()" class="btn btn-primary btn-xs"><i class="glyphicon glyphicon-chevron-left"></i> &nbsp;Back</button>
+                            <button ng-click="vm.reject(vm.selectedVacancy)" ng-disabled="rejectionForm.$invalid" class="btn btn-primary btn-xs pull-right"><i class="glyphicon glyphicon-remove"></i>&nbsp;Reject</button>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+            <button ng-click="vm.back()" class="btn btn-primary btn-xs"><i class="glyphicon glyphicon-chevron-left"></i> &nbsp;Back</button>
+            <br />
+            <div class="row">
+                <div class="col-lg-1">&nbsp;</div>
+                <div ng-hide="!vm.ShowError" class="alert alert-danger alert-dismissable col-lg-10">
+                    <strong>Whoops {{vm.ErrorMessage}}</strong>
+                </div>
+                <div ng-hide="!vm.ShowSuccess" class="alert alert-success alert-dismissable col-lg-10">
+                    <strong>Congratulations {{vm.SuccessMessage}}</strong>
+                </div>
+                <div class="col-lg-1">&nbsp;</div>
+            </div>
+            </fieldset>
+</div>
+        </wz-step>
+    </wizard>
+</div>
+
+
